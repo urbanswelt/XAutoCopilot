@@ -36,6 +36,11 @@ end
 
 
 function gizmoXAutoCopilot_btnPreparation_OnClick()
+    prepstate1 = 0
+    prepstate2 = 0
+    prepstate3 = 0
+    prepstate4 = 0
+    prepstate5 = 0
     btnPreparation_State = 1
 end
 

@@ -7,7 +7,6 @@
 --
 -- know issue = stairs,
 
---COCKPIT PREPARATION 1/5--
 function OnUpdate()
 
     if btnPreparation_State == 1 then
@@ -41,16 +40,16 @@ function OnUpdate()
         --cabine light overhead panel--
         dref.setInt(xac_parbrake, 1)
         dref.setInt(xac_yellow_pump, 1)
-        --xac_flap1--
-        --xac_speedbrake--
+        dref.setFloat(xac_flap_ratio, 0.0)
+        dref.setFloat(xac_speedbrake, 0.0)
         dref.setInt(xac_window_heat, 1)
         dref.setInt(xac_apu_blvlv, 1)
         dref.setInt(xac_bleed_mode_sw, 1)
         dref.setInt(xac_pack1, 1)
         dref.setInt(xac_pack2, 1)
-        --xac_temp_cock--
-        --xac_temp_fwd_cab--
-        --xac_temp_aft_cab--
+        dref.setFloat(xac_temp_cock, 24.0)
+        dref.setFloat(xac_temp_fwd_cab, 24.0)
+        dref.setFloat(xac_temp_aft_cab, 24.0)
         --elac panel--
         --vent panel--
         dref.setInt(xac_adirs_data_sel, 3)
@@ -70,7 +69,7 @@ function OnUpdate()
         dref.setInt(xac_adirs_mode_sel_2, 1)
         dref.setInt(xac_adirs_enter, 1)
         dref.setInt(xac_emer_ext_lt, 1)
-        --xac_cab_vs--
+        dref.setInt(xac_alt_rot, 0)
         --xac_firetest_e1--
         --xac_firetest_e2--
         dref.setInt(xac_strobe_sw, 1)
@@ -87,15 +86,19 @@ function OnUpdate()
         dref.setInt(xac_atc_ta_tara, 0)
         dref.setInt(xac_ant_skeed, 1)
         dref.setInt(xac_efifs_waether, 0)
-        --xac_engn_thro--
+        dref.setFloatV(xac_engn_thro, 1, 0.0, 0.0)
         dref.setInt(xac_eng1msw, 0)
         dref.setInt(xac_eng2msw, 0)
         dref.setInt(xac_startsel, 0)
-        --ADIRS|ALIGNED--
-
-        sound.say("Cockpit Preparation is finish. Sir !.")
         prepstate5 = 1
         prepstate4 = 0
+    end
+
+    xac_adirs_disp_temp = dref.getString(xac_adirs_disp)
+
+    if string.find(xac_adirs_disp_temp, "ALIGNED") and prepstate5 == 1 then
+        sound.say("Cockpit Preparation is finish. Sir !.")
+        prepstate5 = 0
     end
 
 end

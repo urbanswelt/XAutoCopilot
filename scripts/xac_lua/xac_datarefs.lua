@@ -5,7 +5,7 @@
 -- Time: 19:19
 -- To change this template use File | Settings | File Templates.
 --
-
+function OnFirstFrame()
 
 xac_eng1msw             = dref.getDataref("sim/custom/xap/engines/eng1msw")
 xac_eng2msw             = dref.getDataref("sim/custom/xap/engines/eng2msw")
@@ -26,7 +26,7 @@ xac_bleed_mode_sw       = dref.getDataref("sim/custom/xap/bleed/mode_sw")
 xac_start_pb            = dref.getDataref("sim/custom/xap/apu/start_pb")
 xac_parbrake            = dref.getDataref("sim/flightmodel/controls/parkbrake")
 xac_yellow_pump         = dref.getDataref("sim/custom/xap/hydr/y/elpump/mode")
-xac_flap1               = dref.getDataref("sim/flightmodel2/wing/flap1_deg")
+xac_flap_ratio          = dref.getDataref("sim/cockpit2/controls/flap_ratio")
 xac_speedbrake          = dref.getDataref("sim/cockpit2/controls/speedbrake_ratio")
 xac_window_heat         = dref.getDataref("sim/cockpit2/ice/ice_window_heat_on")
 xac_pack1               = dref.getDataref("sim/custom/xap/cond/pack1")
@@ -41,8 +41,9 @@ xac_adirs_mode_sel_3    = dref.getDataref("sim/custom/xap/adirs/mode_sel_3")
 xac_adirs_mode_sel_2    = dref.getDataref("sim/custom/xap/adirs/mode_sel_2")
 xac_adirs_on_bat        = dref.getDataref("sim/custom/xap/adirs/on_bat")
 xac_adirs_enter         = dref.getDataref("sim/custom/xap/adirs/knob_ent")
+xac_adirs_disp          = dref.getDataref("sim/custom/xap/adirs/disp")
 xac_emer_ext_lt         = dref.getDataref("sim/custom/xap/extlight/emer_ext_lt")
-xac_cab_vs              = dref.getDataref("sim/custom/xap/press/cab_vs")
+xac_alt_rot             = dref.getDataref("sim/custom/xap/press/alt_rot")
 xac_strobe_sw           = dref.getDataref("sim/custom/xap/extlight/strobe_sw")
 xac_radio_on            = dref.getDataref("sim/custom/xap/radio/on")
 xac_fcu_fd              = dref.getDataref("sim/custom/xap/fcu/fd")
@@ -68,3 +69,5 @@ xac_p_b_l_now           = dref.getDataref("sim/custom/xap/doors/p_b_l_now")
 xac_p_b_r_now           = dref.getDataref("sim/custom/xap/doors/p_b_r_now")
 xac_c_f_now             = dref.getDataref("sim/custom/xap/doors/c_f_now")
 xac_c_b_now             = dref.getDataref("sim/custom/xap/doors/c_b_now")
+
+end
