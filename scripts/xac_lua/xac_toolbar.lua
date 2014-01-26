@@ -8,32 +8,32 @@
 
 gizmoXAutoCopilot = {
     gui_h = gui.newWindow("gizmoXAutoCopilot"),
-    w = 520,
-    h = 480,
-    l = 540,
-    t = 120,
-
+    l = 10,  --left position on screen
+    t = 430, --top position on screen
+    w = 250, --window width
+    h = 130, --window height
     auto_show=false,
-
 }
+
 function gizmoXAutoCopilot_OnCreate()
     local w,h = gfx.getScreenSize()
 
     gui.setWindowSize( gizmoXAutoCopilot.gui_h, gizmoXAutoCopilot.l, gizmoXAutoCopilot.t, gizmoXAutoCopilot.w, gizmoXAutoCopilot.h )
-    gui.centerWindow( gizmoXAutoCopilot )
     gui.setWindowCaption( gizmoXAutoCopilot.gui_h, "X-Plane Auto Copilot" )
 
+    local xac_left    = 10
+    local xac_top     = 30
+    local xac_width   = 100
 
-    local btn_x = 60
-    local btn_y = 30
-    local btn_h = 15
-    local txt_w = 100
+    gui.newLabel( gizmoXAutoCopilot.gui_h, "ignored", "COCKPIT PREPARATION", xac_left+100, xac_top,    xac_width-50 )
+    gui.newLabel( gizmoXAutoCopilot.gui_h, "ignored", "MCDU/FMC",            xac_left+100, xac_top+15, xac_width-50 )
+    gui.newLabel( gizmoXAutoCopilot.gui_h, "ignored", "BEFORE START",        xac_left+100, xac_top+30, xac_width-50 )
 
-    --Label / Button creation
-    gui.newLabel( gizmoXAutoCopilot.gui_h, "ignored", "COCKPIT PREPARATION", btn_x-50, btn_y, 50 )
-    gizmoXAutoCopilot.btnNavSearch = gui.newButton( gizmoXAutoCopilot.gui_h, "gizmoXAutoCopilot_btnPreparation", "execute", btn_x+txt_w, btn_y, 50 ); btn_y = btn_y + btn_h
+    gui.newButton( gizmoXAutoCopilot.gui_h, "gizmoXAutoCopilot_btnPreparation", "execute", xac_left, xac_top,    xac_width )
+    gui.newButton( gizmoXAutoCopilot.gui_h, "gizmoXAutoCopilot_btnMcdu",        "execute", xac_left, xac_top+15, xac_width )
+    gui.newButton( gizmoXAutoCopilot.gui_h, "gizmoXAutoCopilot_btnBeforeStart", "execute", xac_left, xac_top+30, xac_width )
+
 end
-
 
 function gizmoXAutoCopilot_btnPreparation_OnClick()
     prepstate1 = 0
@@ -42,6 +42,15 @@ function gizmoXAutoCopilot_btnPreparation_OnClick()
     prepstate4 = 0
     prepstate5 = 0
     btnPreparation_State = 1
+end
+
+function gizmoXAutoCopilot_btnMcdu_OnClick()
+    gui.showWindow( gizmoXAutoCopilotMcdu.gui_h )
+end
+
+function gizmoXAutoCopilot_btnBeforeStart_OnClick()
+    beforestartstate1 = 0
+    btnBeforeStart_State = 1
 end
 
 
@@ -66,8 +75,4 @@ if( ToolTray )then
     ToolTray:register( ToolGizmoXAutoCopilot )
 end
 
-
-if( GizmoToyBox_Globals )then
-    GizmoToyBox_Globals:register( ToolGizmoXAutoCopilot )
-end
 

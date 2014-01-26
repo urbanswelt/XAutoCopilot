@@ -5,15 +5,14 @@
 -- Time: 19:36
 -- To change this template use File | Settings | File Templates.
 --
--- know issue = stairs,
 
-function OnUpdate()
+function CockpitPreparation_OnUpdate()
 
     if btnPreparation_State == 1 then
         dref.setInt(xac_p_f_l_kn, 1)
-        --dref stair here --
         dref.setInt(xac_p_f_r_kn, 1)
-        --dref cater here --
+        dref.setInt(xac_cater_on, 1)
+        dref.setInt(xac_stair_on, 1)
         dref.setInt(xac_eng1msw, 0)
         dref.setInt(xac_eng2msw, 0)
         dref.setInt(xac_startsel, 0)
@@ -77,19 +76,16 @@ function OnUpdate()
         --radio set--
         --altimter std--
         --ATC clearance--
-        --FMGS--
         dref.setInt(xac_fcu_fd, 1)
         dref.setInt(xac_fcu_ils, 0)
         --nav mode--
         --clock--
+        --mcdu--
         dref.setInt(xac_atc_mode_sel, 0)
         dref.setInt(xac_atc_ta_tara, 0)
         dref.setInt(xac_ant_skeed, 1)
         dref.setInt(xac_efifs_waether, 0)
         dref.setFloatV(xac_engn_thro, 1, 0.0, 0.0)
-        dref.setInt(xac_eng1msw, 0)
-        dref.setInt(xac_eng2msw, 0)
-        dref.setInt(xac_startsel, 0)
         prepstate5 = 1
         prepstate4 = 0
     end

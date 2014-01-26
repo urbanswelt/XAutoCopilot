@@ -14,3 +14,14 @@ logging.debug("loaded xac_datarefs..")
 
 dofile("xac_lua/xac_preparation.lua")
 logging.debug("loaded xac_preparation..")
+
+dofile("xac_lua/xac_beforestart.lua")
+logging.debug("loaded xac_beforestart..")
+
+dofile("xac_lua/xac_mcdu.lua")
+logging.debug("loaded xac_mcdu..")
+
+function OnUpdate()
+    CockpitPreparation_OnUpdate()
+    BeforeStart_OnUpdate()
+end

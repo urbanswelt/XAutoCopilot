@@ -34,6 +34,8 @@ xac_pack2               = dref.getDataref("sim/custom/xap/cond/pack2")
 xac_temp_cock           = dref.getDataref("sim/custom/xap/cond/ckpt_knob")
 xac_temp_fwd_cab        = dref.getDataref("sim/custom/xap/cond/fwd_knob")
 xac_temp_aft_cab        = dref.getDataref("sim/custom/xap/cond/aft_knob")
+
+-- adirs
 xac_adirs_data_sel      = dref.getDataref("sim/custom/xap/adirs/data_sel")
 xac_adirs_sys_sel       = dref.getDataref("sim/custom/xap/adirs/sys_sel")
 xac_adirs_mode_sel_1    = dref.getDataref("sim/custom/xap/adirs/mode_sel_1")
@@ -42,6 +44,8 @@ xac_adirs_mode_sel_2    = dref.getDataref("sim/custom/xap/adirs/mode_sel_2")
 xac_adirs_on_bat        = dref.getDataref("sim/custom/xap/adirs/on_bat")
 xac_adirs_enter         = dref.getDataref("sim/custom/xap/adirs/knob_ent")
 xac_adirs_disp          = dref.getDataref("sim/custom/xap/adirs/disp")
+
+
 xac_emer_ext_lt         = dref.getDataref("sim/custom/xap/extlight/emer_ext_lt")
 xac_alt_rot             = dref.getDataref("sim/custom/xap/press/alt_rot")
 xac_strobe_sw           = dref.getDataref("sim/custom/xap/extlight/strobe_sw")
@@ -53,6 +57,26 @@ xac_atc_ta_tara         = dref.getDataref("sim/custom/xap/atc/ta_tara")
 xac_ant_skeed           = dref.getDataref("sim/custom/xap/wheels/ant_skeed")
 xac_efifs_waether       = dref.getDataref("/sim/cockpit/switches/EFIFS_shows_weather")
 xac_engn_thro           = dref.getDataref("sim/flightmodel/engine/ENGN_thro")
+xac_fasten_seat_belts   = dref.getDataref("sim/cockpit/switches/fasten_seat_belts")
+xac_no_smoking          = dref.getDataref("sim/cockpit2/switches/no_smoking")
+xac_beacon_sw           = dref.getDataref("sim/custom/xap/extlight/beacon_sw")
+
+--groundservice
+
+xac_cater_on           = dref.getDataref("sim/custom/xap/groundserv/cater/cat_on")
+xac_show_cater         = dref.getDataref("sim/custom/xap/groundserv/cater/show_cater")
+xac_move_to_cater      = dref.getDataref("sim/custom/xap/groundserv/cater/move_to_cater")
+
+xac_stair_on           = dref.getDataref("sim/custom/xap/groundserv/stair/str_on")
+xac_show_stair         = dref.getDataref("sim/custom/xap/groundserv/stair/show_stair")
+xac_move_to_stair      = dref.getDataref("sim/custom/xap/groundserv/stair/move_to_stair")
+
+xac_tanker_on          = dref.getDataref("sim/custom/xap/groundserv/tanker/tanker_on")
+xac_load_on            = dref.getDataref("sim/custom/xap/groundserv/load_on")
+xac_fm_on              = dref.getDataref("sim/custom/xap/groundserv/gnd_fm_on")
+xac_tow_on             = dref.getDataref("sim/custom/xap/groundserv/pwr_tow")
+xac_chk_on             = dref.getDataref("sim/custom/xap/groundserv/pwr_chk")
+
 
 -- doors / menu
 xac_p_f_l_kn            = dref.getDataref("sim/custom/xap/doors/p_f_l_kn")
@@ -70,4 +94,36 @@ xac_p_b_r_now           = dref.getDataref("sim/custom/xap/doors/p_b_r_now")
 xac_c_f_now             = dref.getDataref("sim/custom/xap/doors/c_f_now")
 xac_c_b_now             = dref.getDataref("sim/custom/xap/doors/c_b_now")
 
+-- mcdu
+xac_click_init          = dref.getDataref("sim/custom/xap/mcdu/click_int")
+xac_click_l1            = dref.getDataref("sim/custom/xap/mcdu/click_l1")
+xac_click_a             = dref.getDataref("sim/custom/xap/mcdu/click_a")
+xac_click_b             = dref.getDataref("sim/custom/xap/mcdu/click_b")
+xac_click_c             = dref.getDataref("sim/custom/xap/mcdu/click_c")
+xac_click_d             = dref.getDataref("sim/custom/xap/mcdu/click_d")
+xac_click_e             = dref.getDataref("sim/custom/xap/mcdu/click_e")
+xac_click_f             = dref.getDataref("sim/custom/xap/mcdu/click_f")
+xac_click_g             = dref.getDataref("sim/custom/xap/mcdu/click_g")
+xac_click_h             = dref.getDataref("sim/custom/xap/mcdu/click_h")
+xac_click_i             = dref.getDataref("sim/custom/xap/mcdu/click_i")
+xac_click_j             = dref.getDataref("sim/custom/xap/mcdu/click_j")
+xac_click_k             = dref.getDataref("sim/custom/xap/mcdu/click_k")
+xac_click_l             = dref.getDataref("sim/custom/xap/mcdu/click_l")
+xac_click_m             = dref.getDataref("sim/custom/xap/mcdu/click_m")
+xac_click_n             = dref.getDataref("sim/custom/xap/mcdu/click_n")
+xac_click_o             = dref.getDataref("sim/custom/xap/mcdu/click_o")
+xac_click_p             = dref.getDataref("sim/custom/xap/mcdu/click_p")
+xac_click_q             = dref.getDataref("sim/custom/xap/mcdu/click_q")
+xac_click_r             = dref.getDataref("sim/custom/xap/mcdu/click_r")
+xac_click_s             = dref.getDataref("sim/custom/xap/mcdu/click_s")
+xac_click_t             = dref.getDataref("sim/custom/xap/mcdu/click_t")
+xac_click_u             = dref.getDataref("sim/custom/xap/mcdu/click_u")
+xac_click_v             = dref.getDataref("sim/custom/xap/mcdu/click_v")
+xac_click_w             = dref.getDataref("sim/custom/xap/mcdu/click_w")
+xac_click_x             = dref.getDataref("sim/custom/xap/mcdu/click_x")
+xac_click_y             = dref.getDataref("sim/custom/xap/mcdu/click_y")
+xac_click_z             = dref.getDataref("sim/custom/xap/mcdu/click_z")
+
+--misc
+--xac_timer              = dref.getDataref("sim/cockpit2/clock_timer/local_time_seconds")
 end
