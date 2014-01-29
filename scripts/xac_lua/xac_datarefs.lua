@@ -3,8 +3,9 @@
 -- User: larsurban
 -- Date: 23.01.14
 -- Time: 19:19
--- To change this template use File | Settings | File Templates.
 --
+
+
 function OnFirstFrame()
 
 xac_eng1msw             = dref.getDataref("sim/custom/xap/engines/eng1msw")
@@ -123,6 +124,7 @@ xac_click_w             = dref.getDataref("sim/custom/xap/mcdu/click_w")
 xac_click_x             = dref.getDataref("sim/custom/xap/mcdu/click_x")
 xac_click_y             = dref.getDataref("sim/custom/xap/mcdu/click_y")
 xac_click_z             = dref.getDataref("sim/custom/xap/mcdu/click_z")
+xac_scratchpad          = dref.getDataref("sim/custom/xap/mcdu/scratchpad")
 
 --misc
 --xac_timer              = dref.getDataref("sim/cockpit2/clock_timer/local_time_seconds")

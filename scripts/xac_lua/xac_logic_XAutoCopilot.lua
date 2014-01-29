@@ -1,14 +1,15 @@
 --
 -- Created by IntelliJ IDEA.
 -- User: larsurban
--- Date: 23.01.14
--- Time: 19:36
--- To change this template use File | Settings | File Templates.
+-- Date: 25.01.14
+-- Time: 15:51
 --
 
-function CockpitPreparation_OnUpdate()
+function XAutoCopilot_OnUpdate()
 
-    if btnPreparation_State == 1 then
+-- Cockpit preparation checklist
+
+    if XAutoCopilot_btnPreparation_State == 1 then
         dref.setInt(xac_p_f_l_kn, 1)
         dref.setInt(xac_p_f_r_kn, 1)
         dref.setInt(xac_cater_on, 1)
@@ -19,7 +20,7 @@ function CockpitPreparation_OnUpdate()
         dref.setInt(xac_gear_handle_status, 1)
         dref.setInt(xac_gpu_here, 1)
         prepstate1 = 1
-        btnPreparation_State = 0
+        XAutoCopilot_btnPreparation_State = 0
     end
 
     if dref.getInt( xac_gpu_av )== 1 and dref.getInt( xac_gpu_run )== 1 and prepstate1 == 1 then
@@ -95,6 +96,45 @@ function CockpitPreparation_OnUpdate()
     if string.find(xac_adirs_disp_temp, "ALIGNED") and prepstate5 == 1 then
         sound.say("Cockpit Preparation is finish. Sir !.")
         prepstate5 = 0
+        preparation_finish = 1
     end
 
+
+
+-- befor start checklist
+    if XAutoCopilot_btnBeforeStart_State == 1  and preparation_finish == 1 then
+        dref.setInt(xac_p_f_l_kn , 0)
+        dref.setInt(xac_p_f_r_kn , 0)
+        dref.setInt(xac_p_b_l_kn , 0)
+        dref.setInt(xac_p_b_r_kn , 0)
+        dref.setInt(xac_c_f_kn , 0)
+        dref.setInt(xac_c_b_kn , 0)
+        dref.setInt(xac_cater_on, 0)
+        dref.setInt(xac_stair_on, 0)
+        beforestartstate1 = 1
+        XAutoCopilot_btnBeforeStart_State = 0
+    end
+
+    if beforestartstate1 == 1 and
+       dref.getFloat( xac_p_f_l_now )== 0.0 and
+       dref.getFloat( xac_p_f_r_now )== 0.0 and
+       dref.getFloat( xac_p_b_l_now )== 0.0 and
+       dref.getFloat( xac_p_b_r_now )== 0.0 and
+       dref.getFloat( xac_c_f_now )== 0.0 and
+       dref.getFloat( xac_c_b_now )== 0.0 and
+       dref.getFloat( xac_move_to_cater )> 19.0 and
+       dref.getFloat( xac_move_to_stair )> 37.0
+    then
+        dref.setInt(xac_show_cater , 0)
+        dref.setInt(xac_show_stair , 0)
+        dref.setInt(xac_fasten_seat_belts , 1)
+        dref.setInt(xac_no_smoking , 1)
+        dref.setInt(xac_beacon_sw , 1)
+        beforestartstate1 = 0
+        beforestart_finish = 1
+    end
+
+
 end
+
+function XAutoCopilot_OnBeforeClose() end
