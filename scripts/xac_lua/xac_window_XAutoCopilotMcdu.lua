@@ -44,28 +44,32 @@ end
 function XAutoCopilotMcdu_btnStart_OnClick()
     tmp_xac_corte = gui.getWidgetValue( xac_corte )
     timer.newOneShot( "test1", 1 )
-
+    timer.newOneShot( "test2", 2 )
+    timer.newOneShot( "test3", 3 )
 end
 
 function test1 ()
     --dref.setInt(xac_click_init, 1)
-
     tmp_ascii = string.byte(tmp_xac_corte,1)
-    local testfunc = find_dref_ascii(ascii_matrix)
-    dref.setInt(testfunc, 1)
-
-
-
+    local xac_get_info = find_dref_ascii(ascii_matrix)
+    local xac_click_mcdu = dref.getDataref(tostring(xac_get_info))
+    dref.setInt(xac_click_mcdu,1)
 end
 
+function test2 ()
+    --dref.setInt(xac_click_init, 1)
+    tmp_ascii = string.byte(tmp_xac_corte,2)
+    local xac_get_info = find_dref_ascii(ascii_matrix)
+    local xac_click_mcdu = dref.getDataref(tostring(xac_get_info))
+    dref.setInt(xac_click_mcdu,1)
+end
 
-
-
-
-
-
-
-
+function test3 ()
+    tmp_ascii = string.byte(tmp_xac_corte,3)
+    local xac_get_info = find_dref_ascii(ascii_matrix)
+    local xac_click_mcdu = dref.getDataref(tostring(xac_get_info))
+    dref.setInt(xac_click_mcdu,1)
+end
 
 
 -- Toolbar Widget definition/Integration. --

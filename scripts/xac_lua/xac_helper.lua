@@ -30,13 +30,13 @@ end
 
 ascii_matrix[1][1]="A"
 ascii_matrix[1][2]=65
-ascii_matrix[1][3]="xac_click_a"
+ascii_matrix[1][3]="sim/custom/xap/mcdu/click_a"
 
 ascii_matrix[2][1]="B"
 ascii_matrix[2][2]=66
-ascii_matrix[2][3]="xac_click_b"
+ascii_matrix[2][3]="sim/custom/xap/mcdu/click_b"
 
 ascii_matrix[3][1]="C"
 ascii_matrix[3][2]=67
-ascii_matrix[3][3]="xac_click_c"
+ascii_matrix[3][3]="sim/custom/xap/mcdu/click_c"
 
