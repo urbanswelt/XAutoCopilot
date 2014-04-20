@@ -133,6 +133,109 @@ function XAutoCopilot_OnUpdate()
         beforestartstate1 = 0
         beforestart_finish = 1
     end
+-- onboard auto-checklist
+
+-- pushback
+    if XAutoCopilot_btnPushback_State == 1 and
+       beforestart_finish == 1 and
+       xac_show_tow == 1 then
+        -- dref .....
+        pushback_finish = 1
+        XAutoCopilot_btnPushback_State = 0
+    end
+
+-- engine start
+
+    if XAutoCopilot_btnEngineStart_State == 1 then
+        dref.setInt(xac_t1_pump1 , 1)
+        dref.setInt(xac_t1_pump2 , 1)
+        dref.setInt(xac_t2_pump1 , 1)
+        dref.setInt(xac_t2_pump2 , 1)
+        dref.setInt(xac_t3_pump1 , 1)
+        dref.setInt(xac_t3_pump2 , 1)
+        dref.setInt(xac_startsel , 1)
+        dref.setInt(xac_eng1msw, 1)
+        enginestartstate1 = 1
+        XAutoCopilot_btnEngineStart_State = 0
+    end
+
+    if enginestartstate1 == 1 and
+    dref.getFloatV( xac_n2_percent,1,1 )> 50.0 then
+        dref.setInt(xac_eng2msw, 1)
+        enginestartstate1 = 0
+        enginestartstate2 = 1
+    end
+
+    if enginestartstate2 == 1 and
+    dref.getFloatV( xac_n2_percent,2,1 )> 50.0 then
+    sound.say("Engine start finish. Sir !.")
+    enginestartstate2 = 0
+    enginestart_finish = 1
+    end
+
+    -- after engine start
+    if XAutoCopilot_btnAfterEngineStart_State == 1 then
+        dref.setInt(xac_startsel , 0)
+        dref.setInt(xac_apu_blvlv, 0)
+        dref.setInt(xac_pack1, 1)
+        dref.setInt(xac_pack2, 1)
+        dref.setFloat(xac_speedbrake, -0.5)
+        dref.setInt(xac_brake_auto_max, 1)
+        dref.setFloat(xac_rudder_trim, 0.0)
+        dref.setInt(xac_APU_switch, 0)
+        afterenginestartstate1 = 1
+        XAutoCopilot_btnAfterEngineStart_State = 0
+
+    end
+
+    xac_test = dref.getString(xac_line_3b)
+    if afterenginestartstate1 == 1 then
+        dref.setInt(xac_click_perf, 1)
+        afterenginestartstate2 = 1
+        afterenginestartstate1 = 0
+        timer.newOneShot("test", 2.0)
+    end
+
+    function test()
+        
+        -- flap adjust from mcdu menu
+        -- flap 0 = 0.0
+        -- flap 1 = 0.4
+        -- flap 2 = 0.6
+        -- flap 3 = 0.8
+        -- flap 4 = 1.0
+
+        if string.find(xac_test, "0/") and afterenginestartstate2 == 1 then
+            dref.setFloat(xac_flap, 0.0)
+            afterenginestart_finish = 1
+            afterenginestartstate2 = 0
+        end
+
+        if string.find(xac_test, "1/") and afterenginestartstate2 == 1 then
+            dref.setFloat(xac_flap, 0.4)
+            afterenginestart_finish = 1
+            afterenginestartstate2 = 0
+        end
+
+        if string.find(xac_test, "2/") and afterenginestartstate2 == 1 then
+            dref.setFloat(xac_flap, 0.6)
+            afterenginestart_finish = 1
+            afterenginestartstate2 = 0
+        end
+
+        if string.find(xac_test, "3/") and afterenginestartstate2 == 1 then
+            dref.setFloat(xac_flap, 0.8)
+            afterenginestart_finish = 1
+            afterenginestartstate2 = 0
+        end
+
+        if string.find(xac_test, "4/") and afterenginestartstate2 == 1 then
+            dref.setFloat(xac_flap, 1.0)
+            afterenginestart_finish = 1
+            afterenginestartstate2 = 0
+        end
+    end
+
 
 
 end

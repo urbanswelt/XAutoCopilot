@@ -11,7 +11,7 @@ dofile("xac_lua/xac_init.lua")
 --Undefined function
 function OnDraw_BeforeGauges_3D() end
 function OnDraw_Gauges_3D() end
-function OnUpdate()end
+function OnUpdate() end
 function OnPluginEnable () end
 function OnAircraftUnload () end
 function OnBeforeReboot () end
@@ -24,7 +24,15 @@ function OnSceneryLoaded () end
 function OnAirportChanged () end
 function OnLiveryChanged () end
 function OnXPlaneDialog () end
-function main () end
+function main ()
+
+    function wait(waitTime)
+        timer = os.time()
+        repeat until os.time() > timer + waitTime
+    end
+
+
+end
 function XA_Activation_OnCreate () end
 function OnDraw_BeforeGauges () end
 function OnDraw_Gauges () end

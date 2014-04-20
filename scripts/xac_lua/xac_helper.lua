@@ -6,6 +6,18 @@
 -- To change this template use File | Settings | File Templates.
 --
 
+
+--[[
+function test2 ()
+    --dref.setInt(xac_click_init, 1)
+    tmp_ascii = string.byte(tmp_xac_corte,2)
+    local xac_get_info = find_dref_ascii(ascii_matrix)
+    local xac_click_mcdu = dref.getDataref(tostring(xac_get_info))
+    dref.setInt(xac_click_mcdu,1)
+end
+]]
+
+
 function find_dref_ascii(xac_table_dummy)
 
     local match_field=tmp_ascii
