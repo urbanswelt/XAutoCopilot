@@ -197,7 +197,7 @@ function XAutoCopilot_OnUpdate()
     end
 
     function test()
-        
+
         -- flap adjust from mcdu menu
         -- flap 0 = 0.0
         -- flap 1 = 0.4
@@ -235,6 +235,24 @@ function XAutoCopilot_OnUpdate()
             afterenginestartstate2 = 0
         end
     end
+
+
+    -- auto anti ice
+
+    if dref.getFloat( xac_outside_air_temp_degc )< 0.0 and dref.getFloatV( xac_n2_percent,2,1 )> 50.0 then
+        dref.setInt(xac_ice_eng1_knob, 1)
+        dref.setInt(xac_ice_eng2_knob, 1)
+        dref.setInt(xac_ice_window, 1)
+        dref.setInt(xac_ice_wing_knob, 1)
+    end
+
+    if dref.getFloat( xac_outside_air_temp_degc )> 1.0 and dref.getFloatV( xac_n2_percent,2,1 )> 50.0 then
+        dref.setInt(xac_ice_eng1_knob, 0)
+        dref.setInt(xac_ice_eng2_knob, 0)
+        dref.setInt(xac_ice_window, 0)
+        dref.setInt(xac_ice_wing_knob, 0)
+    end
+
 
 
 

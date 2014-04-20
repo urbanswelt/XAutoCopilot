@@ -157,6 +157,22 @@ xac_eng2msw             = dref.getDataref("sim/custom/xap/engines/eng2msw")
 xac_n2_percent          = dref.getDataref("sim/cockpit2/engine/indicators/N2_percent")
 
 
+-- temperature/ice
+xac_outside_air_temp_degc = dref.getDataref("sim/cockpit2/temperature/outside_air_temp_degc")
+xac_ice_eng1_knob = dref.getDataref("sim/custom/xap/icerain/eng1_knob")
+xac_ice_eng2_knob = dref.getDataref("sim/custom/xap/icerain/eng2_knob")
+xac_ice_window = dref.getDataref("sim/custom/xap/icerain/window")
+xac_ice_wing_knob = dref.getDataref("sim/custom/xap/icerain/wing_knob")
+
+
+
+--sim/custom/xap/icerain/wing_knob_flt
+--sim/custom/xap/icerain/wip_l_anim
+--sim/custom/xap/icerain/wip_r_anim
+--sim/custom/xap/icerain/wiper_l
+--sim/custom/xap/icerain/wiper_r
+
+
 --misc
 --xac_timer              = dref.getDataref("sim/cockpit2/clock_timer/local_time_seconds")
 end
