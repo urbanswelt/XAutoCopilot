@@ -67,6 +67,7 @@ function XAutoCopilotMcdu_btnStart_OnClick()
     timer.newOneShot("step7", 1.3)
     timer.newOneShot("step8", 1.5)
     timer.newOneShot("step9", 1.7)
+    timer.newOneShot("step10", 1.9)
 end
 
 -- init page start
@@ -120,6 +121,11 @@ end
 function step9 ()
     dref.setString(xac_scratchpad, tmp_xac_flex_temp)
     dref.setInt(xac_click_r4, 1)
+end
+
+function step10 ()
+    dref.setInt(xac_click_init, 1)
+    dref.setInt(xac_click_r3, 1)
 end
 
 -- perf page end

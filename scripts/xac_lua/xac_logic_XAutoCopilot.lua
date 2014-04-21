@@ -38,7 +38,7 @@ function XAutoCopilot_OnUpdate()
         dref.setInt(xac_gpu_on, 0)
         dref.setInt(xac_gpu_here, 0)
         --cabine light overhead panel--
-        dref.setInt(xac_parbrake, 1)
+        dref.setFloat(xac_parbrake , 1.0)
         dref.setInt(xac_yellow_pump, 1)
         dref.setFloat(xac_flap_ratio, 0.0)
         dref.setFloat(xac_speedbrake, 0.0)
@@ -127,6 +127,8 @@ function XAutoCopilot_OnUpdate()
     then
         dref.setInt(xac_show_cater , 0)
         dref.setInt(xac_show_stair , 0)
+        dref.setInt(xac_tanker_on, 0)
+        dref.setInt(xac_load_on, 0)
         dref.setInt(xac_fasten_seat_belts , 1)
         dref.setInt(xac_no_smoking , 1)
         dref.setInt(xac_beacon_sw , 1)
@@ -137,8 +139,8 @@ function XAutoCopilot_OnUpdate()
 
 -- pushback
     if XAutoCopilot_btnPushback_State == 1 and
-       beforestart_finish == 1 and
-       xac_show_tow == 1 then
+       beforestart_finish == 1 then
+        --dref.setInt(xac_tow_on , 1) is wrong
         -- dref .....
         pushback_finish = 1
         XAutoCopilot_btnPushback_State = 0
@@ -188,15 +190,16 @@ function XAutoCopilot_OnUpdate()
 
     end
 
-    xac_test = dref.getString(xac_line_3b)
+    xac_AutoFlap = dref.getString(xac_line_3b)
     if afterenginestartstate1 == 1 then
         dref.setInt(xac_click_perf, 1)
         afterenginestartstate2 = 1
         afterenginestartstate1 = 0
-        timer.newOneShot("test", 2.0)
+        timer.newOneShot("AutoFlap", 2.0)
+        timer.newOneShot("QNH", 4.0)
     end
 
-    function test()
+    function AutoFlap()
 
         -- flap adjust from mcdu menu
         -- flap 0 = 0.0
@@ -205,56 +208,154 @@ function XAutoCopilot_OnUpdate()
         -- flap 3 = 0.8
         -- flap 4 = 1.0
 
-        if string.find(xac_test, "0/") and afterenginestartstate2 == 1 then
+        if string.find(xac_AutoFlap, "0/") and afterenginestartstate2 == 1 then
             dref.setFloat(xac_flap, 0.0)
             afterenginestart_finish = 1
             afterenginestartstate2 = 0
         end
 
-        if string.find(xac_test, "1/") and afterenginestartstate2 == 1 then
+        if string.find(xac_AutoFlap, "1/") and afterenginestartstate2 == 1 then
             dref.setFloat(xac_flap, 0.4)
             afterenginestart_finish = 1
             afterenginestartstate2 = 0
         end
 
-        if string.find(xac_test, "2/") and afterenginestartstate2 == 1 then
+        if string.find(xac_AutoFlap, "2/") and afterenginestartstate2 == 1 then
             dref.setFloat(xac_flap, 0.6)
             afterenginestart_finish = 1
             afterenginestartstate2 = 0
         end
 
-        if string.find(xac_test, "3/") and afterenginestartstate2 == 1 then
+        if string.find(xac_AutoFlap, "3/") and afterenginestartstate2 == 1 then
             dref.setFloat(xac_flap, 0.8)
             afterenginestart_finish = 1
             afterenginestartstate2 = 0
         end
 
-        if string.find(xac_test, "4/") and afterenginestartstate2 == 1 then
+        if string.find(xac_AutoFlap, "4/") and afterenginestartstate2 == 1 then
             dref.setFloat(xac_flap, 1.0)
             afterenginestart_finish = 1
             afterenginestartstate2 = 0
         end
     end
 
+function QNH()
+    -- qnh
 
-    -- auto anti ice
+    if (math.abs(dref.getFloat(xac_barometer_setting_in_hg_pilot)-dref.getFloat(xac_barometer_sealevel_inhg)) > 0.01) then
+        dref.setFloat(xac_barometer_setting_in_hg_pilot,   dref.getFloat(xac_barometer_sealevel_inhg))
+        dref.setFloat(xac_barometer_setting_in_hg_copilot, dref.getFloat(xac_barometer_sealevel_inhg))
+        sound.say("QNH adjusted!")
+    end
 
-    if dref.getFloat( xac_outside_air_temp_degc )< 0.0 and dref.getFloatV( xac_n2_percent,2,1 )> 50.0 then
+end
+
+    -- auto anti ice on
+
+    if dref.getFloat( xac_outside_air_temp_degc )< 0.0 and
+       dref.getFloatV( xac_n2_percent,1,1 )> 50.0 and
+       dref.getFloatV( xac_n2_percent,2,1 )> 50.0 then
         dref.setInt(xac_ice_eng1_knob, 1)
         dref.setInt(xac_ice_eng2_knob, 1)
         dref.setInt(xac_ice_window, 1)
         dref.setInt(xac_ice_wing_knob, 1)
     end
 
-    if dref.getFloat( xac_outside_air_temp_degc )> 1.0 and dref.getFloatV( xac_n2_percent,2,1 )> 50.0 then
+    -- auto anti ice off
+    if dref.getFloat( xac_outside_air_temp_degc )> 1.0 and
+       dref.getFloatV( xac_n2_percent,1,1 )> 50.0 and
+       dref.getFloatV( xac_n2_percent,2,1 )> 50.0 then
         dref.setInt(xac_ice_eng1_knob, 0)
         dref.setInt(xac_ice_eng2_knob, 0)
         dref.setInt(xac_ice_window, 0)
         dref.setInt(xac_ice_wing_knob, 0)
     end
+-- taxi
+
+    if XAutoCopilot_btnTaxi_State == 1 and
+       afterenginestart_finish == 1 then
+        dref.setInt(xac_fm_on , 1)
+        -- speedcontrol
+        dref.setInt(xac_nose_sw , 1)
+        dref.setFloat(xac_parbrake , 0.0)
+        taxi_finish = 1
+        XAutoCopilot_btnTaxi_State = 0
+    end
+
+    if XAutoCopilot_btnAtHoldingPoint_State == 1 and
+       taxi_finish == 1 then
+        dref.setInt(xac_fm_on , 0)
+        dref.setInt(xac_efifs_waether, 1)
+        atholdingpoint_finish = 1
+        XAutoCopilot_btnAtHoldingPoint_State = 0
+    end
+
+    if XAutoCopilot_btnLinedUp_State == 1 and
+        atholdingpoint_finish == 1 then
+        dref.setInt(xac_atc_mode_sel, 2)
+        dref.setInt(xac_atc_ta_tara, 2)
+        dref.setInt(xac_pack1, 0)
+        dref.setInt(xac_pack2, 0)
+        dref.setInt(xac_nose_sw, 2)
+        dref.setInt(xac_landr_sw, 2)
+        dref.setInt(xac_landl_sw, 2)
+        linedup_finish = 1
+        XAutoCopilot_btnLinedUp_State = 0
+    end
+
+
+    if XAutoCopilot_btnTakeOff_State == 1 then
+        -- linedup_finish == 1 then
+        --dref.setFloatV(xac_engn_thro, 1, 0.90, 0.90)
+        --dref.setFloat(xac_parbrake , 0.0)
+        takeoff_finish = 1
+        XAutoCopilot_btnTakeOff_State = 0
+    end
 
 
 
+    if XAutoCopilot_btnAfterTakeOff_State == 1 then
+        -- takeoff_finish == 1 then
+        dref.setFloat(xac_speedbrake, 0.0)
+        dref.setInt(xac_pack1, 1)
+        dref.setInt(xac_pack2, 1)
+        aftertakeoff_finish = 1
+        XAutoCopilot_btnAfterTakeOff_State = 0
+    end
+
+
+    if XAutoCopilot_btnClimb_State == 1 and
+    dref.getFloat(xac_altitude_ft_pilot) > 3000 then
+        sound.say("reaching 3000 feet")
+        dref.setInt(xac_ap1, 1)
+        climbstate1 = 1
+        XAutoCopilot_btnClimb_State = 0
+    end
+
+    if climbstate1 == 1 and
+            dref.getFloat(xac_altitude_ft_pilot) > 5000 then
+        sound.say("reaching 5000 feet")
+        dref.setInt(xac_push_baro, 1)
+        climbstate2 = 1
+        climbstate1 = 0
+    end
+
+    if climbstate2 == 1 and
+            dref.getFloat(xac_altitude_ft_pilot) > 10000 then
+    sound.say("reaching 10000 feet")
+    dref.setInt(xac_landr_sw, 0)
+    dref.setInt(xac_landl_sw, 0)
+    dref.setInt(xac_nose_sw , 0)
+    climbstate3 = 1
+    climbstate2 = 0
+    end
+
+    if climbstate3 == 1 and
+            dref.getFloat(xac_altitude_ft_pilot) > dref.getFloat(xac_alt100x) * 100 then
+        dref.setInt(xac_fasten_seat_belts, 0)
+        climb_finish = 1
+        climbstate3 = 0
+    end
 
 end
 

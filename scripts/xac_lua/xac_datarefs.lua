@@ -57,8 +57,12 @@ xac_fcu_ils             = dref.getDataref("sim/custom/xap/fcu/ils")
 xac_atc_mode_sel        = dref.getDataref("sim/custom/xap/atc/mode_sel")
 xac_atc_ta_tara         = dref.getDataref("sim/custom/xap/atc/ta_tara")
 xac_ant_skeed           = dref.getDataref("sim/custom/xap/wheels/ant_skeed")
-xac_efifs_waether       = dref.getDataref("/sim/cockpit/switches/EFIFS_shows_weather")
+
+xac_efifs_waether       = dref.getDataref("sim/cockpit/switches/EFIFS_shows_weather")
+
 xac_engn_thro           = dref.getDataref("sim/flightmodel/engine/ENGN_thro")
+xac_throttle_ratio_all  = dref.getDataref("sim/cockpit2/engine/actuators/throttle_ratio_all")
+
 xac_fasten_seat_belts   = dref.getDataref("sim/cockpit/switches/fasten_seat_belts")
 xac_no_smoking          = dref.getDataref("sim/cockpit2/switches/no_smoking")
 xac_beacon_sw           = dref.getDataref("sim/custom/xap/extlight/beacon_sw")
@@ -155,6 +159,7 @@ xac_startsel            = dref.getDataref("sim/custom/xap/engines/startsel")
 xac_eng1msw             = dref.getDataref("sim/custom/xap/engines/eng1msw")
 xac_eng2msw             = dref.getDataref("sim/custom/xap/engines/eng2msw")
 xac_n2_percent          = dref.getDataref("sim/cockpit2/engine/indicators/N2_percent")
+xac_fuel_quantity       = dref.getDataref("sim/cockpit2/fuel/fuel_quantity")
 
 
 -- temperature/ice
@@ -163,15 +168,30 @@ xac_ice_eng1_knob = dref.getDataref("sim/custom/xap/icerain/eng1_knob")
 xac_ice_eng2_knob = dref.getDataref("sim/custom/xap/icerain/eng2_knob")
 xac_ice_window = dref.getDataref("sim/custom/xap/icerain/window")
 xac_ice_wing_knob = dref.getDataref("sim/custom/xap/icerain/wing_knob")
-
-
-
 --sim/custom/xap/icerain/wing_knob_flt
 --sim/custom/xap/icerain/wip_l_anim
 --sim/custom/xap/icerain/wip_r_anim
 --sim/custom/xap/icerain/wiper_l
 --sim/custom/xap/icerain/wiper_r
 
+-- light
+xac_nose_sw          = dref.getDataref("sim/custom/xap/extlight/nose_sw")
+xac_landr_sw          = dref.getDataref("sim/custom/xap/extlight/landr_sw")
+xac_landl_sw          = dref.getDataref("sim/custom/xap/extlight/landl_sw")
+
+-- qnh
+xac_barometer_setting_in_hg_pilot   = dref.getDataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot")
+xac_barometer_setting_in_hg_copilot = dref.getDataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot")
+xac_barometer_sealevel_inhg         = dref.getDataref("sim/weather/barometer_sealevel_inhg")
+
+-- fcu
+xac_push_baro = dref.getDataref("sim/custom/xap/fcu/push_baro")
+xac_ap1 = dref.getDataref("sim/custom/xap/fcu/ap1")
+xac_alt100x = dref.getDataref("sim/custom/xap/fcu/alt100x")
+
+-- altitude
+xac_altitude_ft_pilot                       = dref.getDataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
+xac_altitude_ft_pilot                       = dref.getDataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
 
 --misc
 --xac_timer              = dref.getDataref("sim/cockpit2/clock_timer/local_time_seconds")
