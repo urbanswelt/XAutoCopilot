@@ -20,6 +20,3 @@ logging.debug("loaded xac_window_XAutoCopilot..")
 dofile("xac_lua/xac_window_XAutoCopilotMcdu.lua")
 logging.debug("loaded xac_window_XAutoCopilotMcdu..")
 
-dofile("xac_lua/xac_helper.lua")
-logging.debug("loaded xac_helper..")
-

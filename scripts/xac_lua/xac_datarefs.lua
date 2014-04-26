@@ -147,6 +147,7 @@ xac_click_y             = dref.getDataref("sim/custom/xap/mcdu/click_y")
 xac_click_z             = dref.getDataref("sim/custom/xap/mcdu/click_z")
 xac_scratchpad          = dref.getDataref("sim/custom/xap/mcdu/scratchpad")
 xac_line_3b             = dref.getDataref("sim/custom/xap/mcdu/line_3b")
+xac_line_2b             = dref.getDataref("sim/custom/xap/mcdu/line_2b")
 
 -- fuel, start
 xac_t1_pump1            = dref.getDataref("sim/custom/xap/fuel/t1_pump1")
@@ -188,10 +189,16 @@ xac_barometer_sealevel_inhg         = dref.getDataref("sim/weather/barometer_sea
 xac_push_baro = dref.getDataref("sim/custom/xap/fcu/push_baro")
 xac_ap1 = dref.getDataref("sim/custom/xap/fcu/ap1")
 xac_alt100x = dref.getDataref("sim/custom/xap/fcu/alt100x")
+xac_alt_pull_bat = dref.getDataref("sim/custom/xap/fcu/alt_pull_bat")
 
 -- altitude
 xac_altitude_ft_pilot                       = dref.getDataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
 xac_altitude_ft_pilot                       = dref.getDataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
+xac_altitude                       = dref.getDataref("sim/cockpit/autopilot/altitude")
+xac_altitude_dial_ft                       = dref.getDataref("sim/cockpit2/autopilot/altitude_dial_ft")
+
+-- distance
+xac_gps_dme_dist_m                       = dref.getDataref("sim/cockpit/radios/gps_dme_dist_m")
 
 --misc
 --xac_timer              = dref.getDataref("sim/cockpit2/clock_timer/local_time_seconds")

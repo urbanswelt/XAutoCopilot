@@ -10,7 +10,7 @@ XAutoCopilot = {
     l = 10,  --left position on screen
     t = 430, --top position on screen
     w = 250, --window width
-    h = 250, --window height
+    h = 150, --window height
     auto_show=false,
 }
 
@@ -24,31 +24,21 @@ function XAutoCopilot_OnCreate()
     local xac_top     = 30
     local xac_width   = 100
 
-    gui.newLabel( XAutoCopilot.gui_h, "ignored", "COCKPIT PREPARATION", xac_left+100, xac_top,    xac_width-50 )
-    gui.newLabel( XAutoCopilot.gui_h, "ignored", "MCDU/FMC",            xac_left+100, xac_top+15, xac_width-50 )
-    gui.newLabel( XAutoCopilot.gui_h, "ignored", "BEFORE START",        xac_left+100, xac_top+30, xac_width-50 )
-    gui.newLabel( XAutoCopilot.gui_h, "ignored", "PUSHBACK",            xac_left+100, xac_top+45, xac_width-50 )
-    gui.newLabel( XAutoCopilot.gui_h, "ignored", "ENGINE START",        xac_left+100, xac_top+60, xac_width-50 )
-    gui.newLabel( XAutoCopilot.gui_h, "ignored", "AFTER ENGINE START",  xac_left+100, xac_top+75, xac_width-50 )
-    gui.newLabel( XAutoCopilot.gui_h, "ignored", "TAXI",                xac_left+100, xac_top+90, xac_width-50 )
-    gui.newLabel( XAutoCopilot.gui_h, "ignored", "AT HOLDING POINT",    xac_left+100, xac_top+105,xac_width-50 )
-    gui.newLabel( XAutoCopilot.gui_h, "ignored", "LINED UP",            xac_left+100, xac_top+120,xac_width-50 )
-    gui.newLabel( XAutoCopilot.gui_h, "ignored", "TAKE OFF",            xac_left+100, xac_top+135,xac_width-50 )
-    gui.newLabel( XAutoCopilot.gui_h, "ignored", "AFTER TAKE OFF",      xac_left+100, xac_top+150,xac_width-50 )
-    gui.newLabel( XAutoCopilot.gui_h, "ignored", "CLIMB/CRUISE",      xac_left+100, xac_top+165,xac_width-50 )
+    gui.newLabel( XAutoCopilot.gui_h, "ignored", "COCKPIT PREPARATION",  xac_left+100, xac_top,   xac_width-50 )
+    gui.newLabel( XAutoCopilot.gui_h, "ignored", "START",                xac_left+100, xac_top+15,xac_width-50 )
+    gui.newLabel( XAutoCopilot.gui_h, "ignored", "TAXI",                 xac_left+100, xac_top+30,xac_width-50 )
+    gui.newLabel( XAutoCopilot.gui_h, "ignored", "AT HOLDING POINT",     xac_left+100, xac_top+45,xac_width-50 )
+    gui.newLabel( XAutoCopilot.gui_h, "ignored", "LINED UP",             xac_left+100, xac_top+60,xac_width-50 )
+    gui.newLabel( XAutoCopilot.gui_h, "ignored", "TAKE OFF/CLIMB/CRUISE",xac_left+100, xac_top+75,xac_width-50 )
+    gui.newLabel( XAutoCopilot.gui_h, "ignored", "DECENT/APPROACH/LANDING",xac_left+100, xac_top+90,xac_width-50 )
 
-    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnPreparation", "execute",      xac_left, xac_top,    xac_width )
-    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnMcdu",        "execute",      xac_left, xac_top+15, xac_width )
-    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnBeforeStart", "execute",      xac_left, xac_top+30, xac_width )
-    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnPushback",    "execute",      xac_left, xac_top+45, xac_width )
-    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnEngineStart", "execute",      xac_left, xac_top+60, xac_width )
-    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnAfterEngineStart", "execute", xac_left, xac_top+75, xac_width )
-    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnTaxi", "execute",             xac_left, xac_top+90, xac_width )
-    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnAtHoldingPoint", "execute",   xac_left, xac_top+105,xac_width )
-    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnLinedUp", "execute",          xac_left, xac_top+120,xac_width )
-    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnTakeOff", "execute",          xac_left, xac_top+135,xac_width )
-    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnAfterTakeOff", "execute",     xac_left, xac_top+150,xac_width )
-    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnClimb", "execute",     xac_left, xac_top+165,xac_width )
+    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnPreparation", "execute",      xac_left, xac_top,   xac_width )
+    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnStart", "execute",            xac_left, xac_top+15,xac_width )
+    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnTaxi", "execute",             xac_left, xac_top+30,xac_width )
+    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnAtHoldingPoint", "execute",   xac_left, xac_top+45,xac_width )
+    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnLinedUp", "execute",          xac_left, xac_top+60,xac_width )
+    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnTakeOff", "execute",          xac_left, xac_top+75,xac_width )
+    gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnLanding", "execute",          xac_left, xac_top+90,xac_width )
 
 end
 
@@ -62,29 +52,17 @@ function XAutoCopilot_btnPreparation_OnClick()
     XAutoCopilot_btnPreparation_State = 1
 end
 
-function XAutoCopilot_btnMcdu_OnClick()
-    gui.showWindow( XAutoCopilotMcdu.gui_h )
-end
 
-function XAutoCopilot_btnBeforeStart_OnClick()
+function XAutoCopilot_btnStart_OnClick()
     beforestartstate1 = 0
     beforestart_finish = 0
-    XAutoCopilot_btnBeforeStart_State = 1
-end
-
-function XAutoCopilot_btnPushback_OnClick()
-    pushback_finish = 0
-    XAutoCopilot_btnPushback_State = 1
-end
-
-function XAutoCopilot_btnEngineStart_OnClick()
+    enginestartstate1 = 0
+    enginestartstate2 = 0
     enginestart_finish = 0
-    XAutoCopilot_btnEngineStart_State = 1
-end
-
-function XAutoCopilot_btnAfterEngineStart_OnClick()
+    afterenginestartstate1 = 0
+    afterenginestartstate2 = 0
     afterenginestart_finish = 0
-    XAutoCopilot_btnAfterEngineStart_State = 1
+    XAutoCopilot_btnStart_State = 1
 end
 
 function XAutoCopilot_btnTaxi_OnClick()
@@ -104,18 +82,18 @@ end
 
 function XAutoCopilot_btnTakeOff_OnClick()
     takeoff_finish = 0
+    aftertakeoff_finish = 0
+    climbstate1 = 0
+    climbstate2 = 0
+    climbstate3 = 0
+    climb_finish = 0
     XAutoCopilot_btnTakeOff_State = 1
 end
 
-function XAutoCopilot_btnAfterTakeOff_OnClick()
-    aftertakeoff_finish = 0
-    XAutoCopilot_btnAfterTakeOff_State = 1
+function XAutoCopilot_btnLanding_OnClick()
+    XAutoCopilot_btnLanding_State = 1
 end
 
-function XAutoCopilot_btnClimb_OnClick()
-    climb_finish = 0
-    XAutoCopilot_btnClimb_State = 1
-end
 
 -- Toolbar Widget definition/Integration. --
 

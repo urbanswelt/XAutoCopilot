@@ -33,10 +33,10 @@ function XAutoCopilotMcdu_OnCreate()
     gui.newLabel( XAutoCopilotMcdu.gui_h, "ignored", "Flaps",              xac_left+100, xac_top+60, xac_width-50 )
     gui.newLabel( XAutoCopilotMcdu.gui_h, "ignored", "Flex temp",          xac_left+100, xac_top+75, xac_width-50 )
 
-    xac_corte      = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "EDDHEDDM", xac_left, xac_top,    xac_width )
-    xac_fltnbr     = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "ABC123",   xac_left, xac_top+15, xac_width )
+    xac_corte      = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "EDDHEDHK", xac_left, xac_top,    xac_width )
+    xac_fltnbr     = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "KOM123",   xac_left, xac_top+15, xac_width )
     xac_coi        = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "99",       xac_left, xac_top+30, xac_width )
-    xac_crzfl      = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "150",      xac_left, xac_top+45, xac_width )
+    xac_crzfl      = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "100",      xac_left, xac_top+45, xac_width )
     xac_flaps      = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "2/UP2.0",  xac_left, xac_top+60, xac_width )
     xac_flex_temp  = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "F50",      xac_left, xac_top+75, xac_width )
 
@@ -46,6 +46,7 @@ end
 
 
 function XAutoCopilotMcdu_btnStart_OnClick()
+    dref.setInt(xac_alt100x, gui.getWidgetValue(xac_crzfl))
     tmp_xac_corte = string.upper(gui.getWidgetValue(xac_corte))
     tmp_xac_corte_l = string.len(tmp_xac_corte)
     tmp_xac_fltnbr = string.upper(gui.getWidgetValue(xac_fltnbr))
