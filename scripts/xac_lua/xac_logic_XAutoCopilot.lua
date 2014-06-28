@@ -289,53 +289,44 @@ end
 -- ##################################TakeOff BEGIN##############################################
 
     if XAutoCopilot_btnTakeOff_State == 1 and
-        linedup_finish == 1 or XAutoCopilot_btnTakeOff_State == 1 and xac_debugon == 1 then
+        linedup_finish == 1 and XAutoCopilot_btnTakeOff_State == 1 or xac_debugon == 1 then
         takeoff_finish = 1
         XAutoCopilot_btnTakeOff_State = 0
     end
 
     if takeoff_finish == 1 then
-        dref.setFloat(xac_speedbrake, 0.0)
         dref.setInt(xac_pack1, 1)
         dref.setInt(xac_pack2, 1)
         aftertakeoff_finish = 1
         takeoff_finish = 0
     end
 
+	if xac_gear_handle_status == 0 and aftertakeoff_finish == 1 then
+		dref.setFloat(xac_speedbrake, 0.0)
+	   	dref.setInt(xac_nose_sw , 0)
+	end
+	
 
     if aftertakeoff_finish == 1 and
-    dref.getFloat(xac_altitude_ft_pilot) > 3000 then
-        sound.say("reaching 3000 feet")
-        dref.setInt(xac_ap1, 1)
+    dref.getFloat(xac_altitude_ft_pilot) > 10000 then
+        sound.say("passing 10000 feet")
+		dref.setInt(xac_landr_sw, 0)
+		dref.setInt(xac_landl_sw, 0)
         climbstate1 = 1
         aftertakeoff_finish = 0
     end
 
+	xac_cruisealt = dref.getFloat(xac_alt100x) *100
+	
     if climbstate1 == 1 and
-            dref.getFloat(xac_altitude_ft_pilot) > 5000 then
-        sound.say("reaching 5000 feet")
-        dref.setInt(xac_push_baro, 1)
-        climbstate2 = 1
+            dref.getFloat(xac_altitude_ft_pilot) >  xac_cruisealt then
+        dref.setInt(xac_fasten_seat_belts, 0)
+        climb_finish = 1
         climbstate1 = 0
     end
 
-    if climbstate2 == 1 and
-            dref.getFloat(xac_altitude_ft_pilot) > 10000 then
-    sound.say("reaching 10000 feet")
-    dref.setInt(xac_landr_sw, 0)
-    dref.setInt(xac_landl_sw, 0)
-    dref.setInt(xac_nose_sw , 0)
-    climbstate3 = 1
-    climbstate2 = 0
-    end
-
-    if climbstate3 == 1 and
-            dref.getFloat(xac_altitude_ft_pilot) > dref.getFloat(xac_alt100x) * 100 then
-        dref.setInt(xac_fasten_seat_belts, 0)
-        climb_finish = 1
-        climbstate3 = 0
-    end
-
+	-- STD ?
+	
 -- ##################################TakeOff END##############################################
 
 -- ##################################Landing BEGIN############################################
@@ -354,13 +345,12 @@ end
 
     if dref.getFloat(xac_altitude_ft_pilot) < 4500 and landingstate == 1 then
     dref.setInt(xac_push_baro, 1)
-    dref.setInt(xac_click_l6, 1)
-    dref.setInt(xac_click_l6, 1)
-    dref.setInt(xac_push_baro, 1)
-    timer.newOneShot("QNH", 1.0)
+    --timer.newOneShot("QNH", 1.0)
         landingstate1 = 0
     end
 
+	--spoilers arm
+	
 -- ##################################Landing END############################################
 -- ##################################Helper BEGIN##############################################
 
@@ -386,6 +376,7 @@ end
     end
 
 -- ##################################Helper END##############################################
+
 end
 
 function XAutoCopilot_OnBeforeClose() end

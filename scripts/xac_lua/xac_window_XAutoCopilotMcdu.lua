@@ -36,7 +36,7 @@ function XAutoCopilotMcdu_OnCreate()
     xac_corte      = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "KMMHKSFO", xac_left, xac_top,    xac_width )
     xac_fltnbr     = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "KOM123",   xac_left, xac_top+15, xac_width )
     xac_coi        = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "99",       xac_left, xac_top+30, xac_width )
-    xac_crzfl      = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "180",      xac_left, xac_top+45, xac_width )
+    xac_crzfl      = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "200",      xac_left, xac_top+45, xac_width )
     xac_flaps      = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "2/UP2.0",  xac_left, xac_top+60, xac_width )
     xac_flex_temp  = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "F50",      xac_left, xac_top+75, xac_width )
 

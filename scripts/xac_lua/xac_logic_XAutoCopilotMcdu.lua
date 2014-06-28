@@ -11,7 +11,6 @@ end
 
 
 function XAutoCopilotMcdu_OnBeforeClose()
-    dref.setInt(xac_tanker_on, 1)
-    dref.setInt(xac_load_on, 1)
+
 end
 
