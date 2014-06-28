@@ -289,7 +289,7 @@ end
 -- ##################################TakeOff BEGIN##############################################
 
     if XAutoCopilot_btnTakeOff_State == 1 and
-        linedup_finish == 1 and XAutoCopilot_btnTakeOff_State == 1 or xac_debugon == 1 then
+        linedup_finish == 1 or XAutoCopilot_btnTakeOff_State == 1 and xac_debugon == 1 then
         takeoff_finish = 1
         XAutoCopilot_btnTakeOff_State = 0
     end
@@ -301,28 +301,25 @@ end
         takeoff_finish = 0
     end
 
-	if xac_gear_handle_status == 0 and aftertakeoff_finish == 1 then
-		dref.setFloat(xac_speedbrake, 0.0)
-	   	dref.setInt(xac_nose_sw , 0)
-	end
-	
-
     if aftertakeoff_finish == 1 and
     dref.getFloat(xac_altitude_ft_pilot) > 10000 then
         sound.say("passing 10000 feet")
 		dref.setInt(xac_landr_sw, 0)
 		dref.setInt(xac_landl_sw, 0)
+		dref.setInt(xac_nose_sw , 0)
+		dref.setInt(xac_click_perf, 1)
         climbstate1 = 1
         aftertakeoff_finish = 0
     end
-
-	xac_cruisealt = dref.getFloat(xac_alt100x) *100
 	
+	xac_ToCD = dref.getString(xac_line_2b)
+	
+	-- not clear enough must be change
     if climbstate1 == 1 and
-            dref.getFloat(xac_altitude_ft_pilot) >  xac_cruisealt then
-        dref.setInt(xac_fasten_seat_belts, 0)
-        climb_finish = 1
-        climbstate1 = 0
+		string.find(xac_ToCD, "T/C") and dref.getFloat(xac_gps_dme_dist_m) < 1.0	then
+       dref.setInt(xac_fasten_seat_belts, 0)
+       climb_finish = 1
+       climbstate1 = 0
     end
 
 	-- STD ?
@@ -331,18 +328,20 @@ end
 
 -- ##################################Landing BEGIN############################################
 
-    xac_ToD = dref.getString(xac_line_2b)
     if XAutoCopilot_btnLanding_State == 1 and
-       string.find(xac_ToD, "T/D") and dref.getFloat(xac_gps_dme_dist_m) < 4.0 or XAutoCopilot_btnLanding_State == 1 and xac_debugon == 1 then
+       string.find(xac_ToCD, "T/D") and dref.getFloat(xac_gps_dme_dist_m) < 4.0 or XAutoCopilot_btnLanding_State == 1 and xac_debugon == 1 then
         --string.find(xac_ToD, "DECEL") and dref.getFloat(xac_gps_dme_dist_m) < 17.0 then
         --climb_finish == 1 then
         --FMGS Check Radio Nav Frequency|CHECK
+		dref.setInt(xac_fasten_seat_belts, 1)
         dref.setInt(xac_alt100x, 30)
         dref.setInt(xac_alt_pull_bat, 1)
         landingstate1 = 1
         XAutoCopilot_btnLanding_State = 0
     end
 
+	-- here 10000 feet for landing lights!!!
+	
     if dref.getFloat(xac_altitude_ft_pilot) < 4500 and landingstate == 1 then
     dref.setInt(xac_push_baro, 1)
     --timer.newOneShot("QNH", 1.0)
