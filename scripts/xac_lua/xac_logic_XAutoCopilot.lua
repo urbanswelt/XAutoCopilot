@@ -88,6 +88,8 @@ function XAutoCopilot_OnUpdate()
         dref.setInt(xac_ant_skeed, 1)
         dref.setInt(xac_efifs_waether, 0)
         dref.setFloatV(xac_engn_thro, 1, 0.0, 0.0)
+		dref.setInt(xac_tanker_on, 1)
+		dref.setInt(xac_load_on, 1)
         gui.showWindow( XAutoCopilotMcdu.gui_h )
         prepstate5 = 1
         prepstate4 = 0
@@ -106,7 +108,10 @@ function XAutoCopilot_OnUpdate()
 
 -- ##################################Start BEGIN##############################################
 -- befor start checklist
-    if XAutoCopilot_btnStart_State == 1  and preparation_finish == 1 then
+    if XAutoCopilot_btnStart_State == 1  and preparation_finish == 1 or
+       XAutoCopilot_btnStart_State == 1 and xac_debugon == 1 then
+	    dref.setInt(xac_tanker_on, 0)
+		dref.setInt(xac_load_on, 0)
         dref.setInt(xac_p_f_l_kn , 0)
         dref.setInt(xac_p_f_r_kn , 0)
         dref.setInt(xac_p_b_l_kn , 0)
@@ -237,21 +242,17 @@ function XAutoCopilot_OnUpdate()
 -- ##################################Start END##############################################
 
 function QNH()
-    -- qnh
-
     if (math.abs(dref.getFloat(xac_barometer_setting_in_hg_pilot)-dref.getFloat(xac_barometer_sealevel_inhg)) > 0.01) then
         dref.setFloat(xac_barometer_setting_in_hg_pilot,   dref.getFloat(xac_barometer_sealevel_inhg))
         dref.setFloat(xac_barometer_setting_in_hg_copilot, dref.getFloat(xac_barometer_sealevel_inhg))
         sound.say("QNH adjusted!")
     end
-
 end
-
 
 -- taxi
 
     if XAutoCopilot_btnTaxi_State == 1 and
-       afterenginestart_finish == 1 then
+       afterenginestart_finish == 1 or XAutoCopilot_btnTaxi_State == 1 and xac_debugon == 1 then
         dref.setInt(xac_fm_on , 1)
         -- speedcontrol
         dref.setInt(xac_nose_sw , 1)
@@ -263,7 +264,7 @@ end
 -- holding point
 
     if XAutoCopilot_btnAtHoldingPoint_State == 1 and
-       taxi_finish == 1 then
+       taxi_finish == 1 or XAutoCopilot_btnAtHoldingPoint_State == 1 and xac_debugon == 1 then
         dref.setInt(xac_fm_on , 0)
         dref.setInt(xac_efifs_waether, 1)
         atholdingpoint_finish = 1
@@ -273,7 +274,7 @@ end
 -- lined up
 
     if XAutoCopilot_btnLinedUp_State == 1 and
-        atholdingpoint_finish == 1 then
+        atholdingpoint_finish == 1 or XAutoCopilot_btnLinedUp_State == 1 and xac_debugon == 1 then
         dref.setInt(xac_atc_mode_sel, 2)
         dref.setInt(xac_atc_ta_tara, 2)
         dref.setInt(xac_pack1, 0)
@@ -288,7 +289,7 @@ end
 -- ##################################TakeOff BEGIN##############################################
 
     if XAutoCopilot_btnTakeOff_State == 1 and
-        linedup_finish == 1 then
+        linedup_finish == 1 or XAutoCopilot_btnTakeOff_State == 1 and xac_debugon == 1 then
         takeoff_finish = 1
         XAutoCopilot_btnTakeOff_State = 0
     end
@@ -341,7 +342,7 @@ end
 
     xac_ToD = dref.getString(xac_line_2b)
     if XAutoCopilot_btnLanding_State == 1 and
-       string.find(xac_ToD, "T/D") and dref.getFloat(xac_gps_dme_dist_m) < 4.0 then
+       string.find(xac_ToD, "T/D") and dref.getFloat(xac_gps_dme_dist_m) < 4.0 or XAutoCopilot_btnLanding_State == 1 and xac_debugon == 1 then
         --string.find(xac_ToD, "DECEL") and dref.getFloat(xac_gps_dme_dist_m) < 17.0 then
         --climb_finish == 1 then
         --FMGS Check Radio Nav Frequency|CHECK
@@ -352,9 +353,11 @@ end
     end
 
     if dref.getFloat(xac_altitude_ft_pilot) < 4500 and landingstate == 1 then
-        timer.newOneShot("QNH", 4.0)
+    dref.setInt(xac_push_baro, 1)
     dref.setInt(xac_click_l6, 1)
     dref.setInt(xac_click_l6, 1)
+    dref.setInt(xac_push_baro, 1)
+    timer.newOneShot("QNH", 1.0)
         landingstate1 = 0
     end
 

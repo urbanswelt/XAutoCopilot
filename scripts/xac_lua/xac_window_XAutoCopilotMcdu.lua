@@ -33,10 +33,10 @@ function XAutoCopilotMcdu_OnCreate()
     gui.newLabel( XAutoCopilotMcdu.gui_h, "ignored", "Flaps",              xac_left+100, xac_top+60, xac_width-50 )
     gui.newLabel( XAutoCopilotMcdu.gui_h, "ignored", "Flex temp",          xac_left+100, xac_top+75, xac_width-50 )
 
-    xac_corte      = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "EDDHEDHK", xac_left, xac_top,    xac_width )
+    xac_corte      = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "KMMHKSFO", xac_left, xac_top,    xac_width )
     xac_fltnbr     = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "KOM123",   xac_left, xac_top+15, xac_width )
     xac_coi        = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "99",       xac_left, xac_top+30, xac_width )
-    xac_crzfl      = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "100",      xac_left, xac_top+45, xac_width )
+    xac_crzfl      = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "180",      xac_left, xac_top+45, xac_width )
     xac_flaps      = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "2/UP2.0",  xac_left, xac_top+60, xac_width )
     xac_flex_temp  = gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "F50",      xac_left, xac_top+75, xac_width )
 
@@ -71,7 +71,7 @@ function XAutoCopilotMcdu_btnStart_OnClick()
     timer.newOneShot("step10", 1.9)
 end
 
--- init page start
+-- ##################################INIT PAGE BEGIN##############################################
 function step1()
     dref.setInt(xac_click_init, 1)
     dref.setString(xac_scratchpad, tmp_xac_corte)
@@ -104,9 +104,9 @@ end
 
 -- sim/cockpit2/fuel_quantity
 
--- init page end
+-- ##################################INIT PAGE END##############################################
 
--- perf page start
+-- ##################################PERF PAGE BEGIN##############################################
 function step7 ()
     dref.setInt(xac_click_perf, 1)
     dref.setInt(xac_click_l1, 1)
@@ -129,7 +129,7 @@ function step10 ()
     dref.setInt(xac_click_r3, 1)
 end
 
--- perf page end
+-- ##################################PERF PAGE END##############################################
 
 -- Toolbar Widget definition/Integration. --
 

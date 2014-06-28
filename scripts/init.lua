@@ -7,7 +7,6 @@
 
 dofile("xac_lua/xac_init.lua")
 
-
 --Undefined function
 function OnDraw_BeforeGauges_3D() end
 function OnDraw_Gauges_3D() end

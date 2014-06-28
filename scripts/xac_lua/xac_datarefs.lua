@@ -193,7 +193,6 @@ xac_alt_pull_bat = dref.getDataref("sim/custom/xap/fcu/alt_pull_bat")
 
 -- altitude
 xac_altitude_ft_pilot                       = dref.getDataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
-xac_altitude_ft_pilot                       = dref.getDataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
 xac_altitude                       = dref.getDataref("sim/cockpit/autopilot/altitude")
 xac_altitude_dial_ft                       = dref.getDataref("sim/cockpit2/autopilot/altitude_dial_ft")
 

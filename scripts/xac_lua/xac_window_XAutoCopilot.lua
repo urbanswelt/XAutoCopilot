@@ -9,7 +9,7 @@ XAutoCopilot = {
     gui_h = gui.newWindow("XAutoCopilot"),
     l = 10,  --left position on screen
     t = 430, --top position on screen
-    w = 250, --window width
+    w = 280, --window width
     h = 150, --window height
     auto_show=false,
 }
@@ -40,7 +40,23 @@ function XAutoCopilot_OnCreate()
     gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnTakeOff", "execute",          xac_left, xac_top+75,xac_width )
     gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnLanding", "execute",          xac_left, xac_top+90,xac_width )
 
+    gui.newCheckbox( XAutoCopilot.gui_h, "XAutoCopilot_chkDEBUG", 0, xac_left, xac_top+105,xac_width )
+    gui.newLabel( XAutoCopilot.gui_h, "ignored", "DEBUG",xac_left+100, xac_top+105,xac_width-50 )
 end
+
+
+function XAutoCopilot_chkDEBUG_OnClick()
+
+    local check_val = gui.getWidgetValue( XAutoCopilot_chkDEBUG )
+    if( check_val )then
+        xac_debugon = 1 --checked
+    else
+        xac_debugoff = 0--unchecked
+    end
+
+end --OnClick
+
+
 
 function XAutoCopilot_btnPreparation_OnClick()
     prepstate1 = 0
