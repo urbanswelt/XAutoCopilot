@@ -41,12 +41,11 @@ function XAutoCopilotMcdu_OnCreate()
     xac_coi				= gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "99",       			xac_left, xac_top+30, xac_width )
     xac_crzfl			= gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "200",      			xac_left, xac_top+45, xac_width )
 	xac_trans_dep	= gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "18000",      		xac_left, xac_top+60, xac_width )
-	xac_trans_arr	= gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "6000",      		xac_left, xac_top+75, xac_width )	
+	xac_trans_arr	= gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "18000",      		xac_left, xac_top+75, xac_width )	
     xac_flaps			= gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "2/UP2.0",  		xac_left, xac_top+90, xac_width )
     xac_flex_temp	= gui.newTextBox( XAutoCopilotMcdu.gui_h, "ignored", "F50",      			xac_left, xac_top+105, xac_width )
 
     gui.newButton( XAutoCopilotMcdu.gui_h, "XAutoCopilotMcdu_btnStart", "Start", 			xac_left, xac_top+125, xac_width-50 )
-
 end
 
 

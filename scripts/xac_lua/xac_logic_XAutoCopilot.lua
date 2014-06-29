@@ -7,6 +7,43 @@
 
 function XAutoCopilot_OnUpdate()
 
+-- delete Info on screen start
+if 	preparation_finish == 1 then
+gui.hideWidget( xac_widprep1 )
+gui.hideWidget( xac_widprep2 )
+end
+
+if 	afterenginestart_finish == 1 then
+gui.hideWidget( xac_widstart1 )
+gui.hideWidget( xac_widstart2 )
+end
+
+if 	taxi_finish == 1 then
+gui.hideWidget( xac_widtaxi1 )
+gui.hideWidget( xac_widtaxi2 )
+end
+
+if 	atholdingpoint_finish == 1 then
+gui.hideWidget( xac_widhold1 )
+gui.hideWidget( xac_widhold2 )
+end
+
+if 	linedup_finish == 1 then
+gui.hideWidget( xac_widline1 )
+gui.hideWidget( xac_widline2 )
+end
+
+if 	climb_finish == 1 then
+gui.hideWidget( xac_widtcc1 )
+gui.hideWidget( xac_widtcc2 )
+end	
+
+if 	landing_finish == 1 then
+gui.hideWidget( xac_widdal1 )
+gui.hideWidget( xac_widdal2 )
+end	
+-- delete Info on screen end
+
 -- ##################################Preparation BEGIN##############################################
 
 -- Cockpit preparation checklist
@@ -314,9 +351,9 @@ end
 	
 	xac_ToCD = dref.getString(xac_line_2b)
 	
-	-- not clear enough must be change
+	-- not clear enough must be change, look at MCDU CRZ ....
     if climbstate1 == 1 and
-		string.find(xac_ToCD, "T/C") and dref.getFloat(xac_gps_dme_dist_m) < 1.0	then
+		string.find(xac_ToCD, "T/C") and dref.getFloat(xac_gps_dme_dist_m) < 4.0	then
        dref.setInt(xac_fasten_seat_belts, 0)
        climb_finish = 1
        climbstate1 = 0
