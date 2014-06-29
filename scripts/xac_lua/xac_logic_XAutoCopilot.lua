@@ -342,7 +342,7 @@ end
 
 	-- here 10000 feet for landing lights!!!
 	
-    if dref.getFloat(xac_altitude_ft_pilot) < 4500 and landingstate == 1 then
+    if dref.getFloat(xac_altitude_ft_pilot) < 4500 and landingstate == 1 then -- transition fl must be change !
     dref.setInt(xac_push_baro, 1)
     --timer.newOneShot("QNH", 1.0)
         landingstate1 = 0
