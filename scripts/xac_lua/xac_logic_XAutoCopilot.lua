@@ -196,7 +196,7 @@ function XAutoCopilot_OnUpdate()
         afterenginestartstate2 = 1
         afterenginestartstate1 = 0
         timer.newOneShot("AutoFlap", 2.0)
-        timer.newOneShot("QNH", 4.0)
+     --   timer.newOneShot("QNH", 4.0) must be change
     end
 
     function AutoFlap()
