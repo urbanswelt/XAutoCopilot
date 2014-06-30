@@ -6,11 +6,9 @@
 --
 
 function XAutoCopilotMcdu_OnUpdate()
-
 end
 
 
 function XAutoCopilotMcdu_OnBeforeClose()
-
 end
 

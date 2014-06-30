@@ -7,45 +7,45 @@
 
 XAutoCopilot = {
     gui_h = gui.newWindow("XAutoCopilot"),
-    l = 10,  --left position on screen
+    l = 10, --left position on screen
     t = 430, --top position on screen
     w = 280, --window width
     h = 150, --window height
-    auto_show=false,
+    auto_show = false,
 }
 
 function XAutoCopilot_OnCreate()
-    local w,h = gfx.getScreenSize()
+    local w, h = gfx.getScreenSize()
 
-    gui.setWindowSize( XAutoCopilot.gui_h, XAutoCopilot.l, XAutoCopilot.t, XAutoCopilot.w, XAutoCopilot.h )
-    gui.setWindowCaption( XAutoCopilot.gui_h, "X-Plane Auto Copilot" )
+    gui.setWindowSize(XAutoCopilot.gui_h, XAutoCopilot.l, XAutoCopilot.t, XAutoCopilot.w, XAutoCopilot.h)
+    gui.setWindowCaption(XAutoCopilot.gui_h, "X-Plane Auto Copilot")
 
-    local xac_left    = 10
-    local xac_top     = 30
-    local xac_width   = 100
-	
-	
-	xac_widprep1	= gui.newLabel( XAutoCopilot.gui_h, "ignored", "COCKPIT PREPARATION",  xac_left+100, xac_top,   xac_width-50 )
-    xac_widstart1 	= gui.newLabel( XAutoCopilot.gui_h, "ignored", "START",                xac_left+100, xac_top+15 ,xac_width-50 ) 
-    xac_widtaxi1 	= gui.newLabel( XAutoCopilot.gui_h, "ignored", "TAXI",                 xac_left+100, xac_top+30,xac_width-50 )
-    xac_widhold1 	= gui.newLabel( XAutoCopilot.gui_h, "ignored", "AT HOLDING POINT",     xac_left+100, xac_top+45,xac_width-50 )
-    xac_widline1 	= gui.newLabel( XAutoCopilot.gui_h, "ignored", "LINED UP",             xac_left+100, xac_top+60,xac_width-50 )
-    xac_widtcc1	 	= gui.newLabel( XAutoCopilot.gui_h, "ignored", "TAKE OFF/CLIMB/CRUISE",xac_left+100, xac_top+75,xac_width-50 )
-    xac_widdal1 		= gui.newLabel( XAutoCopilot.gui_h, "ignored", "DECENT/APPROACH/LANDING",xac_left+100, xac_top+90,xac_width-50 )
+    local xac_left = 10
+    local xac_top = 30
+    local xac_width = 100
 
-    xac_widprep2	= gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnPreparation", "execute",      xac_left, xac_top,   xac_width )
-    xac_widstart2 	= gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnStart", "execute",            xac_left, xac_top+15 ,xac_width ) 
-    xac_widtaxi2 	= gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnTaxi", "execute",             xac_left, xac_top+30,xac_width )
-    xac_widhold2 	= gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnAtHoldingPoint", "execute",   xac_left, xac_top+45,xac_width )
-    xac_widline2 	= gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnLinedUp", "execute",          xac_left, xac_top+60,xac_width )
-    xac_widtcc2	 	= gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnTakeOff", "execute",          xac_left, xac_top+75,xac_width )
-    xac_widdal2 		= gui.newButton( XAutoCopilot.gui_h, "XAutoCopilot_btnLanding", "execute",          xac_left, xac_top+90,xac_width )
+
+    xac_widprep1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "COCKPIT PREPARATION", xac_left + 100, xac_top, xac_width - 50)
+    xac_widstart1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "START", xac_left + 100, xac_top + 15, xac_width - 50)
+    xac_widtaxi1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "TAXI", xac_left + 100, xac_top + 30, xac_width - 50)
+    xac_widhold1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "AT HOLDING POINT", xac_left + 100, xac_top + 45, xac_width - 50)
+    xac_widline1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "LINED UP", xac_left + 100, xac_top + 60, xac_width - 50)
+    xac_widtcc1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "TAKE OFF/CLIMB/CRUISE", xac_left + 100, xac_top + 75, xac_width - 50)
+    xac_widdal1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "DECENT/APPROACH/LANDING", xac_left + 100, xac_top + 90, xac_width - 50)
+
+    xac_widprep2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnPreparation", "execute", xac_left, xac_top, xac_width)
+    xac_widstart2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnStart", "execute", xac_left, xac_top + 15, xac_width)
+    xac_widtaxi2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnTaxi", "execute", xac_left, xac_top + 30, xac_width)
+    xac_widhold2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnAtHoldingPoint", "execute", xac_left, xac_top + 45, xac_width)
+    xac_widline2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnLinedUp", "execute", xac_left, xac_top + 60, xac_width)
+    xac_widtcc2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnTakeOff", "execute", xac_left, xac_top + 75, xac_width)
+    xac_widdal2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnLanding", "execute", xac_left, xac_top + 90, xac_width)
 
     --gui.newCheckbox( XAutoCopilot.gui_h, "XAutoCopilot_chkDEBUG", 0, xac_left, xac_top+105,xac_width )
     --gui.newLabel( XAutoCopilot.gui_h, "ignored", "DEBUG",xac_left+100, xac_top+105,xac_width-50 )
 end
 
-
+--[[
 function XAutoCopilot_chkDEBUG_OnClick()
 
     local check_val = gui.getWidgetValue( XAutoCopilot_chkDEBUG )
@@ -56,16 +56,17 @@ function XAutoCopilot_chkDEBUG_OnClick()
     end
 
 end --OnClick
+]]
 
 
 
 function XAutoCopilot_btnPreparation_OnClick()
-	prepstate1 = 0
+    prepstate1 = 0
     prepstate2 = 0
     prepstate3 = 0
     prepstate4 = 0
     prepstate5 = 0
-	preparation_finish = 0
+    preparation_finish = 0
     XAutoCopilot_btnPreparation_State = 1
 end
 
@@ -108,8 +109,8 @@ function XAutoCopilot_btnTakeOff_OnClick()
 end
 
 function XAutoCopilot_btnLanding_OnClick()
-	landingstate1 = 0
-	landing_finish = 0
+    landingstate1 = 0
+    landing_finish = 0
     XAutoCopilot_btnLanding_State = 1
 end
 
@@ -118,12 +119,11 @@ end
 
 ToolXAutoCopilot = {
     active = true,
-    texture = gfx.loadPng( gizmo.getFolder() .. "firmware/icons/world.png" ),
-
+    texture = gfx.loadPng(gizmo.getFolder() .. "firmware/icons/world.png"),
     name = "XAutoCopilot",
     run = function(self)
-        if( XAutoCopilot )then
-            gui.showWindow( XAutoCopilot.gui_h )
+        if (XAutoCopilot) then
+            gui.showWindow(XAutoCopilot.gui_h)
         else
             self.active = false
         end
@@ -131,8 +131,8 @@ ToolXAutoCopilot = {
 }
 
 
-if( ToolTray )then
-    ToolTray:register( ToolXAutoCopilot )
+if (ToolTray) then
+    ToolTray:register(ToolXAutoCopilot)
 end
 
 
