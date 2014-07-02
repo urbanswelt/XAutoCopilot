@@ -51,7 +51,6 @@ end
 
 function XAutoCopilotBriefingDeparture_btnStart_OnClick()
 
-
     tmp_xac_initalt = string.format("%i", gui.getWidgetValue(xac_initalt)) -- Initial Altitude
     tmp_depstation = gui.getWidgetValue(xac_depstation) * 100 -- Save Departure Frequency
     tmp_xac_trans_dep = string.upper(gui.getWidgetValue(xac_trans_dep)) -- Transition Altitude for Departure

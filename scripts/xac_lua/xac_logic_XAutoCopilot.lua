@@ -11,37 +11,30 @@ function XAutoCopilot_OnUpdate()
     -- delete Info on screen start
     if preparation_finish == 1 then
         gui.hideWidget(xac_widprep1)
-        gui.hideWidget(xac_widprep2)
     end
 
     if afterenginestart_finish == 1 then
         gui.hideWidget(xac_widstart1)
-        gui.hideWidget(xac_widstart2)
     end
 
     if taxi_finish == 1 then
         gui.hideWidget(xac_widtaxi1)
-        gui.hideWidget(xac_widtaxi2)
     end
 
     if atholdingpoint_finish == 1 then
         gui.hideWidget(xac_widhold1)
-        gui.hideWidget(xac_widhold2)
     end
 
     if linedup_finish == 1 then
         gui.hideWidget(xac_widline1)
-        gui.hideWidget(xac_widline2)
     end
 
     if climb_finish == 1 then
         gui.hideWidget(xac_widtcc1)
-        gui.hideWidget(xac_widtcc2)
     end
 
     if landing_finish == 1 then
         gui.hideWidget(xac_widdal1)
-        gui.hideWidget(xac_widdal2)
     end
     -- delete Info on screen end
 
@@ -140,6 +133,7 @@ function XAutoCopilot_OnUpdate()
         sound.say("Cockpit Preparation is finish.")
         prepstate5 = 0
         preparation_finish = 1
+        XAutoCopilot_btnPreparation_State2 = 0
     end
 
     -- ##################################Preparation END##############################################
@@ -321,6 +315,7 @@ function XAutoCopilot_OnUpdate()
         dref.setInt(xac_pack1, 1)
         dref.setInt(xac_pack2, 1)
         aftertakeoff_finish = 1
+        climbstate2 = 1
         takeoff_finish = 0
     end
 
@@ -334,8 +329,9 @@ function XAutoCopilot_OnUpdate()
         aftertakeoff_finish = 0
     end
 
+
     if climbstate1 == 1 then
-        local cruisepoint = tmp_xac_crzfl * 100
+        local cruisepoint = (tmp_xac_crzfl * 100)
         if xac_altitude_ft_pilot >= cruisepoint then
             timer.newOneShot("Cruise_Step1", (steptime * 1))
         end
@@ -343,11 +339,21 @@ function XAutoCopilot_OnUpdate()
 
     function Cruise_Step1()
         dref.setInt(xac_fasten_seat_belts, 0)
-        climb_finish = 1
         climbstate1 = 0
+        climb_finish = 1
     end
 
-    -- STD BARO ?
+    if climbstate2 == 1 then
+        local deptranspoint = xac_trans_dep
+        if xac_altitude_ft_pilot == deptranspoint then
+            timer.newOneShot("Cruise_Step2", (steptime * 1))
+        end
+    end
+
+    function Cruise_Step2()
+        dref_setInt(xac_push_baro, 1)
+    end
+
 
     -- ##################################TakeOff END##############################################
 

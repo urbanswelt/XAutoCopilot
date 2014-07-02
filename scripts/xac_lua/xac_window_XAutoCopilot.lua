@@ -25,6 +25,7 @@ function XAutoCopilot_OnCreate()
     local xac_width = 100
     local xac_width_button = 60
 
+    xac_inprogress1 = "execute"
 
     xac_widprep1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "COCKPIT PREPARATION", xac_left + 80, xac_top, xac_width - 50)
     xac_widstart1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "START", xac_left + 80, xac_top + 15, xac_width - 50)
@@ -34,7 +35,7 @@ function XAutoCopilot_OnCreate()
     xac_widtcc1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "TAKE OFF/CLIMB/CRUISE", xac_left + 80, xac_top + 75, xac_width - 50)
     xac_widdal1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "DECENT/APPROACH/LANDING", xac_left + 80, xac_top + 90, xac_width - 50)
 
-    xac_widprep2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnPreparation", "execute", xac_left, xac_top, xac_width_button)
+    xac_widprep2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnPreparation", xac_inprogress1, xac_left, xac_top, xac_width_button)
     xac_widstart2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnStart", "execute", xac_left, xac_top + 15, xac_width_button)
     xac_widtaxi2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnTaxi", "execute", xac_left, xac_top + 30, xac_width_button)
     xac_widhold2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnAtHoldingPoint", "execute", xac_left, xac_top + 45, xac_width_button)
@@ -44,6 +45,7 @@ function XAutoCopilot_OnCreate()
 end
 
 function XAutoCopilot_btnPreparation_OnClick()
+    gui.hideWidget(xac_widprep2)
     prepstate1 = 0
     prepstate2 = 0
     prepstate3 = 0
@@ -51,37 +53,47 @@ function XAutoCopilot_btnPreparation_OnClick()
     prepstate5 = 0
     preparation_finish = 0
     XAutoCopilot_btnPreparation_State = 1
+    XAutoCopilot_btnPreparation_State2 = 1
 end
 
 
 function XAutoCopilot_btnStart_OnClick()
-    beforestartstate1 = 0
-    beforestart_finish = 0
-    enginestartstate1 = 0
-    enginestartstate2 = 0
-    enginestart_finish = 0
-    afterenginestartstate1 = 0
-    afterenginestartstate2 = 0
-    afterenginestart_finish = 0
-    XAutoCopilot_btnStart_State = 1
+    if XAutoCopilot_btnPreparation_State2 == 1 then
+        return
+    else
+        gui.hideWidget(xac_widstart2)
+        beforestartstate1 = 0
+        beforestart_finish = 0
+        enginestartstate1 = 0
+        enginestartstate2 = 0
+        enginestart_finish = 0
+        afterenginestartstate1 = 0
+        afterenginestartstate2 = 0
+        afterenginestart_finish = 0
+        XAutoCopilot_btnStart_State = 1
+    end
 end
 
 function XAutoCopilot_btnTaxi_OnClick()
+    gui.hideWidget(xac_widtaxi2)
     taxi_finish = 0
     XAutoCopilot_btnTaxi_State = 1
 end
 
 function XAutoCopilot_btnAtHoldingPoint_OnClick()
+    gui.hideWidget(xac_widhold2)
     atholdingpoint_finish = 0
     XAutoCopilot_btnAtHoldingPoint_State = 1
 end
 
 function XAutoCopilot_btnLinedUp_OnClick()
+    gui.hideWidget(xac_widline2)
     linedup_finish = 0
     XAutoCopilot_btnLinedUp_State = 1
 end
 
 function XAutoCopilot_btnTakeOff_OnClick()
+    gui.hideWidget(xac_widtcc2)
     takeoff_finish = 0
     aftertakeoff_finish = 0
     climbstate1 = 0
@@ -92,6 +104,7 @@ function XAutoCopilot_btnTakeOff_OnClick()
 end
 
 function XAutoCopilot_btnLanding_OnClick()
+    gui.hideWidget(xac_widdal2)
     landingstate1 = 0
     landing_finish = 0
     XAutoCopilot_btnLanding_State = 1
