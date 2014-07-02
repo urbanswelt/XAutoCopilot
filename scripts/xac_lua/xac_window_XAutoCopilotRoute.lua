@@ -70,6 +70,9 @@ function XAutoCopilotRoute_btnStart_OnClick()
     timer.newOneShot("Route_Step5", (steptime * 5))
     timer.newOneShot("Route_Step6", (steptime * 6))
     timer.newOneShot("Route_Step7", (steptime * 7))
+    timer.newOneShot("Route_Step8", (steptime * 8))
+    timer.newOneShot("Route_Step9", (steptime * 9))
+    timer.newOneShot("Route_Step10", (steptime * 10))
 end
 
 
@@ -106,8 +109,18 @@ end
 function Route_Step7()
     dref.setInt(xac_click_perf, 1) -- go to performance page
     dref.setInt(xac_click_l1, 1) -- click V1
+end
+
+function Route_Step8()
+    dref.setInt(xac_click_perf, 1) -- go to performance page
     dref.setInt(xac_click_l2, 1) -- click VR
+end
+
+function Route_Step9()
     dref.setInt(xac_click_l3, 1) -- click V2
+end
+
+function Route_Step10()
     dref.setInt(xac_click_init, 1) -- go to init page
     sound.say("Route is Set!")
 end
