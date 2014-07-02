@@ -4,7 +4,8 @@
 -- Date: 23.01.14
 -- Time: 19:47
 --
-
+-- You would like use more than one script ?
+-- make a new folder put it in here
 dofile("xac_lua/xac_init.lua")
 
 --Undefined function
@@ -23,15 +24,7 @@ function OnSceneryLoaded () end
 function OnAirportChanged () end
 function OnLiveryChanged () end
 function OnXPlaneDialog () end
-function main ()
-
-    function wait(waitTime)
-        timer = os.time()
-        repeat until os.time() > timer + waitTime
-    end
-
-
-end
+function main () end
 function XA_Activation_OnCreate () end
 function OnDraw_BeforeGauges () end
 function OnDraw_Gauges () end

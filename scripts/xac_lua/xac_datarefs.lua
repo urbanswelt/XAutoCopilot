@@ -179,6 +179,7 @@ function OnFirstFrame()
     xac_nose_sw = dref.getDataref("sim/custom/xap/extlight/nose_sw")
     xac_landr_sw = dref.getDataref("sim/custom/xap/extlight/landr_sw")
     xac_landl_sw = dref.getDataref("sim/custom/xap/extlight/landl_sw")
+    xac_navlogo_sw = dref.getDataRef("sim/custom/xap/extlight/navlogo_sw")
 
     -- qnh
     xac_barometer_setting_in_hg_pilot = dref.getDataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot")
@@ -187,11 +188,11 @@ function OnFirstFrame()
     xac_barometer_setting = dref.getDataref("sim/cockpit/misc/barometer_setting")
     xac_barometer_setting2 = dref.getDataref("sim/cockpit/misc/barometer_setting2")
 
-
     -- fcu
     xac_push_baro = dref.getDataref("sim/custom/xap/fcu/push_baro")
     xac_ap1 = dref.getDataref("sim/custom/xap/fcu/ap1")
     xac_alt100x = dref.getDataref("sim/custom/xap/fcu/alt100x")
+    --xac_alt1000x = dref.getDataref("sim/custom/xap/fcu/alt1000x") does not work ?
     xac_alt_pull_bat = dref.getDataref("sim/custom/xap/fcu/alt_pull_bat")
 
     -- altitude
@@ -201,6 +202,14 @@ function OnFirstFrame()
 
     -- distance
     xac_gps_dme_dist_m = dref.getDataref("sim/cockpit/radios/gps_dme_dist_m")
+
+    -- communication
+    xac_transponder_code = dref.getDataref("sim/cockpit2/radios/actuators/transponder_code")
+    xac_nav_com_adf_mode = dref.getDataref("sim/cockpit/radios/nav_com_adf_mode")
+    xac_com1_freq_hz = dref.getDataref("sim/cockpit/radios/com1_freq_hz")
+    xac_com2_freq_hz = dref.getDataref("sim/cockpit/radios/com2_freq_hz")
+    xac_com1_stdby_freq_hz = dref.getDataref("sim/cockpit/radios/com1_stdby_freq_hz")
+    xac_com2_stdby_freq_hz = dref.getDataref("sim/cockpit/radios/com2_stdby_freq_hz")
 
     --misc
     --xac_timer              = dref.getDataref("sim/cockpit2/clock_timer/local_time_seconds")

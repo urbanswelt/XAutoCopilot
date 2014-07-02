@@ -112,6 +112,7 @@ function XAutoCopilot_OnUpdate()
         --xac_firetest_e1--
         --xac_firetest_e2--
         dref.setInt(xac_strobe_sw, 1)
+        dref.setInt(xac_navlogo_sw, 1)
         dref.setInt(xac_radio_on, 1)
         --radio set--
         --altimter std--
