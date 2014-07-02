@@ -44,14 +44,13 @@ function XAutoCopilotRoute_OnCreate()
     gui.newButton(XAutoCopilotRoute.gui_h, "XAutoCopilotRoute_btnStart", "Start", xac_left, xac_top + 125, xac_width - 50)
 
 
---[[Init FUEL PREDICTION
--extra / time
-- TAXI Time 0.2
-- Route Reserve in % with /5.0
-- Final / Time
-- sim/cockpit2/fuel_quantity
-- Extra / Time (for reading)]]
-
+    --[[Init FUEL PREDICTION
+    -extra / time
+    - TAXI Time 0.2
+    - Route Reserve in % with /5.0
+    - Final / Time
+    - sim/cockpit2/fuel_quantity
+    - Extra / Time (for reading)]]
 end
 
 

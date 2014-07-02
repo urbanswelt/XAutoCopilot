@@ -232,7 +232,6 @@ function XAutoCopilot_OnUpdate()
         afterenginestartstate2 = 1
         afterenginestartstate1 = 0
         timer.newOneShot("AutoFlap", 2.0)
-        timer.newOneShot("QNH", 4.0)
     end
 
     function AutoFlap()
@@ -276,14 +275,6 @@ function XAutoCopilot_OnUpdate()
     end
 
     -- ##################################Start END##############################################
-
-    function QNH()
-        if (math.abs(dref.getFloat(xac_barometer_setting_in_hg_pilot) - dref.getFloat(xac_barometer_sealevel_inhg)) > 0.01) then
-            dref.setFloat(xac_barometer_setting, dref.getFloat(xac_barometer_sealevel_inhg))
-            dref.setFloat(xac_barometer_setting2, dref.getFloat(xac_barometer_sealevel_inhg))
-            sound.say("QNH adjusted!")
-        end
-    end
 
     -- taxi
 
@@ -351,7 +342,7 @@ function XAutoCopilot_OnUpdate()
 
 
     -- not clear enough must be change, look at MCDU CRZ ....
-    if climbstate1 == 1 and xac_altitude_ft_pilot == 20000 then  --must changed .. too late now =)
+    if climbstate1 == 1 and xac_altitude_ft_pilot == 20000 then --must changed .. too late now =)
         dref.setInt(xac_fasten_seat_belts, 0)
         climb_finish = 1
         climbstate1 = 0
@@ -381,7 +372,6 @@ function XAutoCopilot_OnUpdate()
 
     if dref.getFloat(xac_altitude_ft_pilot) < 4500 and landingstate == 1 then -- transition fl must be change !
         dref.setInt(xac_push_baro, 1)
-        --timer.newOneShot("QNH", 1.0) -- don´t forget ONE SHOT ! ... change it
         landingstate1 = 0
     end
 
@@ -410,6 +400,14 @@ function XAutoCopilot_OnUpdate()
         dref.setInt(xac_ice_window, 0)
         dref.setInt(xac_ice_wing_knob, 0)
     end
+
+    --[[    function QNH()
+            if (math.abs(dref.getFloat(xac_barometer_setting_in_hg_pilot) - dref.getFloat(xac_barometer_sealevel_inhg)) > 0.01) then
+                dref.setFloat(xac_barometer_setting, dref.getFloat(xac_barometer_sealevel_inhg))
+                dref.setFloat(xac_barometer_setting2, dref.getFloat(xac_barometer_sealevel_inhg))
+                sound.say("QNH adjusted!")
+            end
+        end]]
 
     -- ##################################Helper END##############################################
 end

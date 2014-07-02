@@ -41,7 +41,6 @@ function XAutoCopilot_OnCreate()
     xac_widline2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnLinedUp", "execute", xac_left, xac_top + 60, xac_width_button)
     xac_widtcc2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnTakeOff", "execute", xac_left, xac_top + 75, xac_width_button)
     xac_widdal2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnLanding", "execute", xac_left, xac_top + 90, xac_width_button)
-
 end
 
 function XAutoCopilot_btnPreparation_OnClick()
