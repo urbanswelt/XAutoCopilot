@@ -6,6 +6,7 @@
 --
 
 function XAutoCopilot_OnUpdate()
+    local steptime = 0.3
 
     -- delete Info on screen start
     if preparation_finish == 1 then
@@ -146,8 +147,7 @@ function XAutoCopilot_OnUpdate()
 
     -- ##################################Start BEGIN##############################################
     -- befor start checklist
-    if XAutoCopilot_btnStart_State == 1 and preparation_finish == 1 or
-            XAutoCopilot_btnStart_State == 1 and xac_debugon == 1 then
+    if XAutoCopilot_btnStart_State == 1 and preparation_finish == 1 then
         dref.setInt(xac_tanker_on, 0)
         dref.setInt(xac_load_on, 0)
         dref.setInt(xac_p_f_l_kn, 0)
@@ -278,8 +278,7 @@ function XAutoCopilot_OnUpdate()
 
     -- taxi
 
-    if XAutoCopilot_btnTaxi_State == 1 and
-            afterenginestart_finish == 1 or XAutoCopilot_btnTaxi_State == 1 and xac_debugon == 1 then
+    if XAutoCopilot_btnTaxi_State == 1 and afterenginestart_finish == 1 then
         dref.setInt(xac_fm_on, 1)
         -- speedcontrol
         dref.setInt(xac_nose_sw, 1)
@@ -290,8 +289,7 @@ function XAutoCopilot_OnUpdate()
 
     -- holding point
 
-    if XAutoCopilot_btnAtHoldingPoint_State == 1 and
-            taxi_finish == 1 or XAutoCopilot_btnAtHoldingPoint_State == 1 and xac_debugon == 1 then
+    if XAutoCopilot_btnAtHoldingPoint_State == 1 and taxi_finish == 1 then
         dref.setInt(xac_fm_on, 0)
         dref.setInt(xac_efifs_waether, 1)
         atholdingpoint_finish = 1
@@ -300,8 +298,7 @@ function XAutoCopilot_OnUpdate()
 
     -- lined up
 
-    if XAutoCopilot_btnLinedUp_State == 1 and
-            atholdingpoint_finish == 1 or XAutoCopilot_btnLinedUp_State == 1 and xac_debugon == 1 then
+    if XAutoCopilot_btnLinedUp_State == 1 and atholdingpoint_finish == 1 then
         dref.setInt(xac_atc_mode_sel, 2)
         dref.setInt(xac_atc_ta_tara, 2)
         dref.setInt(xac_pack1, 0)
@@ -315,8 +312,7 @@ function XAutoCopilot_OnUpdate()
 
     -- ##################################TakeOff BEGIN##############################################
 
-    if XAutoCopilot_btnTakeOff_State == 1 and
-            linedup_finish == 1 or XAutoCopilot_btnTakeOff_State == 1 and xac_debugon == 1 then
+    if XAutoCopilot_btnTakeOff_State == 1 and linedup_finish == 1 then
         takeoff_finish = 1
         XAutoCopilot_btnTakeOff_State = 0
     end
@@ -328,8 +324,7 @@ function XAutoCopilot_OnUpdate()
         takeoff_finish = 0
     end
 
-    if aftertakeoff_finish == 1 and
-            dref.getFloat(xac_altitude_ft_pilot) > 10000 then
+    if aftertakeoff_finish == 1 and dref.getFloat(xac_altitude_ft_pilot) > 10000 then
         sound.say("passing 10000 feet")
         dref.setInt(xac_landr_sw, 0)
         dref.setInt(xac_landl_sw, 0)
@@ -339,10 +334,14 @@ function XAutoCopilot_OnUpdate()
         aftertakeoff_finish = 0
     end
 
+    if climbstate1 == 1 then
+        local cruisepoint = tmp_xac_crzfl * 100
+        if xac_altitude_ft_pilot >= cruisepoint then
+            timer.newOneShot("Cruise_Step1", (steptime * 1))
+        end
+    end
 
-
-    -- not clear enough must be change, look at MCDU CRZ ....
-    if climbstate1 == 1 and xac_altitude_ft_pilot == 20000 then --must changed .. too late now =)
+    function Cruise_Step1()
         dref.setInt(xac_fasten_seat_belts, 0)
         climb_finish = 1
         climbstate1 = 0
@@ -357,10 +356,7 @@ function XAutoCopilot_OnUpdate()
     xac_ToCD = dref.getString(xac_line_2b)
 
     if XAutoCopilot_btnLanding_State == 1 and
-            string.find(xac_ToCD, "T/D") and dref.getFloat(xac_gps_dme_dist_m) < 4.0 or XAutoCopilot_btnLanding_State == 1 and xac_debugon == 1 then
-        --string.find(xac_ToD, "DECEL") and dref.getFloat(xac_gps_dme_dist_m) < 17.0 then
-        --climb_finish == 1 then
-        --FMGS Check Radio Nav Frequency|CHECK
+            string.find(xac_ToCD, "T/D") and dref.getFloat(xac_gps_dme_dist_m) < 4.0 then
         dref.setInt(xac_fasten_seat_belts, 1)
         dref.setInt(xac_alt100x, 30)
         dref.setInt(xac_alt_pull_bat, 1)

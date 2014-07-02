@@ -20,5 +20,5 @@ logging.debug("loaded xac_window_XAutoCopilotRoute..")
 dofile("xac_lua/xac_window_XAutoCopilotBriefingDeparture.lua")
 logging.debug("loaded xac_window_XAutoCopilotBriefingDeparture..")
 
-dofile("xac_lua/xac_window_XAutoCopilotBriefingApproach.lua")
-logging.debug("loaded xac_window_XAutoCopilotBriefingApproach..")
+--dofile("xac_lua/xac_window_XAutoCopilotBriefingApproach.lua")
+--logging.debug("loaded xac_window_XAutoCopilotBriefingApproach..")
