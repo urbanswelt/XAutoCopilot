@@ -128,7 +128,7 @@ function XAutoCopilot_OnUpdate()
         dref.setFloatV(xac_engn_thro, 1, 0.0, 0.0)
         dref.setInt(xac_tanker_on, 1)
         dref.setInt(xac_load_on, 1)
-        gui.showWindow(XAutoCopilotMcdu.gui_h)
+        gui.showWindow(XAutoCopilotRoute.gui_h)
         prepstate5 = 1
         prepstate4 = 0
     end

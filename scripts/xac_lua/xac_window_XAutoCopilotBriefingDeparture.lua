@@ -8,7 +8,7 @@
 
 XAutoCopilotBriefingDeparture = {
     gui_h = gui.newWindow("XAutoCopilotBriefingDeparture"),
-    l = 300, --left position on screen
+    l = 560, --left position on screen
     t = 430, --top position on screen
     w = 250, --window width
     h = 180, --window height
@@ -33,7 +33,7 @@ function XAutoCopilotBriefingDeparture_OnCreate()
     gui.newLabel(XAutoCopilotBriefingDeparture.gui_h, "ignored", "Tower Frequency", xac_left + 100, xac_top + 30, xac_width - 50)
     gui.newLabel(XAutoCopilotBriefingDeparture.gui_h, "ignored", "Departure Frequency", xac_left + 100, xac_top + 45, xac_width - 50)
     gui.newLabel(XAutoCopilotBriefingDeparture.gui_h, "ignored", "Squawk Code", xac_left + 100, xac_top + 60, xac_width - 50)
-    gui.newLabel(XAutoCopilotBriefingDeparture.gui_h, "ignored", "Transition Alt", xac_left + 100, xac_top + 75, xac_width - 50)
+    gui.newLabel(XAutoCopilotBriefingDeparture.gui_h, "ignored", "Transition Altitude", xac_left + 100, xac_top + 75, xac_width - 50)
     gui.newLabel(XAutoCopilotBriefingDeparture.gui_h, "ignored", "Flaps", xac_left + 100, xac_top + 90, xac_width - 50)
     gui.newLabel(XAutoCopilotBriefingDeparture.gui_h, "ignored", "Flex temp", xac_left + 100, xac_top + 105, xac_width - 50)
 
@@ -67,6 +67,7 @@ function XAutoCopilotBriefingDeparture_btnStart_OnClick()
     timer.newOneShot("Departure_Brief_Step4", (steptime * 4))
     timer.newOneShot("Departure_Brief_Step5", (steptime * 5))
     timer.newOneShot("Departure_Brief_Step6", (steptime * 6))
+    timer.newOneShot("Departure_Brief_Step7", (steptime * 7))
 end
 
 function Departure_Brief_Step1()
@@ -98,10 +99,13 @@ end
 function Departure_Brief_Step6()
     dref.setString(xac_scratchpad, tmp_xac_trans_dep) -- Copy Transition Altitude to scratchpad
     dref.setInt(xac_click_l4, 1) -- click left 4
-    sound.say("Departure Briefing Confirmed!")
 end
 
-
+function Departure_Brief_Step7()
+    dref.setInt(xac_click_init, 1) -- go to init page
+    dref.setInt(xac_click_r3, 1) -- press Allign IRS
+    sound.say("Departure Briefing Confirmed!")
+end
 
 
 ToolXAutoCopilotBriefingDeparture = {
