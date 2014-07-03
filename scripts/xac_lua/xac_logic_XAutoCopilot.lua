@@ -6,8 +6,6 @@
 --
 
 function XAutoCopilot_OnUpdate()
-    local steptime = 0.3
-
     -- delete Info on screen start
     if preparation_finish == 1 then
         gui.hideWidget(xac_widprep1)
@@ -134,6 +132,7 @@ function XAutoCopilot_OnUpdate()
         prepstate5 = 0
         preparation_finish = 1
         XAutoCopilot_btnPreparation_State2 = 0
+        XAutoCopilot_btnStart_State2 = 0
     end
 
     -- ##################################Preparation END##############################################
@@ -241,30 +240,35 @@ function XAutoCopilot_OnUpdate()
             dref.setFloat(xac_flap, 0.0)
             afterenginestart_finish = 1
             afterenginestartstate2 = 0
+            XAutoCopilot_btnTaxi_State2 = 0
         end
 
         if string.find(xac_AutoFlap, "1/") and afterenginestartstate2 == 1 then
             dref.setFloat(xac_flap, 0.4)
             afterenginestart_finish = 1
             afterenginestartstate2 = 0
+            XAutoCopilot_btnTaxi_State2 = 0
         end
 
         if string.find(xac_AutoFlap, "2/") and afterenginestartstate2 == 1 then
             dref.setFloat(xac_flap, 0.6)
             afterenginestart_finish = 1
             afterenginestartstate2 = 0
+            XAutoCopilot_btnTaxi_State2 = 0
         end
 
         if string.find(xac_AutoFlap, "3/") and afterenginestartstate2 == 1 then
             dref.setFloat(xac_flap, 0.8)
             afterenginestart_finish = 1
             afterenginestartstate2 = 0
+            XAutoCopilot_btnTaxi_State2 = 0
         end
 
         if string.find(xac_AutoFlap, "4/") and afterenginestartstate2 == 1 then
             dref.setFloat(xac_flap, 1.0)
             afterenginestart_finish = 1
             afterenginestartstate2 = 0
+            XAutoCopilot_btnTaxi_State2 = 0
         end
     end
 
@@ -278,6 +282,7 @@ function XAutoCopilot_OnUpdate()
         dref.setInt(xac_nose_sw, 1)
         dref.setFloat(xac_parbrake, 0.0)
         taxi_finish = 1
+        XAutoCopilot_btnAtHoldingPoint_State2 = 0
         XAutoCopilot_btnTaxi_State = 0
     end
 
@@ -287,6 +292,7 @@ function XAutoCopilot_OnUpdate()
         dref.setInt(xac_fm_on, 0)
         dref.setInt(xac_efifs_waether, 1)
         atholdingpoint_finish = 1
+        XAutoCopilot_btnLinedUp_State2 = 0
         XAutoCopilot_btnAtHoldingPoint_State = 0
     end
 
@@ -301,6 +307,7 @@ function XAutoCopilot_OnUpdate()
         dref.setInt(xac_landr_sw, 2)
         dref.setInt(xac_landl_sw, 2)
         linedup_finish = 1
+        XAutoCopilot_btnTakeOff_State2 = 0
         XAutoCopilot_btnLinedUp_State = 0
     end
 
@@ -315,46 +322,36 @@ function XAutoCopilot_OnUpdate()
         dref.setInt(xac_pack1, 1)
         dref.setInt(xac_pack2, 1)
         aftertakeoff_finish = 1
+        climbstate1 = 1
         climbstate2 = 1
         takeoff_finish = 0
     end
 
-    if aftertakeoff_finish == 1 and dref.getFloat(xac_altitude_ft_pilot) > 10000 then
-        sound.say("passing 10000 feet")
-        dref.setInt(xac_landr_sw, 0)
-        dref.setInt(xac_landl_sw, 0)
-        dref.setInt(xac_nose_sw, 0)
-        dref.setInt(xac_click_perf, 1)
-        climbstate1 = 1
-        aftertakeoff_finish = 0
-    end
+    if xac_flight_begin == 1 then
+        local flight_timer = 0.3
 
+        if aftertakeoff_finish == 1 and dref.getFloat(xac_altitude_ft_pilot) > 10000 then
+            sound.say("passing 10000 feet")
+            dref.setInt(xac_landr_sw, 0)
+            dref.setInt(xac_landl_sw, 0)
+            dref.setInt(xac_nose_sw, 0)
+            dref.setInt(xac_click_perf, 1)
+            aftertakeoff_finish = 0
+        end
 
-    if climbstate1 == 1 then
-        local cruisepoint = (tmp_xac_crzfl * 100)
-        if xac_altitude_ft_pilot >= cruisepoint then
-            timer.newOneShot("Cruise_Step1", (steptime * 1))
+        if dref.getFloat(xac_altitude_ft_pilot) >= xac_deptranspoint and climbstate1 == 1 then
+            dref.setInt(xac_push_baro, 1)
+            climbstate1 = 0
+        end
+
+        if dref.getFloat(xac_altitude_ft_pilot) >= xac_cruisepoint and climbstate2 == 1 then
+            dref.setInt(xac_fasten_seat_belts, 0)
+            climb_finish = 1
+            XAutoCopilot_btnLanding_State2 = 0
+            xac_flight_begin = 0
+            climbstate2 = 0
         end
     end
-
-    function Cruise_Step1()
-        dref.setInt(xac_fasten_seat_belts, 0)
-        climbstate1 = 0
-        climb_finish = 1
-    end
-
-    if climbstate2 == 1 then
-        local deptranspoint = xac_trans_dep
-        if xac_altitude_ft_pilot == deptranspoint then
-            timer.newOneShot("Cruise_Step2", (steptime * 1))
-        end
-    end
-
-    function Cruise_Step2()
-        dref_setInt(xac_push_baro, 1)
-    end
-
-
     -- ##################################TakeOff END##############################################
 
     -- ##################################Landing BEGIN############################################
@@ -371,20 +368,14 @@ function XAutoCopilot_OnUpdate()
     end
 
     -- here 10000 feet for landing lights!!!
-
-    if dref.getFloat(xac_altitude_ft_pilot) < 4500 and landingstate == 1 then -- transition fl must be change !
-        dref.setInt(xac_push_baro, 1)
-        landingstate1 = 0
-    end
-
+    -- Baro setting
     --spoilers arm
 
     -- ##################################Landing END############################################
     -- ##################################Helper BEGIN##############################################
 
     -- auto anti ice on
-
-    if dref.getFloat(xac_outside_air_temp_degc) < 0.0 and
+--[[    if dref.getFloat(xac_outside_air_temp_degc) < 0.0 and
             dref.getFloatV(xac_n2_percent, 1, 1) > 50.0 and
             dref.getFloatV(xac_n2_percent, 2, 1) > 50.0 then
         dref.setInt(xac_ice_eng1_knob, 1)
@@ -401,17 +392,9 @@ function XAutoCopilot_OnUpdate()
         dref.setInt(xac_ice_eng2_knob, 0)
         dref.setInt(xac_ice_window, 0)
         dref.setInt(xac_ice_wing_knob, 0)
-    end
-
-    --[[    function QNH()
-            if (math.abs(dref.getFloat(xac_barometer_setting_in_hg_pilot) - dref.getFloat(xac_barometer_sealevel_inhg)) > 0.01) then
-                dref.setFloat(xac_barometer_setting, dref.getFloat(xac_barometer_sealevel_inhg))
-                dref.setFloat(xac_barometer_setting2, dref.getFloat(xac_barometer_sealevel_inhg))
-                sound.say("QNH adjusted!")
-            end
-        end]]
+    end]]
 
     -- ##################################Helper END##############################################
 end
 
-function XAutoCopilot_OnBeforeClose() end
+

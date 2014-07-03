@@ -53,7 +53,8 @@ function XAutoCopilotBriefingDeparture_btnStart_OnClick()
 
     tmp_xac_initalt = string.format("%i", gui.getWidgetValue(xac_initalt)) -- Initial Altitude
     tmp_depstation = gui.getWidgetValue(xac_depstation) * 100 -- Save Departure Frequency
-    tmp_xac_trans_dep = string.upper(gui.getWidgetValue(xac_trans_dep)) -- Transition Altitude for Departure
+    tmp_xac_trans_dep = tonumber(gui.getWidgetValue(xac_trans_dep)) -- Transition Altitude for Departure
+    --tmp_xac_trans_dep = string.upper(gui.getWidgetValue(xac_trans_dep)) -- Transition Altitude for Departure
     tmp_xac_flaps = string.upper(gui.getWidgetValue(xac_flaps)) -- Flaps Setting
     tmp_xac_flex_temp = string.upper(gui.getWidgetValue(xac_flex_temp)) -- Flex Temperature Setting
 
@@ -74,8 +75,8 @@ function Departure_Brief_Step1()
 end
 
 function Departure_Brief_Step2()
-    dref.setFloat(xac_barometer_setting, gui.getWidgetValue(xac_qnh) + 0.01) --  set QNH Pilot  / jar use a round/ceil formating ?
-    dref.setFloat(xac_barometer_setting2, gui.getWidgetValue(xac_qnh) + 0.01) --  set QNH CoPilot
+    dref.setFloat(xac_barometer_setting, gui.getWidgetValue(xac_qnh)) --  set QNH Pilot  / jar use a round/ceil formating ?
+    dref.setFloat(xac_barometer_setting2, gui.getWidgetValue(xac_qnh)) --  set QNH CoPilot
     dref.setInt(xac_transponder_code, gui.getWidgetValue(xac_squawk)) -- Set Transponder Code
 end
 

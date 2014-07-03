@@ -58,7 +58,7 @@ function XAutoCopilotRoute_btnStart_OnClick()
     tmp_xac_corte = string.upper(gui.getWidgetValue(xac_corte))
     tmp_xac_fltnbr = string.upper(gui.getWidgetValue(xac_fltnbr))
     tmp_xac_coi = string.upper(gui.getWidgetValue(xac_coi))
-    tmp_xac_crzfl = string.upper(gui.getWidgetValue(xac_crzfl))
+    tmp_xac_crzfl = gui.getWidgetValue(xac_crzfl)
 
     local steptime = 0.3
 
