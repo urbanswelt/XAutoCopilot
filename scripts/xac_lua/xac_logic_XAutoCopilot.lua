@@ -324,11 +324,17 @@ function XAutoCopilot_OnUpdate()
         aftertakeoff_finish = 1
         climbstate1 = 1
         climbstate2 = 1
+        climbstate3 = 1
         takeoff_finish = 0
     end
 
     if xac_flight_begin == 1 then
-        local flight_timer = 0.3
+        local acf_alt_agl = acf.getAltAgl()
+        if climbstate3 == 1 and acf_alt_agl > 100 then
+            dref.setInt(xac_nav_com_adf_mode, 2) -- VHF1 active
+            dref.setInt(xac_com1_stdby_freq_hz, gui.getWidgetValue(tmp_xac_depstation) * 100) -- Set Departure Frequency on Standby COM1
+        end
+
 
         if aftertakeoff_finish == 1 and dref.getFloat(xac_altitude_ft_pilot) > 10000 then
             sound.say("passing 10000 feet")
@@ -352,6 +358,7 @@ function XAutoCopilot_OnUpdate()
             climbstate2 = 0
         end
     end
+
     -- ##################################TakeOff END##############################################
 
     -- ##################################Landing BEGIN############################################
@@ -375,24 +382,24 @@ function XAutoCopilot_OnUpdate()
     -- ##################################Helper BEGIN##############################################
 
     -- auto anti ice on
---[[    if dref.getFloat(xac_outside_air_temp_degc) < 0.0 and
-            dref.getFloatV(xac_n2_percent, 1, 1) > 50.0 and
-            dref.getFloatV(xac_n2_percent, 2, 1) > 50.0 then
-        dref.setInt(xac_ice_eng1_knob, 1)
-        dref.setInt(xac_ice_eng2_knob, 1)
-        dref.setInt(xac_ice_window, 1)
-        dref.setInt(xac_ice_wing_knob, 1)
-    end
+    --[[    if dref.getFloat(xac_outside_air_temp_degc) < 0.0 and
+                dref.getFloatV(xac_n2_percent, 1, 1) > 50.0 and
+                dref.getFloatV(xac_n2_percent, 2, 1) > 50.0 then
+            dref.setInt(xac_ice_eng1_knob, 1)
+            dref.setInt(xac_ice_eng2_knob, 1)
+            dref.setInt(xac_ice_window, 1)
+            dref.setInt(xac_ice_wing_knob, 1)
+        end
 
-    -- auto anti ice off
-    if dref.getFloat(xac_outside_air_temp_degc) > 1.0 and
-            dref.getFloatV(xac_n2_percent, 1, 1) > 50.0 and
-            dref.getFloatV(xac_n2_percent, 2, 1) > 50.0 then
-        dref.setInt(xac_ice_eng1_knob, 0)
-        dref.setInt(xac_ice_eng2_knob, 0)
-        dref.setInt(xac_ice_window, 0)
-        dref.setInt(xac_ice_wing_knob, 0)
-    end]]
+        -- auto anti ice off
+        if dref.getFloat(xac_outside_air_temp_degc) > 1.0 and
+                dref.getFloatV(xac_n2_percent, 1, 1) > 50.0 and
+                dref.getFloatV(xac_n2_percent, 2, 1) > 50.0 then
+            dref.setInt(xac_ice_eng1_knob, 0)
+            dref.setInt(xac_ice_eng2_knob, 0)
+            dref.setInt(xac_ice_window, 0)
+            dref.setInt(xac_ice_wing_knob, 0)
+        end]]
 
     -- ##################################Helper END##############################################
 end

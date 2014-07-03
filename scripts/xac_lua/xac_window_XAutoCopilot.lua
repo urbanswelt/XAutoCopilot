@@ -144,7 +144,7 @@ end
 
 ToolXAutoCopilot = {
     active = true,
-    texture = gfx.loadPng(gizmo.getFolder() .. "firmware/icons/world.png"),
+    texture = gfx.loadPng(acf.getFolder() .. "scripts/xac_lua/icons/Flight.png"),
     name = "XAutoCopilot",
     run = function(self)
         if (XAutoCopilot) then
