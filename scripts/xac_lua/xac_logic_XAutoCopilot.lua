@@ -332,7 +332,7 @@ function XAutoCopilot_OnUpdate()
         local acf_alt_agl = acf.getAltAgl()
         if climbstate3 == 1 and acf_alt_agl > 100 then
             dref.setInt(xac_nav_com_adf_mode, 2) -- VHF1 active
-            dref.setInt(xac_com1_stdby_freq_hz, gui.getWidgetValue(tmp_xac_depstation) * 100) -- Set Departure Frequency on Standby COM1
+            dref.setInt(xac_com1_stdby_freq_hz, (tmp_xac_depstation * 100)) -- Set Departure Frequency on Standby COM1
         end
 
 
