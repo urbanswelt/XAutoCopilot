@@ -125,9 +125,9 @@ function XAutoCopilot_OnUpdate()
         prepstate4 = 0
     end
 
-    xac_adirs_disp_temp = dref.getString(xac_adirs_disp)
+    --xac_adirs_disp_temp = dref.getString(xac_adirs_disp)
 
-    if string.find(xac_adirs_disp_temp, "ALIGNED") and prepstate5 == 1 then
+    if string.find(dref.getString(xac_adirs_disp), "ALIGNED") and prepstate5 == 1 then
         sound.say("Cockpit Preparation is finish.")
         prepstate5 = 0
         preparation_finish = 1
@@ -332,7 +332,7 @@ function XAutoCopilot_OnUpdate()
         local acf_alt_agl = acf.getAltAgl()
         if climbstate3 == 1 and acf_alt_agl > 100 then
             dref.setInt(xac_nav_com_adf_mode, 2) -- VHF1 active
-            dref.setInt(xac_com1_stdby_freq_hz, (tmp_xac_depstation) * 100) -- Set Departure Frequency on Standby COM1
+            dref.setInt(xac_com1_stdby_freq_hz, dref.getInt(xac_daparture_station)) -- Set Departure Frequency on Standby COM1
         end
 
 
@@ -345,12 +345,12 @@ function XAutoCopilot_OnUpdate()
             aftertakeoff_finish = 0
         end
 
-        if dref.getFloat(xac_altitude_ft_pilot) >= xac_deptranspoint and climbstate1 == 1 then
+        if dref.getFloat(xac_altitude_ft_pilot) >= dref.getInt(xac_departure_transition) and climbstate1 == 1 then
             dref.setInt(xac_push_baro, 1)
             climbstate1 = 0
         end
 
-        if dref.getFloat(xac_altitude_ft_pilot) >= xac_cruisepoint and climbstate2 == 1 then
+        if dref.getFloat(xac_altitude_ft_pilot) >= dref.getInt(xac_crzflinft) and climbstate2 == 1 then
             dref.setInt(xac_fasten_seat_belts, 0)
             climb_finish = 1
             XAutoCopilot_btnLanding_State2 = 0
@@ -363,10 +363,10 @@ function XAutoCopilot_OnUpdate()
 
     -- ##################################Landing BEGIN############################################
 
-    xac_ToCD = dref.getString(xac_line_2b)
+    --xac_ToCD = dref.getString(xac_line_2b)
 
     if XAutoCopilot_btnLanding_State == 1 and
-            string.find(xac_ToCD, "T/D") and dref.getFloat(xac_gps_dme_dist_m) < 4.0 then
+            string.find(dref.getString(xac_line_2b), "T/D") and dref.getFloat(xac_gps_dme_dist_m) < 4.0 then
         dref.setInt(xac_fasten_seat_belts, 1)
         dref.setInt(xac_alt100x, 30)
         dref.setInt(xac_alt_pull_bat, 1)

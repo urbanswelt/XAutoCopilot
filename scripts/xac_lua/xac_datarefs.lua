@@ -50,7 +50,6 @@ function OnFirstFrame()
 
     xac_emer_ext_lt = dref.getDataref("sim/custom/xap/extlight/emer_ext_lt")
     xac_alt_rot = dref.getDataref("sim/custom/xap/press/alt_rot")
-    xac_strobe_sw = dref.getDataref("sim/custom/xap/extlight/strobe_sw")
     xac_radio_on = dref.getDataref("sim/custom/xap/radio/on")
     xac_fcu_fd = dref.getDataref("sim/custom/xap/fcu/fd")
     xac_fcu_ils = dref.getDataref("sim/custom/xap/fcu/ils")
@@ -148,6 +147,11 @@ function OnFirstFrame()
     xac_scratchpad = dref.getDataref("sim/custom/xap/mcdu/scratchpad")
     xac_line_3b = dref.getDataref("sim/custom/xap/mcdu/line_3b")
     xac_line_2b = dref.getDataref("sim/custom/xap/mcdu/line_2b")
+    xac_line_1b = dref.getDataref("sim/custom/xap/mcdu/line_1b")
+    xac_line_2g = dref.getDataref("sim/custom/xap/mcdu/line_2g")
+    xac_line_6g = dref.getDataref("sim/custom/xap/mcdu/line_6g")
+    xac_line_5b = dref.getDataref("sim/custom/xap/mcdu/line_5b")
+    xac_title_w = dref.getDataref("sim/custom/xap/mcdu/title_w")
 
     -- fuel, start
     xac_t1_pump1 = dref.getDataref("sim/custom/xap/fuel/t1_pump1")
@@ -161,6 +165,11 @@ function OnFirstFrame()
     xac_eng2msw = dref.getDataref("sim/custom/xap/engines/eng2msw")
     xac_n2_percent = dref.getDataref("sim/cockpit2/engine/indicators/N2_percent")
     xac_fuel_quantity = dref.getDataref("sim/cockpit2/fuel/fuel_quantity")
+    xac_t0 = dref.getDataref("sim/custom/xap/fuel/t0")
+    xac_t1 = dref.getDataref("sim/custom/xap/fuel/t1")
+    xac_t2 = dref.getDataref("sim/custom/xap/fuel/t2")
+    xac_t3 = dref.getDataref("sim/custom/xap/fuel/t3")
+    xac_t4 = dref.getDataref("sim/custom/xap/fuel/t4")
 
 
     -- temperature/ice
@@ -180,6 +189,7 @@ function OnFirstFrame()
     xac_landr_sw = dref.getDataref("sim/custom/xap/extlight/landr_sw")
     xac_landl_sw = dref.getDataref("sim/custom/xap/extlight/landl_sw")
     xac_navlogo_sw = dref.getDataRef("sim/custom/xap/extlight/navlogo_sw")
+    xac_strobe_sw = dref.getDataref("sim/custom/xap/extlight/strobe_sw")
 
     -- qnh
     xac_barometer_setting_in_hg_pilot = dref.getDataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot")
@@ -188,12 +198,14 @@ function OnFirstFrame()
     xac_barometer_setting = dref.getDataref("sim/cockpit/misc/barometer_setting")
     xac_barometer_setting2 = dref.getDataref("sim/cockpit/misc/barometer_setting2")
 
+
     -- fcu
     xac_push_baro = dref.getDataref("sim/custom/xap/fcu/push_baro")
     xac_ap1 = dref.getDataref("sim/custom/xap/fcu/ap1")
     xac_alt100x = dref.getDataref("sim/custom/xap/fcu/alt100x")
     --xac_alt1000x = dref.getDataref("sim/custom/xap/fcu/alt1000x") does not work ?
     xac_alt_pull_bat = dref.getDataref("sim/custom/xap/fcu/alt_pull_bat")
+    xac_baro_ishpa = dref.getDataref("sim/custom/xap/fcu/baro_ishpa")
 
     -- altitude
     xac_altitude_ft_pilot = dref.getDataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
@@ -213,4 +225,11 @@ function OnFirstFrame()
 
     --misc
     --xac_timer              = dref.getDataref("sim/cockpit2/clock_timer/local_time_seconds")
+
+    -- own dataref
+    xac_crzflinft = dref.newInt("my/custom/dataref/crzflinft")
+    xac_departure_transition = dref.newInt("my/custom/dataref/departure/transition")
+    xac_daparture_station = dref.newInt("my/custom/dataref/departure/radio/station")
+    xac_daparture_qnh_inHg = dref.newFloat("my/custom/dataref/departure/qnh_inHg")
+    --xac_daparture_qnh_hPa = dref.newFloat("my/custom/dataref/departure/qnh_hPa")
 end

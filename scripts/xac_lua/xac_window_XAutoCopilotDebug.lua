@@ -44,20 +44,18 @@ function XAutoCopilotDebug_btnStart_OnClick()
         local prefs_path = prefs.filename
 
         --write prefs data
-        local fh = io.open( prefs_path, "wb" )
-        if( fh )then
+        local fh = io.open(prefs_path, "wb")
+        if (fh) then
             --prefs_data = fh:read("*all")
-            fh:write( prefs_blob )
+            fh:write(prefs_blob)
             fh:close()
             fh = nil
 
             --logging.warning("prefs saved. (" .. prefs_path ..  ")")
 
         else
-            error("prefs.save(): Failed: (" .. prefs_path ..  ")")
-
+            error("prefs.save(): Failed: (" .. prefs_path .. ")")
         end --check file handle is not nil
-
     end --prefs.save()
 end
 

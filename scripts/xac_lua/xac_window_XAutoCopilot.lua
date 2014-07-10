@@ -22,26 +22,31 @@ function XAutoCopilot_OnCreate()
     gui.setWindowSize(XAutoCopilot.gui_h, XAutoCopilot.l, XAutoCopilot.t, XAutoCopilot.w, XAutoCopilot.h)
     gui.setWindowCaption(XAutoCopilot.gui_h, "X-Plane Auto Copilot")
 
-    local xac_left = 10
+    local left = 80
+    local top = 30
+    local width = 50
+
+-- right side
+    xac_widprep1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "COCKPIT PREPARATION", left, top, width)
+    xac_widstart1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "START", left, top + 15, width)
+    xac_widtaxi1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "TAXI", left, top + 30, width)
+    xac_widhold1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "AT HOLDING POINT", left, top + 45, width)
+    xac_widline1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "LINED UP", left , top + 60, width)
+    xac_widtcc1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "TAKE OFF/CLIMB/CRUISE", left, top + 75, width)
+    xac_widdal1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "DESCENT/APPROACH/LANDING", left, top + 90, width)
+
+
+    local left = 10
     local xac_top = 30
-    local xac_width = 100
-    local xac_width_button = 60
-
-    xac_widprep1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "COCKPIT PREPARATION", xac_left + 80, xac_top, xac_width - 50)
-    xac_widstart1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "START", xac_left + 80, xac_top + 15, xac_width - 50)
-    xac_widtaxi1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "TAXI", xac_left + 80, xac_top + 30, xac_width - 50)
-    xac_widhold1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "AT HOLDING POINT", xac_left + 80, xac_top + 45, xac_width - 50)
-    xac_widline1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "LINED UP", xac_left + 80, xac_top + 60, xac_width - 50)
-    xac_widtcc1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "TAKE OFF/CLIMB/CRUISE", xac_left + 80, xac_top + 75, xac_width - 50)
-    xac_widdal1 = gui.newLabel(XAutoCopilot.gui_h, "ignored", "DECENT/APPROACH/LANDING", xac_left + 80, xac_top + 90, xac_width - 50)
-
-    xac_widprep2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnPreparation", "execute", xac_left, xac_top, xac_width_button)
-    xac_widstart2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnStart", "execute", xac_left, xac_top + 15, xac_width_button)
-    xac_widtaxi2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnTaxi", "execute", xac_left, xac_top + 30, xac_width_button)
-    xac_widhold2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnAtHoldingPoint", "execute", xac_left, xac_top + 45, xac_width_button)
-    xac_widline2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnLinedUp", "execute", xac_left, xac_top + 60, xac_width_button)
-    xac_widtcc2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnTakeOff", "execute", xac_left, xac_top + 75, xac_width_button)
-    xac_widdal2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnLanding", "execute", xac_left, xac_top + 90, xac_width_button)
+    local width = 60
+-- left side
+    xac_widprep2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnPreparation", "execute", left, xac_top, width)
+    xac_widstart2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnStart", "execute", left, xac_top + 15, width)
+    xac_widtaxi2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnTaxi", "execute", left, xac_top + 30, width)
+    xac_widhold2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnAtHoldingPoint", "execute", left, xac_top + 45, width)
+    xac_widline2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnLinedUp", "execute", left, xac_top + 60, width)
+    xac_widtcc2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnTakeOff", "execute", left, xac_top + 75, width)
+    xac_widdal2 = gui.newButton(XAutoCopilot.gui_h, "XAutoCopilot_btnLanding", "execute", left, xac_top + 90, width)
 
     XAutoCopilot_btnPreparation_State2 = 1
     XAutoCopilot_btnStart_State2 = 1
@@ -115,7 +120,6 @@ function XAutoCopilot_btnTakeOff_OnClick()
         return
     else
         gui.hideWidget(xac_widtcc2)
-        xac_cruisepoint = (tmp_xac_crzfl * 100)
         xac_deptranspoint = tmp_xac_trans_dep
         xac_flight_begin = 1
         takeoff_finish = 0
@@ -144,7 +148,7 @@ end
 
 ToolXAutoCopilot = {
     active = true,
-    texture = gfx.loadPng(acf.getFolder() .. "scripts/xac_lua/icons/Flight.png"),
+    texture = gfx.loadPng(acf.getFolder() .. "scripts/xac_lua/icons/CoPilot.png"),
     name = "XAutoCopilot",
     run = function(self)
         if (XAutoCopilot) then

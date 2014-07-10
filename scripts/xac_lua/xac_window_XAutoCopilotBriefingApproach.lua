@@ -1,6 +1,6 @@
 -- Copyright
 --
--- 02.07.14 19:58			DateInfo	The current date and time.
+-- 04.07.14 20:16			DateInfo	The current date and time.
 
 --
 -- Created by IntelliJ IDEA.
@@ -32,10 +32,11 @@ function XAutoCopilotBriefingApproach_OnCreate()
     local xac_top = 30
     local xac_width = 100
 
+    -- Approach Briefing: QNH, Temperature, Wind, Transition Alt, Flaps, MDA/DH, Go Around Altitude, Tower Frequency, Ground Frequency
     gui.newLabel(XAutoCopilotBriefingApproach.gui_h, "ignored", "Initial Altitude", xac_left + 100, xac_top, xac_width - 50)
     gui.newLabel(XAutoCopilotBriefingApproach.gui_h, "ignored", "QNH", xac_left + 100, xac_top + 15, xac_width - 50)
     gui.newLabel(XAutoCopilotBriefingApproach.gui_h, "ignored", "Tower Frequency", xac_left + 100, xac_top + 30, xac_width - 50)
-    gui.newLabel(XAutoCopilotBriefingApproach.gui_h, "ignored", "Approach Frequency", xac_left + 100, xac_top + 45, xac_width - 50)
+    gui.newLabel(XAutoCopilotBriefingApproach.gui_h, "ignored", "Ground Frequency", xac_left + 100, xac_top + 45, xac_width - 50)
     gui.newLabel(XAutoCopilotBriefingApproach.gui_h, "ignored", "Squawk Code", xac_left + 100, xac_top + 60, xac_width - 50)
     gui.newLabel(XAutoCopilotBriefingApproach.gui_h, "ignored", "Transition Altitude", xac_left + 100, xac_top + 75, xac_width - 50)
     gui.newLabel(XAutoCopilotBriefingApproach.gui_h, "ignored", "Flaps", xac_left + 100, xac_top + 90, xac_width - 50)
@@ -55,10 +56,9 @@ end
 
 function XAutoCopilotBriefingApproach_btnStart_OnClick()
 
-
     tmp_xac_initalt = string.format("%i", gui.getWidgetValue(xac_initalt)) -- Initial Altitude
-    tmp_depstation = gui.getWidgetValue(xac_depstation) * 100 -- Save Approach Frequency
-    tmp_xac_trans_dep = string.upper(gui.getWidgetValue(xac_trans_dep)) -- Transition Altitude for Approach
+    tmp_xac_depstation = tonumber(gui.getWidgetValue(xac_depstation)) -- Save Approach Frequency
+    tmp_xac_trans_dep = tonumber(gui.getWidgetValue(xac_trans_dep)) -- Transition Altitude for Approach
     tmp_xac_flaps = string.upper(gui.getWidgetValue(xac_flaps)) -- Flaps Setting
     tmp_xac_flex_temp = string.upper(gui.getWidgetValue(xac_flex_temp)) -- Flex Temperature Setting
 
@@ -79,8 +79,8 @@ function Approach_Brief_Step1()
 end
 
 function Approach_Brief_Step2()
-    dref.setFloat(xac_barometer_setting, gui.getWidgetValue(xac_qnh) + 0.01) --  set QNH Pilot  / jar use a round/ceil formating ?
-    dref.setFloat(xac_barometer_setting2, gui.getWidgetValue(xac_qnh) + 0.01) --  set QNH CoPilot
+    dref.setFloat(xac_barometer_setting, gui.getWidgetValue(xac_qnh)) --  set QNH Pilot  / jar use a round/ceil formating ?
+    dref.setFloat(xac_barometer_setting2, gui.getWidgetValue(xac_qnh)) --  set QNH CoPilot
     dref.setInt(xac_transponder_code, gui.getWidgetValue(xac_squawk)) -- Set Transponder Code
 end
 
