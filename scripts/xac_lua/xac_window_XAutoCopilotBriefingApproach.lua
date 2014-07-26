@@ -7,7 +7,7 @@
 
 XAutoCopilotBriefingApproach = {
     gui_h = gui.newWindow("XAutoCopilotBriefingApproach"),
-    l = 560, --left position on screen
+    l = 825, --left position on screen
     t = 430, --top position on screen
     w = 250, --window width
     h = 220, --window height
