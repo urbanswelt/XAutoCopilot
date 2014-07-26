@@ -45,7 +45,7 @@ function XAutoCopilotRoute_OnCreate()
 
     -- right side
     XAutoCopilotRoute.corte = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "KMMHKSFO", left, top, width)
-    XAutoCopilotRoute.fltnbr = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "KOM123", left, top + 15, width)
+    XAutoCopilotRoute.fltnbr = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "KOM1234", left, top + 15, width)
     XAutoCopilotRoute.coi = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "99", left, top + 30, width)
     XAutoCopilotRoute.crzfl = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "200", left, top + 45, width)
 
@@ -57,10 +57,8 @@ function XAutoCopilotRoute_OnCreate()
     XAutoCopilotRoute.fuel_extra_m = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "00", left+30, top + 115, width-30)
 end
 
-
 function XAutoCopilotRoute_btnStart_OnClick()
-    --update the value of our dateref
-    dref.setInt( xac_crzflinft, gui.getWidgetValue(XAutoCopilotRoute.crzfl)*100 )
+    dref.setInt( xac_route_crzflinft, gui.getWidgetValue(XAutoCopilotRoute.crzfl)*100 )
 
     local steptime = 0.3
 
@@ -69,6 +67,7 @@ function XAutoCopilotRoute_btnStart_OnClick()
     timer.newOneShot("Route_Step3", (steptime * 3))
     timer.newOneShot("Route_Step4", (steptime * 4))
 end
+
 
 function Route_Step1()
     dref.setInt(xac_click_init, 1) -- go to init page
@@ -89,7 +88,6 @@ end
 function Route_Step4()
     dref.setString(xac_scratchpad, gui.getWidgetValue(XAutoCopilotRoute.crzfl)) -- Copy Cruise Flightlevel to scratchpad
     dref.setInt(xac_click_l6, 1) -- click left 6
-    sound.say("Route is Set!")
 end
 
 function XAutoCopilotRoute_btnFuelStart_OnClick()
@@ -169,14 +167,15 @@ function RouteFuel_Step5()
 end
 
 function RouteFuel_Step6()
-    local taxi = tonumber(string.sub(dref.getString(xac_line_1b), 1, 4)) --taxi time
-    local trip = tonumber(string.sub(dref.getString(xac_line_2g), 1, 4)) --trip time
-    local reserve = tonumber(string.sub(dref.getString(xac_line_3b), 1, 4)) --route reserve
-    local final = tonumber(string.sub(dref.getString(xac_line_5b), 1, 4)) --final time
+    local taxi = dref.getFloat(xac_taxi_fuel)
+    local trip = dref.getFloat(xac_trip_fuel)
+    local reserve = dref.getFloat(xac_rsv_fuel)
+    local final = dref.getFloat(xac_final_fuel)
     local extra_h = tonumber(gui.getWidgetValue(XAutoCopilotRoute.fuel_extra_h)) * 60
     local extra_m = tonumber(gui.getWidgetValue(XAutoCopilotRoute.fuel_extra_m))
-    local extra = (extra_h + extra_m) * 0.0333 --extra time
-    XAutoCopilotRoute.block = taxi + trip + reserve + final + extra + 0.0222
+    local extra = (extra_h + extra_m) * (1/30)
+    local block = taxi + trip + reserve + final + extra
+    XAutoCopilotRoute.block = taxi + trip + reserve + final + extra
 end
 
 function RouteFuel_Step7()
@@ -216,9 +215,6 @@ function RouteFuel_Step8()
         dref.setFloat(xac_t2, rest2)
     end
 end
-
-
-
 
 
 

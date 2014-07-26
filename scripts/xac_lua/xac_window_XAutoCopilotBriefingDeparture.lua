@@ -24,7 +24,7 @@ function XAutoCopilotBriefingDeparture_OnCreate()
     local left = 70
     local top = 30
     local width = 50
-    -- left side
+    -- right side
     gui.newLabel(XAutoCopilotBriefingDeparture.gui_h, "ignored", "Initial Altitude", left, top, width)
     gui.newLabel(XAutoCopilotBriefingDeparture.gui_h, "ignored", "Transition Altitude", left, top + 15, width)
     gui.newLabel(XAutoCopilotBriefingDeparture.gui_h, "ignored", "Flaps", left, top + 30, width)
@@ -39,7 +39,7 @@ function XAutoCopilotBriefingDeparture_OnCreate()
     local top = 30
     local width = 60
 
-    -- right side
+    -- left side
     XAutoCopilotBriefingDeparture.initalt = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "9000", left, top, width)
     XAutoCopilotBriefingDeparture.transition = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "18000", left, top + 15, width)
     XAutoCopilotBriefingDeparture.flaps = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "2/UP2.0", left, top + 30, width)
@@ -78,7 +78,7 @@ function Departure_Brief_Step1()
 end
 
 function Departure_Brief_Step2()
-    -- http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html
+    -- http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html / choose 30.15 for ind_baro_inhg and look on barometer_setting JAR ?
         dref.setFloat(xac_daparture_qnh_inHg, tonumber(gui.getWidgetValue(XAutoCopilotBriefingDeparture.qnh_inHg))) --back to real float
         dref.setFloat(xac_barometer_setting, dref.getFloat(xac_daparture_qnh_inHg)) --  set QNH Pilot
         dref.setFloat(xac_barometer_setting2, dref.getFloat(xac_daparture_qnh_inHg)) --  set QNH CoPilot
@@ -102,8 +102,7 @@ function Departure_Brief_Step5()
 end
 
 function Departure_Brief_Step6()
-    dref.setString(xac_scratchpad, tonumber(gui.getWidgetValue(XAutoCopilotBriefingDeparture.transition))) -- Copy Transition Altitude to scratchpad
-    dref.setInt(xac_click_l4, 1) -- click left 4
+    dref.setInt(xac_ap_trans_alt, tonumber(gui.getWidgetValue(XAutoCopilotBriefingDeparture.transition))) -- Copy Transition Altitude to scratchpad
 end
 
 function Departure_Brief_Step7()

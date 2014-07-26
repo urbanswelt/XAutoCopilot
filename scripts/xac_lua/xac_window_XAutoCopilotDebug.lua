@@ -33,36 +33,20 @@ function XAutoCopilotDebug_OnCreate()
 end
 
 
+
+
 function XAutoCopilotDebug_btnStart_OnClick()
-    prefs.save = function()
 
-    --console.log("prefs.save()..")
+end
 
-        local prefs_blob = "--Auto Generated Gizmo Preferences Data\nreturn" .. vardump_lua(prefs.values)
-        --console.log( prefs_blob )
+function XAutoCopilotDebug_OnUpdate()
 
-        local prefs_path = prefs.filename
-
-        --write prefs data
-        local fh = io.open(prefs_path, "wb")
-        if (fh) then
-            --prefs_data = fh:read("*all")
-            fh:write(prefs_blob)
-            fh:close()
-            fh = nil
-
-            --logging.warning("prefs saved. (" .. prefs_path ..  ")")
-
-        else
-            error("prefs.save(): Failed: (" .. prefs_path .. ")")
-        end --check file handle is not nil
-    end --prefs.save()
 end
 
 
 ToolXAutoCopilotDebug = {
     active = true,
-    texture = gfx.loadPng(acf.getFolder() .. "scripts/xac_lua/icons/Approach.png"),
+    texture = gfx.loadPng(acf.getFolder() .. "scripts/xac_lua/icons/Flight.png"),
     name = "XAutoCopilotDebug",
     run = function(self)
         if (XAutoCopilotDebug) then

@@ -47,7 +47,6 @@ function OnFirstFrame()
     xac_adirs_enter = dref.getDataref("sim/custom/xap/adirs/knob_ent")
     xac_adirs_disp = dref.getDataref("sim/custom/xap/adirs/disp")
 
-
     xac_emer_ext_lt = dref.getDataref("sim/custom/xap/extlight/emer_ext_lt")
     xac_alt_rot = dref.getDataref("sim/custom/xap/press/alt_rot")
     xac_radio_on = dref.getDataref("sim/custom/xap/radio/on")
@@ -77,12 +76,30 @@ function OnFirstFrame()
     xac_move_to_stair = dref.getDataref("sim/custom/xap/groundserv/stair/move_to_stair")
 
     xac_tanker_on = dref.getDataref("sim/custom/xap/groundserv/tanker/tanker_on")
+    xac_show_tanker = dref.getDataref("sim/custom/xap/groundserv/tanker/show_tanker")
     xac_load_on = dref.getDataref("sim/custom/xap/groundserv/load_on")
     xac_fm_on = dref.getDataref("sim/custom/xap/groundserv/gnd_fm_on")
     xac_tow_on = dref.getDataref("sim/custom/xap/groundserv/pwr_tow")
     xac_show_tow = dref.getDataref("sim/custom/xap/groundserv/show_tow")
 
     xac_chk_on = dref.getDataref("sim/custom/xap/groundserv/pwr_chk")
+
+    --cover
+    xac_chocks_l = dref.getDataref("sim/custom/xap/chocks_l")
+    xac_chocks_r = dref.getDataref("sim/custom/xap/chocks_r")
+    xac_cone = dref.getDataref("sim/custom/xap/cone")
+
+    xac_cover_apu = dref.getDataref("sim/custom/xap/cover_apu")
+    xac_cover_dn_pres_port_l = dref.getDataref("sim/custom/xap/cover_dn_pres_port_l")
+    xac_cover_dn_pres_port_ll = dref.getDataref("sim/custom/xap/cover_dn_pres_port_ll")
+    xac_cover_dn_pres_port_r = dref.getDataref("sim/custom/xap/cover_dn_pres_port_r")
+    xac_cover_engine_l = dref.getDataref("sim/custom/xap/cover_engine_l")
+    xac_cover_engine_r = dref.getDataref("sim/custom/xap/cover_engine_r")
+    xac_cover_st_pres_port_lf = dref.getDataref("sim/custom/xap/cover_st_pres_port_lf")
+    xac_cover_st_pres_port_lr = dref.getDataref("sim/custom/xap/cover_st_pres_port_lr")
+    xac_cover_st_pres_port_rf = dref.getDataref("sim/custom/xap/cover_st_pres_port_rf")
+    xac_cover_st_pres_port_rr = dref.getDataref("sim/custom/xap/cover_st_pres_port_rr")
+    xac_nv_block_pin = dref.getDataref("sim/custom/xap/nv_block_pin")
 
 
     -- doors / menu
@@ -146,14 +163,37 @@ function OnFirstFrame()
     xac_click_z = dref.getDataref("sim/custom/xap/mcdu/click_z")
     xac_scratchpad = dref.getDataref("sim/custom/xap/mcdu/scratchpad")
     xac_line_3b = dref.getDataref("sim/custom/xap/mcdu/line_3b")
+    xac_line_4b = dref.getDataref("sim/custom/xap/mcdu/line_4b")
     xac_line_2b = dref.getDataref("sim/custom/xap/mcdu/line_2b")
     xac_line_1b = dref.getDataref("sim/custom/xap/mcdu/line_1b")
     xac_line_2g = dref.getDataref("sim/custom/xap/mcdu/line_2g")
     xac_line_6g = dref.getDataref("sim/custom/xap/mcdu/line_6g")
     xac_line_5b = dref.getDataref("sim/custom/xap/mcdu/line_5b")
     xac_title_w = dref.getDataref("sim/custom/xap/mcdu/title_w")
+    xac_arr_inhg = dref.getDataref("sim/custom/xap/mcdu/arr_inhg")
+    xac_land_conf = dref.getDataref("sim/custom/xap/mcdu/land_conf")
+    xac_temp_at_dest = dref.getDataref("sim/custom/xap/mcdu/temp_at_dest")
+    xac_wind_dest_deg = dref.getDataref("sim/custom/xap/mcdu/wind_dest_deg")
+    xac_wind_dest_knt = dref.getDataref("sim/custom/xap/mcdu/wind_dest_knt")
+    xac_page_now = dref.getDataref("sim/custom/xap/mcdu/page_now")
+
+
+
+    xac_flt_nbr = dref.getDataref("sim/custom/xap/mcdu/flt_nbr")
+    xac_ci = dref.getDataref("sim/custom/xap/mcdu/ci")
+    xac_alt_crzft = dref.getDataref("sim/custom/xap/ap/alt_crzft")
+
+    --flight plan
+    xac_co_rte = dref.getDataref("sim/custom/xap/fplan/co_rte")
 
     -- fuel, start
+    xac_block_fuel = dref.getDataref("sim/custom/xap/fuel/block_fuel")
+    xac_extra_fuel = dref.getDataref("sim/custom/xap/fuel/extra_fuel")
+    xac_final_fuel = dref.getDataref("sim/custom/xap/fuel/final_fuel")
+    xac_rsv_fuel = dref.getDataref("sim/custom/xap/fuel/rsv_fuel")
+    xac_taxi_fuel = dref.getDataref("sim/custom/xap/fuel/taxi_fuel")
+    xac_trip_fuel = dref.getDataref("sim/custom/xap/fuel/trip_fuel")
+
     xac_t1_pump1 = dref.getDataref("sim/custom/xap/fuel/t1_pump1")
     xac_t1_pump2 = dref.getDataref("sim/custom/xap/fuel/t1_pump2")
     xac_t2_pump1 = dref.getDataref("sim/custom/xap/fuel/t2_pump1")
@@ -172,12 +212,14 @@ function OnFirstFrame()
     xac_t4 = dref.getDataref("sim/custom/xap/fuel/t4")
 
 
-    -- temperature/ice
+    -- temperature/ice/weather
     xac_outside_air_temp_degc = dref.getDataref("sim/cockpit2/temperature/outside_air_temp_degc")
     xac_ice_eng1_knob = dref.getDataref("sim/custom/xap/icerain/eng1_knob")
     xac_ice_eng2_knob = dref.getDataref("sim/custom/xap/icerain/eng2_knob")
     xac_ice_window = dref.getDataref("sim/custom/xap/icerain/window")
     xac_ice_wing_knob = dref.getDataref("sim/custom/xap/icerain/wing_knob")
+    xac_wind_heading_deg_mag = dref.getDataref("sim/cockpit2/gauges/indicators/wind_heading_deg_mag")
+    xac_wind_speed_kts = dref.getDataref("sim/cockpit2/gauges/indicators/wind_speed_kts")
     --sim/custom/xap/icerain/wing_knob_flt
     --sim/custom/xap/icerain/wip_l_anim
     --sim/custom/xap/icerain/wip_r_anim
@@ -197,7 +239,10 @@ function OnFirstFrame()
     xac_barometer_sealevel_inhg = dref.getDataref("sim/weather/barometer_sealevel_inhg")
     xac_barometer_setting = dref.getDataref("sim/cockpit/misc/barometer_setting")
     xac_barometer_setting2 = dref.getDataref("sim/cockpit/misc/barometer_setting2")
+    --xac_ind_baro_hpa = dref.getDataref("sim/custom/xap/ind_baro_hpa")
+    --xac_ind_baro_inhg = dref.getDataref("sim/custom/xap/ind_baro_inhg")
 
+    xac_baro_flash = dref.getDataref("sim/custom/xap/pfd/baro_flash")
 
     -- fcu
     xac_push_baro = dref.getDataref("sim/custom/xap/fcu/push_baro")
@@ -207,7 +252,7 @@ function OnFirstFrame()
     xac_alt_pull_bat = dref.getDataref("sim/custom/xap/fcu/alt_pull_bat")
     xac_baro_ishpa = dref.getDataref("sim/custom/xap/fcu/baro_ishpa")
 
-    -- altitude
+    -- altitude/alt
     xac_altitude_ft_pilot = dref.getDataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
     xac_altitude = dref.getDataref("sim/cockpit/autopilot/altitude")
     xac_altitude_dial_ft = dref.getDataref("sim/cockpit2/autopilot/altitude_dial_ft")
@@ -226,10 +271,95 @@ function OnFirstFrame()
     --misc
     --xac_timer              = dref.getDataref("sim/cockpit2/clock_timer/local_time_seconds")
 
+    -- approach
+    xac_alt_dh_alt = dref.getDataref("sim/custom/xap/alt/dh_alt")
+    xac_alt_mda_alt = dref.getDataref("sim/custom/xap/alt/mda_alt")
+    xac_ap_trans_alt = dref.getDataref("sim/custom/xap/ap/trans_alt")
+    xac_ap_trans_alt_star = dref.getDataref("sim/custom/xap/ap/trans_alt_star")
+
+
     -- own dataref
-    xac_crzflinft = dref.newInt("my/custom/dataref/crzflinft")
+    xac_state_chk_box = dref.newIntArray("my/custom/dataref/state/chk_box")
+    xac_state_preparation = dref.newIntArray("my/custom/dataref/state/preparation")
+    xac_state_beforestart = dref.newIntArray("my/custom/dataref/state/beforestart")
+    xac_state_start = dref.newIntArray("my/custom/dataref/state/start")
+    xac_state_afterstart = dref.newIntArray("my/custom/dataref/state/afterstart")
+    xac_state_taxi = dref.newIntArray("my/custom/dataref/state/taxi")
+    xac_state_atholdingpoint = dref.newIntArray("my/custom/dataref/state/atholdingpoint")
+    xac_state_linedup = dref.newIntArray("my/custom/dataref/state/linedup")
+    xac_state_takeoff = dref.newIntArray("my/custom/dataref/state/takeoff")
+    xac_state_descent = dref.newIntArray("my/custom/dataref/state/descent")
+
     xac_departure_transition = dref.newInt("my/custom/dataref/departure/transition")
     xac_daparture_station = dref.newInt("my/custom/dataref/departure/radio/station")
     xac_daparture_qnh_inHg = dref.newFloat("my/custom/dataref/departure/qnh_inHg")
-    --xac_daparture_qnh_hPa = dref.newFloat("my/custom/dataref/departure/qnh_hPa")
+    xac_daparture_info = dref.newByteArray("my/custom/dataref/departure/info")
+
+    xac_approach_transition = dref.newInt("my/custom/dataref/approach/transition")
+    xac_approach_goaround = dref.newInt("my/custom/dataref/approach/goaround")
+    xac_approach_station = dref.newInt("my/custom/dataref/approach/radio/station")
+    xac_approach_qnh_inHg = dref.newFloat("my/custom/dataref/approach/qnh_inHg")
+    xac_approach_catII_III = dref.newInt("my/custom/dataref/approach/catII_III")
+    xac_approach_info = dref.newByteArray("my/custom/dataref/approach/info")
+
+    xac_route_crzflinft = dref.newInt("my/custom/dataref/route/crzflinft")
+    xac_route_fltnbr = dref.newByteArray("my/custom/dataref/route/fltnbr")
+
+    xac_route_state = dref.newByteArray("my/custom/dataref/route/state")
+    xac_route_info = dref.newByteArray("my/custom/dataref/route/info")
+    xac_route_step = dref.newInt("my/custom/dataref/route/step")
+    xac_route_dir = dref.newByteArray("my/custom/dataref/route/dir")
+    xac_route_pointtype = dref.newByteArray("my/custom/dataref/route/pointtype")
+    xac_route_routepart = dref.newByteArray("my/custom/dataref/route/routepart")
+    xac_route_show_nom = dref.newInt("my/custom/dataref/route/show_nom")
+    xac_route_next_act = dref.newInt("my/custom/dataref/route/next_act")
+    xac_route_lat = dref.newFloat("my/custom/dataref/route/lat")
+    xac_route_lon = dref.newFloat("my/custom/dataref/route/lon")
+    xac_route_alt_min = dref.newInt("my/custom/dataref/route/alt_min")
+    xac_route_alt_max = dref.newInt("my/custom/dataref/route/alt_max")
+    xac_route_cst_min = dref.newInt("my/custom/dataref/route/cst_min")
+    xac_route_cst_max = dref.newInt("my/custom/dataref/route/cst_max")
+    xac_route_prof = dref.newFloat("my/custom/dataref/route/prof")
+    xac_route_eutc = dref.newFloat("my/custom/dataref/route/eutc")
+    xac_route_efob = dref.newFloat("my/custom/dataref/route/efob")
+    xac_route_part = dref.newByteArray("my/custom/dataref/route/part")
+    xac_route_dist = dref.newFloat("my/custom/dataref/route/dist")
+    xac_route_brg = dref.newInt("my/custom/dataref/route/brg")
+    xac_route_awy = dref.newByteArray("my/custom/dataref/route/awy")
+    xac_route_freq = dref.newFloat("my/custom/dataref/route/freq")
+    xac_route_crs = dref.newFloat("my/custom/dataref/route/crs")
+
+    dref.setArraySize( xac_state_chk_box, 7 )
+    dref.setArraySize( xac_state_preparation, 7 )
+    dref.setArraySize( xac_state_beforestart, 7 )
+    dref.setArraySize( xac_state_start, 7 )
+    dref.setArraySize( xac_state_afterstart, 7 )
+    dref.setArraySize( xac_state_taxi, 7 )
+    dref.setArraySize( xac_state_atholdingpoint, 7 )
+    dref.setArraySize( xac_state_linedup, 7 )
+    dref.setArraySize( xac_state_takeoff, 7 )
+    dref.setArraySize( xac_state_descent, 7 )
+    dref.setArraySize( xac_daparture_info, 30 )
+    dref.setArraySize( xac_approach_info, 30 )
+    dref.setArraySize( xac_route_state, 15 )
+    dref.setArraySize( xac_route_info, 30 )
+    dref.setArraySize( xac_route_dir, 10 )
+    dref.setArraySize( xac_route_pointtype, 10 )
+    dref.setArraySize( xac_route_routepart, 10 )
+    dref.setArraySize( xac_route_part, 10 )
+    dref.setArraySize( xac_route_awy, 10 )
+    dref.setArraySize( xac_route_fltnbr, 10 )
+    dref.setIntV( xac_state_chk_box, 1, 0, 0, 0, 0, 0, 0, 0 )
+    dref.setIntV( xac_state_preparation, 1, 0, 0, 0, 0, 0, 0, 0 )
+    dref.setIntV( xac_state_beforestart, 1, 0, 0, 0, 0, 0, 0, 0 )
+    dref.setIntV( xac_state_start, 1, 0, 0, 0, 0, 0, 0, 0 )
+    dref.setIntV( xac_state_afterstart, 1, 0, 0, 0, 0, 0, 0, 0 )
+    dref.setIntV( xac_state_taxi, 1, 0, 0, 0, 0, 0, 0, 0 )
+    dref.setIntV( xac_state_atholdingpoint, 1, 0, 0, 0, 0, 0, 0, 0 )
+    dref.setIntV( xac_state_linedup, 1, 0, 0, 0, 0, 0, 0, 0 )
+    dref.setIntV( xac_state_takeoff, 1, 0, 0, 0, 0, 0, 0, 0 )
+    dref.setIntV( xac_state_descent, 1, 0, 0, 0, 0, 0, 0, 0 )
+    dref.setString( xac_route_state, "DISPATCHING" )
+    dref.setString( xac_route_info, "NO FLIGHTPLAN FILED" )
+    dref.setString( xac_route_fltnbr, "---" )
 end
