@@ -84,8 +84,10 @@ function XAutoCopilot_OnCreate()
     gui.hideWidget(XAutoCopilot.chkFM)
 end
 
+
+
 function XAutoCopilot_btnPreparation_OnClick()
-    gui.hideWindow( XAutoCopilot.gui_h )
+    gui.hideWindow(XAutoCopilot.gui_h)
     gui.hideWidget(XAutoCopilot.btnpreparation)
     gui.hideWidget(XAutoCopilot.chkStair)
     gui.hideWidget(XAutoCopilot.stair)
@@ -218,14 +220,14 @@ function OnUpdate_XAutoCopilot_btnPreparation()
         gui.hideWidget(XAutoCopilot.preparation)
         gui.showWidget(XAutoCopilot.btnbeforestart)
         gui.showWidget(XAutoCopilot.beforestart)
-        gui.showWindow( XAutoCopilot.gui_h )
+        gui.showWindow(XAutoCopilot.gui_h)
         OnUpdate_XAutoCopilot_btnPreparation = nil
     end
     -- ##################################Preparation END##############################################
 end
 
 function XAutoCopilot_btnbeforeStart_OnClick()
-    gui.hideWindow( XAutoCopilot.gui_h )
+    gui.hideWindow(XAutoCopilot.gui_h)
     gui.hideWidget(XAutoCopilot.btnbeforestart)
     dref.setIntV(xac_state_beforestart, 1, 1)
     event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnbeforeStart")
@@ -259,7 +261,7 @@ function OnUpdate_XAutoCopilot_btnbeforeStart()
             dref.getFloat(xac_c_f_now) == 0.0 and
             dref.getFloat(xac_c_b_now) == 0.0 and
             dref.getFloat(xac_move_to_cater) > 19.0
-           -- dref.getFloat(xac_move_to_stair) > 37.0
+        -- dref.getFloat(xac_move_to_stair) > 37.0
     then
         dref.setInt(xac_show_cater, 0)
         dref.setInt(xac_show_stair, 0)
@@ -273,13 +275,13 @@ function OnUpdate_XAutoCopilot_btnbeforeStart()
         gui.hideWidget(XAutoCopilot.beforestart)
         gui.showWidget(XAutoCopilot.btnstart)
         gui.showWidget(XAutoCopilot.start)
-        gui.showWindow( XAutoCopilot.gui_h )
+        gui.showWindow(XAutoCopilot.gui_h)
         OnUpdate_XAutoCopilot_btnbeforeStart = nil
     end
 end
 
 function XAutoCopilot_btnStart_OnClick()
-    gui.hideWindow( XAutoCopilot.gui_h )
+    gui.hideWindow(XAutoCopilot.gui_h)
     gui.hideWidget(XAutoCopilot.btnstart)
     dref.setIntV(xac_state_start, 1, 1)
     event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnStart")
@@ -314,13 +316,13 @@ function OnUpdate_XAutoCopilot_btnStart()
         gui.hideWidget(XAutoCopilot.start)
         gui.showWidget(XAutoCopilot.btnafterstart)
         gui.showWidget(XAutoCopilot.afterstart)
-        gui.showWindow( XAutoCopilot.gui_h )
+        gui.showWindow(XAutoCopilot.gui_h)
         OnUpdate_XAutoCopilot_btnStart = nil
     end
 end
 
 function XAutoCopilot_btnafterStart_OnClick()
-    gui.hideWindow( XAutoCopilot.gui_h )
+    gui.hideWindow(XAutoCopilot.gui_h)
     gui.hideWidget(XAutoCopilot.btnafterstart)
     dref.setIntV(xac_state_afterstart, 1, 1)
     event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnafterStart")
@@ -351,13 +353,13 @@ function OnUpdate_XAutoCopilot_btnafterStart()
         gui.showWidget(XAutoCopilot.taxi)
         gui.showWidget(XAutoCopilot.fm)
         gui.showWidget(XAutoCopilot.chkFM)
-        gui.showWindow( XAutoCopilot.gui_h )
+        gui.showWindow(XAutoCopilot.gui_h)
         OnUpdate_XAutoCopilot_btnafterStart = nil
     end
 end
 
 function XAutoCopilot_btnTaxi_OnClick()
-    gui.hideWindow( XAutoCopilot.gui_h )
+    gui.hideWindow(XAutoCopilot.gui_h)
     gui.hideWidget(XAutoCopilot.btntaxi)
     gui.hideWidget(XAutoCopilot.fm)
     gui.hideWidget(XAutoCopilot.chkFM)
@@ -393,14 +395,14 @@ function OnUpdate_XAutoCopilot_btnTaxi()
         gui.hideWidget(XAutoCopilot.taxi)
         gui.showWidget(XAutoCopilot.btnatholdingpoint)
         gui.showWidget(XAutoCopilot.atholdingpoint)
-        gui.showWindow( XAutoCopilot.gui_h )
+        gui.showWindow(XAutoCopilot.gui_h)
         OnUpdate_XAutoCopilot_btnTaxi = nil
     end
 end
 
 
 function XAutoCopilot_btnAtHoldingPoint_OnClick()
-    gui.hideWindow( XAutoCopilot.gui_h )
+    gui.hideWindow(XAutoCopilot.gui_h)
     gui.hideWidget(XAutoCopilot.btnatholdingpoint)
     dref.setIntV(xac_state_atholdingpoint, 1, 1)
     event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnAtHoldingPoint")
@@ -417,14 +419,14 @@ function OnUpdate_XAutoCopilot_btnAtHoldingPoint()
         gui.hideWidget(XAutoCopilot.atholdingpoint)
         gui.showWidget(XAutoCopilot.btnlinedup)
         gui.showWidget(XAutoCopilot.linedup)
-        gui.showWindow( XAutoCopilot.gui_h )
+        gui.showWindow(XAutoCopilot.gui_h)
         OnUpdate_XAutoCopilot_btnAtHoldingPoint = nil
     end
 end
 
 
 function XAutoCopilot_btnLinedUp_OnClick()
-    gui.hideWindow( XAutoCopilot.gui_h )
+    gui.hideWindow(XAutoCopilot.gui_h)
     gui.hideWidget(XAutoCopilot.btnlinedup)
     dref.setIntV(xac_state_linedup, 1, 1)
     event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnLinedUp")
@@ -444,13 +446,13 @@ function OnUpdate_XAutoCopilot_btnLinedUp()
         gui.hideWidget(XAutoCopilot.linedup)
         gui.showWidget(XAutoCopilot.btntakeoff)
         gui.showWidget(XAutoCopilot.takeoff)
-        gui.showWindow( XAutoCopilot.gui_h )
+        gui.showWindow(XAutoCopilot.gui_h)
         OnUpdate_XAutoCopilot_btnLinedUp = nil
     end
 end
 
 function XAutoCopilot_btnTakeOff_OnClick()
-    gui.hideWindow( XAutoCopilot.gui_h )
+    gui.hideWindow(XAutoCopilot.gui_h)
     gui.hideWidget(XAutoCopilot.btntakeoff)
     dref.setIntV(xac_state_takeoff, 1, 1)
     event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnTakeOff")
@@ -499,14 +501,14 @@ function OnUpdate_XAutoCopilot_btnTakeOff()
         gui.hideWidget(XAutoCopilot.takeoff)
         gui.showWidget(XAutoCopilot.btndescent)
         gui.showWidget(XAutoCopilot.descent)
-        gui.showWindow( XAutoCopilot.gui_h )
+        gui.showWindow(XAutoCopilot.gui_h)
         OnUpdate_XAutoCopilot_btnTakeOff = nil
     end
 end
 
 
 function XAutoCopilot_btnDescent_OnClick()
-    gui.hideWindow( XAutoCopilot.gui_h )
+    gui.hideWindow(XAutoCopilot.gui_h)
     gui.hideWidget(XAutoCopilot.btndescent)
     dref.setIntV(xac_state_descent, 1, 1)
     event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnDescent")
@@ -538,7 +540,7 @@ function OnUpdate_XAutoCopilot_btnDescent()
         dref.setIntV(xac_state_descent, 4, 1)
         dref.setIntV(xac_state_descent, 3, 0)
         gui.hideWidget(XAutoCopilot.descent)
-        gui.showWindow( XAutoCopilot.gui_h )
+        gui.showWindow(XAutoCopilot.gui_h)
         OnUpdate_XAutoCopilot_btnDescent = nil
     end
 

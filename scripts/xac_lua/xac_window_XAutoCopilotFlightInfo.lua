@@ -7,7 +7,6 @@
 XAutoCopilotFlightInfo_visible = false
 menu.newItem("Flight Info", "XAutoCopilotFlightInfo")
 
-
 --this function will run when the user clicks the "Toggle Popup" menu item.
 function XAutoCopilotFlightInfo_OnClick()
 
@@ -64,6 +63,9 @@ function xac_InfoBoard()
         local route_info = dref.getString(xac_route_info)
         local route_dir = dref.getString(xac_route_dir)
         local departure_info = dref.getString(xac_daparture_info)
+        local departure_apt = dref.getString(xac_daparture_apt)
+        local approach_info = dref.getString(xac_approach_info)
+        local approach_apt = dref.getString(xac_approach_apt)
         local qnh = string.sub(dref.getFloat(xac_barometer_sealevel_inhg), 1, 5)
         local wind_heading = string.format("%0.0f", dref.getFloat(xac_wind_heading_deg_mag))
         local wind_speed = string.format("%0.0f", dref.getFloat(xac_wind_speed_kts))
@@ -72,31 +74,45 @@ function xac_InfoBoard()
         gfx.drawString(state, pc.left + 120, pc.top - pc.height + 8)
 
         local fmc_count = fmc.getCount()
-        if fmc_count == 1 then
-            gfx.setColor(grey2)
-            gfx.drawString(route_info, pc.left + 1680, pc.top - pc.height + 8)
-        end
+        --[[        if fmc_count == 1 then
+                    gfx.setColor(grey2)
+                    gfx.drawString(route_info, pc.left + 1680, pc.top - pc.height + 8)
+                end]]
 
-        local acf_alt_agl = acf.getAltAgl()
-        if fmc_count > 1 and acf_alt_agl < 100 then
+        if string.find(state, "BOARDING") or
+                string.find(state, "TAXI OUT") and fmc_count > 1 then
             gfx.setColor(blue)
             dref.setString(xac_route_info, "WINDS: " .. wind_heading .. "°" .. " / " .. wind_speed .. " kt")
             gfx.drawString(route_info, pc.left + 1680, pc.top - pc.height + 8)
             gfx.drawString(departure_info, pc.left + 1500, pc.top - pc.height + 8)
         end
 
-        if fmc_count > 1 and acf_alt_agl > 1000 then
+        if string.find(state, "TAKEOFF") or
+                string.find(state, "CLIMB") and fmc_count > 1 then
             gfx.setColor(blue)
             dref.setString(xac_route_info, "WINDS: " .. wind_heading .. "°" .. " / " .. wind_speed .. " kt")
             gfx.drawString(route_info, pc.left + 1680, pc.top - pc.height + 8)
-            gfx.drawString(route_dir, pc.left + 1500, pc.top - pc.height + 8)
+            --gfx.drawString(route_dir, pc.left + 1500, pc.top - pc.height + 8)
+        end
+
+        if string.find(state, "CRUISE") and fmc_count > 1 then
+            gfx.setColor(blue)
+            gfx.drawString("Enroute from: " .. departure_apt, pc.left + 1560, pc.top - pc.height + 8)
+            gfx.drawString("to: " .. approach_apt, pc.left + 1680, pc.top - pc.height + 8)
+        end
+
+        if string.find(state, "DESCENT") and fmc_count > 1 then
+            gfx.setColor(blue)
+            dref.setString(xac_route_info, "WINDS: " .. wind_heading .. "°" .. " / " .. wind_speed .. " kt")
+            gfx.drawString(route_info, pc.left + 1680, pc.top - pc.height + 8)
+            gfx.drawString(approach_info, pc.left + 1500, pc.top - pc.height + 8)
         end
 
 
         if fmc_count > 1 then
             timer.newTimer("nextWaypoint", 1.0)
             timer.newTimer("DepartureWaypoint", 1.0)
-            timer.newTimer("ApproacheWaypoint", 1.0)
+            timer.newTimer("ApproachWaypoint", 1.0)
         end
 
         gfx.setColor(grey2)

@@ -29,11 +29,11 @@ function DepartureWaypoint()
     local route_dir2 = Split((table2[2]), '=')
     local route_pointtype = Split((table2[3]), '=')
 
-    dref.setString(xac_daparture_info, route_routepart[2] ..":"..route_dir1[1] .." " ..route_pointtype[2] ..":" ..route_dir2[1])
-
+    dref.setString(xac_daparture_info, route_routepart[2] .. ":" .. route_dir1[1] .. " " .. route_pointtype[2] .. ":" .. route_dir2[1])
+    dref.setString(xac_daparture_apt,route_dir1[1])
 end
 
-function ApproacheWaypoint()
+function ApproachWaypoint()
     local fmc_count = fmc.getCount()
     local file = acf.getFolder() .. "FlightPlans/tmpplan.txt" --our file destination
     local lines = lines_from(file) -- line seperated table for all entrys
@@ -45,7 +45,7 @@ function ApproacheWaypoint()
         result[12], result[13], result[14], result[15], result[16], result[17], result[18], result[19], result[20], result[21]
     }
 
-    local actline2 = lines[fmc_count-1] -- before last line is our apt rwy
+    local actline2 = lines[fmc_count - 1] -- before last line is our apt rwy
     local result2 = Split(actline2, ' ') -- split into the sub strings, max21
     local table2 = {
         result2[1], result2[2], result2[3], result2[4], result2[5], result2[6], result2[7], result2[8], result2[9], result2[10], result2[11],
@@ -57,12 +57,12 @@ function ApproacheWaypoint()
     local route_dir2 = Split((table2[2]), '=')
     local route_pointtype = Split((table2[3]), '=')
 
-    dref.setString(xac_approach_info, route_routepart[2] ..":"..route_dir1[1] .." " ..route_pointtype[2] ..":" ..route_dir2[1])
-
+    dref.setString(xac_approach_info, route_routepart[2] .. ":" .. route_dir1[1] .. " " .. route_pointtype[2] .. ":" .. route_dir2[1])
+    dref.setString(xac_approach_apt, route_dir1[1])
 end
 
 function nextWaypoint()
-   -- local fmc_count = fmc.getCount()
+    -- local fmc_count = fmc.getCount()
     local fmc_displayed = fmc.getDisplayed()
     --    local fmc_dest = fmc.getDestination()
     --    logging.debug(fmc_count)
@@ -128,7 +128,6 @@ function nextWaypoint()
     dref.setFloat(xac_route_crs, route_crs[2])
 end
 
-
 function AutoFlap()
     local xac_AutoFlap = dref.getString(xac_line_3b)
 
@@ -139,23 +138,23 @@ function AutoFlap()
     -- flap 3 = 0.8
     -- flap 4 = 1.0
 
-    if string.find(xac_AutoFlap, "0/")  then
+    if string.find(xac_AutoFlap, "0/") then
         dref.setFloat(xac_flap, 0.0)
     end
 
-    if string.find(xac_AutoFlap, "1/")  then
+    if string.find(xac_AutoFlap, "1/") then
         dref.setFloat(xac_flap, 0.4)
     end
 
-    if string.find(xac_AutoFlap, "2/")  then
+    if string.find(xac_AutoFlap, "2/") then
         dref.setFloat(xac_flap, 0.6)
     end
 
-    if string.find(xac_AutoFlap, "3/")  then
+    if string.find(xac_AutoFlap, "3/") then
         dref.setFloat(xac_flap, 0.8)
     end
 
-    if string.find(xac_AutoFlap, "4/")  then
+    if string.find(xac_AutoFlap, "4/") then
         dref.setFloat(xac_flap, 1.0)
     end
 end

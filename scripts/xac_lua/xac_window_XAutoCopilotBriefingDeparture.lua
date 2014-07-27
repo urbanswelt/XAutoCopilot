@@ -45,7 +45,7 @@ function XAutoCopilotBriefingDeparture_OnCreate()
     XAutoCopilotBriefingDeparture.flaps = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "2/UP2.0", left, top + 30, width)
     XAutoCopilotBriefingDeparture.flex = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "F50", left, top + 45, width)
 
-    XAutoCopilotBriefingDeparture.qnh_inHg = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", string.sub(dref.getFloat(xac_barometer_sealevel_inhg),1 ,5), left, top + 70, width)
+    XAutoCopilotBriefingDeparture.qnh_inHg = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", string.sub(dref.getFloat(xac_barometer_sealevel_inhg), 1, 5), left, top + 70, width)
     XAutoCopilotBriefingDeparture.squawk = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "2000", left, top + 85, width)
     XAutoCopilotBriefingDeparture.tower = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "122.00", left, top + 100, width)
     XAutoCopilotBriefingDeparture.station = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "122.00", left, top + 115, width)
@@ -79,10 +79,10 @@ end
 
 function Departure_Brief_Step2()
     -- http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html / choose 30.15 for ind_baro_inhg and look on barometer_setting JAR ?
-        dref.setFloat(xac_daparture_qnh_inHg, tonumber(gui.getWidgetValue(XAutoCopilotBriefingDeparture.qnh_inHg))) --back to real float
-        dref.setFloat(xac_barometer_setting, dref.getFloat(xac_daparture_qnh_inHg)) --  set QNH Pilot
-        dref.setFloat(xac_barometer_setting2, dref.getFloat(xac_daparture_qnh_inHg)) --  set QNH CoPilot
-        dref.setInt(xac_transponder_code, gui.getWidgetValue(XAutoCopilotBriefingDeparture.squawk)) -- Set Transponder Code
+    dref.setFloat(xac_daparture_qnh_inHg, tonumber(gui.getWidgetValue(XAutoCopilotBriefingDeparture.qnh_inHg))) --back to real float
+    dref.setFloat(xac_barometer_setting, dref.getFloat(xac_daparture_qnh_inHg)) --  set QNH Pilot
+    dref.setFloat(xac_barometer_setting2, dref.getFloat(xac_daparture_qnh_inHg)) --  set QNH CoPilot
+    dref.setInt(xac_transponder_code, gui.getWidgetValue(XAutoCopilotBriefingDeparture.squawk)) -- Set Transponder Code
 end
 
 function Departure_Brief_Step3()

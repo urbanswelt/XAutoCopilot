@@ -51,14 +51,14 @@ function XAutoCopilotRoute_OnCreate()
 
     XAutoCopilotRoute.fuel_taxi = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "0.2", left, top + 70, width)
     XAutoCopilotRoute.fuel_reserve = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "5.00", left, top + 85, width)
-    XAutoCopilotRoute.fuel_final_h = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "00", left, top + 100, width-30)
-    XAutoCopilotRoute.fuel_final_m = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "30", left+30, top + 100, width-30)
-    XAutoCopilotRoute.fuel_extra_h = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "00", left, top + 115, width-30)
-    XAutoCopilotRoute.fuel_extra_m = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "00", left+30, top + 115, width-30)
+    XAutoCopilotRoute.fuel_final_h = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "00", left, top + 100, width - 30)
+    XAutoCopilotRoute.fuel_final_m = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "30", left + 30, top + 100, width - 30)
+    XAutoCopilotRoute.fuel_extra_h = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "00", left, top + 115, width - 30)
+    XAutoCopilotRoute.fuel_extra_m = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "00", left + 30, top + 115, width - 30)
 end
 
 function XAutoCopilotRoute_btnStart_OnClick()
-    dref.setInt( xac_route_crzflinft, gui.getWidgetValue(XAutoCopilotRoute.crzfl)*100 )
+    dref.setInt(xac_route_crzflinft, gui.getWidgetValue(XAutoCopilotRoute.crzfl) * 100)
 
     local steptime = 0.3
 
@@ -101,7 +101,6 @@ function XAutoCopilotRoute_btnFuelStart_OnClick()
     -- Block is changing, we must start 2 loop´s
     timer.newOneShot("Fuelloop1", (0.1))
     timer.newOneShot("Fuelloop2", (3.0))
-
 end
 
 function Fuelloop1()
@@ -116,7 +115,6 @@ function Fuelloop1()
     timer.newOneShot("RouteFuel_Step6", (steptime * 6))
     timer.newOneShot("RouteFuel_Step7", (steptime * 7))
     timer.newOneShot("RouteFuel_Step8", (steptime * 8))
-
 end
 
 function Fuelloop2()
@@ -131,7 +129,6 @@ function Fuelloop2()
     timer.newOneShot("RouteFuel_Step6", (steptime * 6))
     timer.newOneShot("RouteFuel_Step7", (steptime * 7))
     timer.newOneShot("RouteFuel_Step8", (steptime * 8))
-
 end
 
 function RouteFuel_Step1()
@@ -161,7 +158,7 @@ function RouteFuel_Step4()
 end
 
 function RouteFuel_Step5()
-    local final = (gui.getWidgetValue(XAutoCopilotRoute.fuel_final_h).. "" ..gui.getWidgetValue(XAutoCopilotRoute.fuel_final_m))
+    local final = (gui.getWidgetValue(XAutoCopilotRoute.fuel_final_h) .. "" .. gui.getWidgetValue(XAutoCopilotRoute.fuel_final_m))
     dref.setString(xac_scratchpad, "/" .. final) -- Copy Final Time to scratchpad
     dref.setInt(xac_click_l5, 1) -- click left 5
 end
@@ -173,7 +170,7 @@ function RouteFuel_Step6()
     local final = dref.getFloat(xac_final_fuel)
     local extra_h = tonumber(gui.getWidgetValue(XAutoCopilotRoute.fuel_extra_h)) * 60
     local extra_m = tonumber(gui.getWidgetValue(XAutoCopilotRoute.fuel_extra_m))
-    local extra = (extra_h + extra_m) * (1/30)
+    local extra = (extra_h + extra_m) * (1 / 30)
     local block = taxi + trip + reserve + final + extra
     XAutoCopilotRoute.block = taxi + trip + reserve + final + extra
 end

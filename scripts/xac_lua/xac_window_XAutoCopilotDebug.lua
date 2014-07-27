@@ -36,11 +36,9 @@ end
 
 
 function XAutoCopilotDebug_btnStart_OnClick()
-
 end
 
 function XAutoCopilotDebug_OnUpdate()
-
 end
 
 
