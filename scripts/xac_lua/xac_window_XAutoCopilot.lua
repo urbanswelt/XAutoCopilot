@@ -527,10 +527,12 @@ function OnUpdate_XAutoCopilot_btnDescent()
 
     if dref.getFloat(xac_altitude_ft_pilot) <= dref.getInt(xac_approach_transition) and dref.getIntV(xac_state_descent, 2, 1) == 1 then
         dref.setInt(xac_push_baro, 1)
-        dref.setFloat(xac_barometer_setting, dref.getFloat(xac_approach_qnh_inHg)) --  set QNH Pilot
-        dref.setFloat(xac_barometer_setting2, dref.getFloat(xac_approach_qnh_inHg)) --  set QNH CoPilot
+        local tmr_oneshot = timer.newOneShot( "xac_set_approach_qnh", 5.0 )
         dref.setIntV(xac_state_descent, 2, 0)
     end
+
+
+
 
     if dref.getIntV(xac_state_descent, 3, 1) == 1 and dref.getFloat(xac_altitude_ft_pilot) < 10000 then
         --sound.say("passing 10000 feet")
@@ -547,6 +549,10 @@ function OnUpdate_XAutoCopilot_btnDescent()
     --spoilers arm
 end
 
+function xac_set_approach_qnh()
+    dref.setFloat(xac_barometer_setting, dref.getFloat(xac_approach_qnh_inHg)) --  set QNH Pilot
+    dref.setFloat(xac_barometer_setting2, dref.getFloat(xac_approach_qnh_inHg)) --  set QNH CoPilot
+end
 
 -- Toolbar Widget definition/Integration. --
 
