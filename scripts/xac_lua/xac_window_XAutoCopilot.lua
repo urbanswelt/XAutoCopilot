@@ -481,7 +481,7 @@ function OnUpdate_XAutoCopilot_btnTakeOff()
     end
 
     if dref.getFloat(xac_altitude_ft_pilot) >= dref.getInt(xac_departure_transition) and dref.getIntV(xac_state_takeoff, 3, 1) == 1 then
-        dref.setInt(xac_push_baro, 1)
+        dref.setInt(xac_baro_pull_bat, 1)
         dref.setIntV(xac_state_takeoff, 3, 0)
     end
 
@@ -526,7 +526,7 @@ function OnUpdate_XAutoCopilot_btnDescent()
     end
 
     if dref.getFloat(xac_altitude_ft_pilot) <= dref.getInt(xac_approach_transition) and dref.getIntV(xac_state_descent, 2, 1) == 1 then
-        dref.setInt(xac_push_baro, 1)
+        dref.setInt(xac_baro_push_bat, 1)
         local tmr_oneshot = timer.newOneShot( "xac_set_approach_qnh", 5.0 )
         dref.setIntV(xac_state_descent, 2, 0)
     end

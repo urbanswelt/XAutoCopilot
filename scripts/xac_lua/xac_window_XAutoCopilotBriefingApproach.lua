@@ -139,6 +139,7 @@ function XAutoCopilotBriefingApproach_btnStart_OnClick()
 end
 
 function Approach_Brief_Step1()
+	dref.setInt(xac_baro_ishpa, 0)
     dref.setString(xac_scratchpad, gui.getWidgetValue(XAutoCopilotBriefingApproach.qnh_inHg))
     dref.setInt(xac_click_l1, 1) -- click left 1
 end

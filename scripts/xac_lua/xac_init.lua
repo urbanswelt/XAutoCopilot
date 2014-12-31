@@ -30,6 +30,6 @@ logging.debug("loaded xac_window_XAutoCopilotFlightInfo..")
 --logging.debug("loaded xac_window_XAutoCopilotDebug..")
 
 -- Dataref in DRE w/o edit the xplane dataref.txt / activate only for testing !(longer loadtime)
---dofile("xac_lua/xac_publish_dataref.lua")
---logging.debug("loaded xac_publish_dataref..")
+dofile("xac_lua/xac_publish_dataref.lua")
+logging.debug("loaded xac_publish_dataref..")
 

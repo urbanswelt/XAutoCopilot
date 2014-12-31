@@ -80,8 +80,8 @@ end
 function Departure_Brief_Step2()
     -- http://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html / choose 30.15 for ind_baro_inhg and look on barometer_setting JAR ?
     dref.setFloat(xac_daparture_qnh_inHg, tonumber(gui.getWidgetValue(XAutoCopilotBriefingDeparture.qnh_inHg))) --back to real float
-    dref.setFloat(xac_barometer_setting, dref.getFloat(xac_daparture_qnh_inHg)) --  set QNH Pilot
-    dref.setFloat(xac_barometer_setting2, dref.getFloat(xac_daparture_qnh_inHg)) --  set QNH CoPilot
+    dref.setFloat(xac_barometer_setting, (dref.getFloat(xac_daparture_qnh_inHg))) --  set QNH Pilot
+    dref.setFloat(xac_barometer_setting2, (dref.getFloat(xac_daparture_qnh_inHg))) --  set QNH CoPilot
     dref.setInt(xac_transponder_code, gui.getWidgetValue(XAutoCopilotBriefingDeparture.squawk)) -- Set Transponder Code
 end
 
@@ -97,7 +97,7 @@ function Departure_Brief_Step4()
 end
 
 function Departure_Brief_Step5()
-    dref.setString(xac_scratchpad, string.upper(gui.getWidgetValue(XAutoCopilotBriefingDeparture.flex))) -- Copy Flex trmp to scratchpad
+    dref.setString(xac_scratchpad, string.upper(gui.getWidgetValue(XAutoCopilotBriefingDeparture.flex))) -- Copy Flex temp to scratchpad
     dref.setInt(xac_click_r4, 1) -- click right 4
 end
 

@@ -159,7 +159,11 @@ function AutoFlap()
     end
 end
 
-
+function round(num, idp)
+    local mult = 10^(idp or 0)
+    return math.floor(num * mult + 0.5) / mult
+    --http://snippets.luacode.org/snippets/Round_a_Number_to_given_number_of_decimal_places_17
+end
 
 
 -- ##################################Helper BEGIN##############################################

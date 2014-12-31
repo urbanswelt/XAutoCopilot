@@ -1025,3 +1025,8 @@ dref.publish("sim/custom/xap/weight/zfwcg")
 dref.publish("sim/custom/xap/wx_radar/off_on")
 dref.publish("sim/custom/xap/wx_radar/range")
 dref.publish("sim/custom/xaУ")
+dref.publish("sim/custom/xap/baro_man_sel")
+dref.publish("sim/custom/xap/fcu/baro_pull_bat")
+dref.publish("sim/custom/xap/fcu/baro_push_bat")
+
+
