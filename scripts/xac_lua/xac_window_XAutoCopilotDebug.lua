@@ -59,7 +59,7 @@ end
 
 function XAutoCopilotDebug_helpIcon_OnMouseDown ()
     --toast.test()
-    toast.newInfo("Debug Info", "This Windows is only for testing\nHave a nice day!")
+    toast.newInfo("Debug Info", "This Window is only for testing\nHave a nice day!")
     end
 
 function XAutoCopilotDebug_help2_OnDraw()
