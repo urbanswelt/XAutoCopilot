@@ -1,0 +1,11 @@
+=Comapany Routes=
+All Routes was stored in the FlightplanFolder
+
+Flight Number:
+Cost Index:
+Cruise Flightlevel:
+
+Taxi:
+Reserve:
+Final Time:
+Extra Time:

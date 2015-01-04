@@ -55,7 +55,44 @@ function XAutoCopilotRoute_OnCreate()
     XAutoCopilotRoute.fuel_final_m = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "30", left + 30, top + 100, width - 30)
     XAutoCopilotRoute.fuel_extra_h = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "00", left, top + 115, width - 30)
     XAutoCopilotRoute.fuel_extra_m = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "00", left + 30, top + 115, width - 30)
+
+    -- help icon
+    XAutoCopilotRoute.helpIcon_h 	= gui.newCustomWidget( XAutoCopilotRoute.gui_h, "XAutoCopilotRoute_helpIcon", XAutoCopilotRoute.w-20, 20, 17, 17)
 end
+
+function XAutoCopilotRoute_helpIcon_OnDraw()
+    --icon
+    local icon_file = "help.png"
+    gfx.texOn()
+    gfx.setColor(color.white)
+    gfx.useTexture(icons.get(icon_file))
+    gfx.drawTexturedQuad( 0,0, 16, 16 )
+
+end
+
+function XAutoCopilotRoute_helpIcon_OnMouseDown ()
+    --message
+    local left = 2
+    local top = 20
+    local width = 50
+
+    gui.hideWindow(XAutoCopilotDebug.gui_h)
+
+    local file = acf.getFolder() .. "scripts/xac_lua/help/route.txt" --our file destination
+    local lines = lines_from(file) -- line seperated table for all entrys
+    local cnt = (table_length(lines))
+    local i = 0
+    --bla = 1
+
+    for i=1,cnt do
+        gui.newLabel(XAutoCopilotDebug.gui_h, "ignored", lines[i], left, top, width);top = top + 15
+    end
+
+    gui.showWindow(XAutoCopilotDebug.gui_h)
+ end
+
+
+
 
 function XAutoCopilotRoute_btnStart_OnClick()
     dref.setInt(xac_route_crzflinft, gui.getWidgetValue(XAutoCopilotRoute.crzfl) * 100)

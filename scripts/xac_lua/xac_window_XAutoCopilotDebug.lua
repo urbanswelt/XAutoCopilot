@@ -19,7 +19,6 @@ XAutoCopilotDebug = {
 
 function XAutoCopilotDebug_OnCreate()
     local w, h = gfx.getScreenSize()
-
     --gui.setWindowSize( gui_window_id, left, top, width, height )
     gui.setWindowSize(XAutoCopilotDebug.gui_h, XAutoCopilotDebug.l, XAutoCopilotDebug.t, XAutoCopilotDebug.w, XAutoCopilotDebug.h)
     gui.setWindowCaption(XAutoCopilotDebug.gui_h, "Debug")
@@ -28,18 +27,50 @@ function XAutoCopilotDebug_OnCreate()
     local xac_top = 30
     local xac_width = 100
 
+    -- help icon
+    XAutoCopilotDebug.helpIcon_h 	= gui.newCustomWidget( XAutoCopilotDebug.gui_h, "XAutoCopilotDebug_helpIcon", XAutoCopilotDebug.w-20, 20, 17, 17)
 
-    gui.newButton(XAutoCopilotDebug.gui_h, "XAutoCopilotDebug_btnStart", "Debug", xac_left, xac_top + 125, xac_width - 30)
+    local left = 2
+    local oben = 20
+    local widht = 200
+    local hight = 160
+    --XAutoCopilotDebug.help2_h 	= gui.newCustomWidget( XAutoCopilotDebug.gui_h, "XAutoCopilotDebug_help2", left, oben, widht, hight) --will resize instantly anyway
+    --gui.newButton(XAutoCopilotDebug.gui_h, "XAutoCopilotDebug_btnStart", "Debug", xac_left, xac_top + 125, xac_width - 30)
+
 end
 
+function XAutoCopilotDebug_OnBeforeClose()
 
-
+end
 
 function XAutoCopilotDebug_btnStart_OnClick()
+
 end
 
-function XAutoCopilotDebug_OnUpdate()
+function XAutoCopilotDebug_helpIcon_OnDraw()
+    --icon
+    local icon_file = "help.png"
+    gfx.texOn()
+    gfx.setColor(color.white)
+    gfx.useTexture(icons.get(icon_file))
+    gfx.drawTexturedQuad( 0,0, 16, 16 )
+
 end
+
+function XAutoCopilotDebug_helpIcon_OnMouseDown ()
+    --toast.test()
+    toast.newInfo("Debug Info", "This Windows is only for testing\nHave a nice day!")
+    end
+
+function XAutoCopilotDebug_help2_OnDraw()
+    local l,t,w,h = gui.getWidgetSize( XAutoCopilotDebug.help2_h )
+    -- helper to find the position
+    --gfx.texOff()
+    --gfx.setColor(0.65,0.65,0.65, 1)
+    --gfx.drawFilledBox( 0,0,w,h )
+
+end
+
 
 
 ToolXAutoCopilotDebug = {

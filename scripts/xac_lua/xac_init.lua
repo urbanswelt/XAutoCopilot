@@ -29,8 +29,8 @@ logging.debug("loaded xac_window_XAutoCopilotFlightInfo..")
 --dofile("xac_lua/xac_window_XAutoCopilotUpdater.lua")
 --logging.debug("loaded xac_window_XAutoCopilotUpdater..")
 
---dofile("xac_lua/xac_window_XAutoCopilotDebug.lua")
---logging.debug("loaded xac_window_XAutoCopilotDebug..")
+dofile("xac_lua/xac_window_XAutoCopilotDebug.lua")
+logging.debug("loaded xac_window_XAutoCopilotDebug..")
 
 -- Dataref in DRE w/o edit the xplane dataref.txt / activate only for testing !(longer loadtime)
 --dofile("xac_lua/xac_publish_dataref.lua")
@@ -42,3 +42,6 @@ dofile("xac_lua/NewGizmoFirmwarePreview/color_api.lua")
 dofile("xac_lua/NewGizmoFirmwarePreview/icons_api.lua")
 logging.debug("loaded NewFeature_api..")
 
+--temp extensions
+--dofile("xac_lua/tmp/FMCExplorer.lua")
+--logging.debug("loaded temp extensions..")
