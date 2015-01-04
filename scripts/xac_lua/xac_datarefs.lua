@@ -59,6 +59,7 @@ function OnFirstFrame()
     xac_efifs_waether = dref.getDataref("sim/cockpit/switches/EFIFS_shows_weather")
 
     xac_engn_thro = dref.getDataref("sim/flightmodel/engine/ENGN_thro")
+    xac_engn_thro_use = dref.getDataref("sim/flightmodel/engine/ENGN_thro_use")
     xac_throttle_ratio_all = dref.getDataref("sim/cockpit2/engine/actuators/throttle_ratio_all")
 
     xac_fasten_seat_belts = dref.getDataref("sim/cockpit/switches/fasten_seat_belts")
@@ -268,6 +269,12 @@ function OnFirstFrame()
 
     --misc
     --xac_timer              = dref.getDataref("sim/cockpit2/clock_timer/local_time_seconds")
+    xac_nosewheel_speed = dref.getDataref("sim/flightmodel/misc/nosewheel_speed")
+    xac_engn_running = dref.getDataref("sim/flightmodel/engine/ENGN_running")
+    xac_acf_num_engines = dref.getDataref("sim/aircraft/engine/acf_num_engines")
+
+
+
 
     -- approach
     xac_alt_dh_alt = dref.getDataref("sim/custom/xap/alt/dh_alt")

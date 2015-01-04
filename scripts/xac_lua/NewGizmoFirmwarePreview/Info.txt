@@ -1,0 +1,2 @@
+Features was not yet implemented from Ben in the last release from Gizmo
+https://github.com/benrussell/Gizmo-Firmware
