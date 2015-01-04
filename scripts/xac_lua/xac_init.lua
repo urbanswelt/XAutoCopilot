@@ -26,8 +26,8 @@ logging.debug("loaded xac_window_XAutoCopilotBriefingApproach..")
 dofile("xac_lua/xac_window_XAutoCopilotFlightInfo.lua")
 logging.debug("loaded xac_window_XAutoCopilotFlightInfo..")
 
-dofile("xac_lua/xac_window_XAutoCopilotUpdater.lua")
-logging.debug("loaded xac_window_XAutoCopilotUpdater..")
+--dofile("xac_lua/xac_window_XAutoCopilotUpdater.lua")
+--logging.debug("loaded xac_window_XAutoCopilotUpdater..")
 
 --dofile("xac_lua/xac_window_XAutoCopilotDebug.lua")
 --logging.debug("loaded xac_window_XAutoCopilotDebug..")
