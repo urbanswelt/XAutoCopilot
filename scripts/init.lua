@@ -9,11 +9,7 @@
 dofile("xac_lua/xac_init.lua")
 
 
--- Global Functions in use
-
-function OnDraw_Windows()
-    xac_InfoBoard()
-    end
+-- don`t use Global Functions, use event.register instead
 
 -- Global extra Functions
 
@@ -101,6 +97,7 @@ function OnDraw_FirstCockpit () end
 function OnDraw_BeforeLastCockpit () end
 function OnDraw_LastCockpit () end
 function OnDraw_BeforeWindows () end
+function OnDraw_Windows() end
 function OnForceRedraw () end
 function Console_OnUpdate () end
 function OnMouseClick () end

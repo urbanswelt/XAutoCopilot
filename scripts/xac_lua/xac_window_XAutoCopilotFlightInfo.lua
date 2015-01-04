@@ -19,7 +19,9 @@ function XAutoCopilotFlightInfo_OnClick()
     end
 end
 
-function xac_InfoBoard()
+event.register("OnDraw_Windows", "xac_InfoBoard_Windows_OnDraw")
+
+function xac_InfoBoard_Windows_OnDraw()
 
     if (XAutoCopilotFlightInfo_visible) then
         local w, h = gfx.getScreenSize()
