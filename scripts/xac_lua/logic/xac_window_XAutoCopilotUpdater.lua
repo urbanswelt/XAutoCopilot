@@ -4,7 +4,8 @@
 -- Date: 01.07.2014
 -- Time: 20:49
 -- 
-
+-- set Version for updates
+xac_updater_version = 201506012350
 
 XAutoCopilotUpdater = {
     gui_h = gui.newWindow("XAutoCopilotUpdater"),
@@ -68,6 +69,7 @@ function http_updater_check( data, url, size )
     if (data) then
         if data > xac_updater_version then
             toast.newInfo("UPDATER", "A new Updater is available")
+            xac_new_updater = 1
         end
     else
         Network_Error()
@@ -85,6 +87,7 @@ function http_update_check( data, url, size )
     if (data) then
         if data > xac_version then
             toast.newInfo("UPDATE", "A new Update for XAC is available")
+            xac_new_update = 1
         end
     else
         Network_Error()
@@ -119,7 +122,28 @@ function XAutoCopilotUpdater_btnStart_OnClick()
     --local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/xac_init.lua'
     --local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs2.txt"
     --http_updater_save(filename,data)
+
+    if xac_new_updater == 1 then
+
+    end
 end
+
+function xac_update_updater ()
+    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua'
+    http.get( url, 'http_update_updater' )
+end
+
+function http_update_updater( data, url, size )
+    local data = tonumber(data)
+    local filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua"
+
+    if (data) then
+        http_updater_save(filename,data)
+    else
+        Network_Error()
+    end
+end
+
 
 function XAutoCopilotUpdater_OnUpdate()
 

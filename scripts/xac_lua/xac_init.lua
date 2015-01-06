@@ -6,7 +6,6 @@
 --
 
 -- set Version for updates
-xac_updater_version = 201506012350
 xac_version = 201506012350
 
 dofile("xac_lua/logic/xac_datarefs.lua")
