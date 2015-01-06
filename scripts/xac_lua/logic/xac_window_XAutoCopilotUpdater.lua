@@ -140,6 +140,7 @@ end
 
 function http_update_updater( data, url, size )
     local data = tonumber(data)
+    logging.debug(data)
     local filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua"
 
     if (data) then
