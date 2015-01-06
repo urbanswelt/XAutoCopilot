@@ -3,7 +3,7 @@ All Routes was stored in the FlightplanFolder
 
 Flight Number:
 Cost Index:
-Cruise Flightlevel:
+Cruise Flightlevel:456
 
 Taxi:
 Reserve:
