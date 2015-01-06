@@ -44,8 +44,19 @@ function XAutoCopilotDebug_OnBeforeClose()
 end
 
 function XAutoCopilotDebug_btnStart_OnClick()
-    xac_prefs.debug()
+    --https://github.com/benrussell/Gizmo-Open-Extensions/blob/master/Cake/info.txt
+    --local url = 'http://github.com/benrussell/Gizmo-Open-Extensions/blob/master/Cake/info.txt'
+    local url = 'http://x-plane.joanpc.com/plugins/updater_json/'
+    sound.say( 'fetch: ' .. url )
+    http.get( url, 'cb_http_get_complete' )
 end
+
+function cb_http_get_complete( data, url, size )
+    logging.debug('dl url: ' .. url)
+    logging.debug('dl data: ' .. data)
+    logging.debug('dl size: ' .. size)
+end
+
 
 function XAutoCopilotDebug_helpIcon_OnDraw()
     --icon
