@@ -44,18 +44,46 @@ function XAutoCopilotDebug_OnBeforeClose()
 end
 
 function XAutoCopilotDebug_btnStart_OnClick()
-    --https://github.com/benrussell/Gizmo-Open-Extensions/blob/master/Cake/info.txt
-    --local url = 'http://github.com/benrussell/Gizmo-Open-Extensions/blob/master/Cake/info.txt'
-    local url = 'http://x-plane.joanpc.com/plugins/updater_json/'
-    sound.say( 'fetch: ' .. url )
-    http.get( url, 'cb_http_get_complete' )
+    --local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/xac_init.lua'
+    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/updater_version.txt'
+    http.get( url, 'http_updater_get' )
 end
 
-function cb_http_get_complete( data, url, size )
-    logging.debug('dl url: ' .. url)
-    logging.debug('dl data: ' .. data)
-    logging.debug('dl size: ' .. size)
+-- set Version for updater
+xac_updater_version = 201506012053
+xac_version = 201506012053
+
+function http_updater_get( data, url, size )
+    local data = data
+    if data > xac_updater_version then
+        toast.newInfo("UPDATER", "A new Updater is available")
+    end
+
+    --local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs2.txt"
+    --httpupdater.save(filename,data)
 end
+
+
+
+http_updater_save = function(filename,data)
+
+    local data_blob = data
+    local data_path = filename
+
+    --write data
+    local fh = io.open( data_path, "wb" )
+    if( fh )then
+        fh:write( data_blob )
+        fh:close()
+        fh = nil
+
+    else
+        error("http_updater_save(): Failed: (" .. data_path ..  ")")
+
+    end --check file handle is not nil
+
+end --http_updater.save()
+
 
 
 function XAutoCopilotDebug_helpIcon_OnDraw()
