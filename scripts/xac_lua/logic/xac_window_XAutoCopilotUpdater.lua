@@ -22,7 +22,7 @@ function XAutoCopilotUpdater_OnCreate()
 
     --gui.setWindowSize( gui_window_id, left, top, width, height )
     gui.setWindowSize(XAutoCopilotUpdater.gui_h, XAutoCopilotUpdater.l, XAutoCopilotUpdater.t, XAutoCopilotUpdater.w, XAutoCopilotUpdater.h)
-    gui.setWindowCaption(XAutoCopilotUpdater.gui_h, "Debug")
+    gui.setWindowCaption(XAutoCopilotUpdater.gui_h, "Updater")
 
     local xac_left = 10
     local xac_top = 30
@@ -32,7 +32,7 @@ function XAutoCopilotUpdater_OnCreate()
     gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnStart", "Update", xac_left, xac_top + 125, xac_width - 30)
 
     -- help icon
-    XAutoCopilotUpdater.helpIcon_h 	= gui.newCustomWidget( XAutoCopilotUpdater.gui_h, "XAutoCopilotDebug_helpIcon", XAutoCopilotUpdater.w-20, 20, 17, 17)
+    XAutoCopilotUpdater.helpIcon_h 	= gui.newCustomWidget( XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_helpIcon", XAutoCopilotUpdater.w-20, 20, 17, 17)
 end
 
 function XAutoCopilotUpdater_helpIcon_OnDraw()
@@ -59,27 +59,35 @@ end
 
 
 function xac_updater_check ()
-    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/xac_updater_version'
+    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/version_updater'
     http.get( url, 'http_updater_check' )
 end
 
 function http_updater_check( data, url, size )
     local data = tonumber(data)
-    if data > xac_updater_version then
-        toast.newInfo("UPDATER", "A new Updater is available")
+    if (data) then
+        if data > xac_updater_version then
+            toast.newInfo("UPDATER", "A new Updater is available")
+        end
+    else
+        Network_Error()
     end
 end
 
 
 function xac_update_check ()
-    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/xac_version'
+    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/version'
     http.get( url, 'http_update_check' )
 end
 
 function http_update_check( data, url, size )
     local data = tonumber(data)
-    if data > xac_version then
-        toast.newInfo("UPDATE", "A new Update for XAC is available")
+    if (data) then
+        if data > xac_version then
+            toast.newInfo("UPDATE", "A new Update for XAC is available")
+        end
+    else
+        Network_Error()
     end
 end
 
@@ -103,6 +111,9 @@ http_updater_save = function(filename,data)
 
 end --http_updater.save()
 
+function Network_Error()
+    toast.newError("Network", "Network Error")
+end
 
 function XAutoCopilotUpdater_btnStart_OnClick()
     --local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/xac_init.lua'
