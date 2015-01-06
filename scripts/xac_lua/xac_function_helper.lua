@@ -220,6 +220,151 @@ function round(num, idp)
     --http://snippets.luacode.org/snippets/Round_a_Number_to_given_number_of_decimal_places_17
 end
 
+--preferences adapted from Gizmo Firmeware FIXME change for more then 1 pref "table" usage
+--https://github.com/benrussell/Gizmo-Firmware
+xac_prefs = {} --global prefs table
+xac_prefs.filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs.txt"
+xac_prefs.values = {} --storage for user pref data
+
+xac_prefs.load = function(filename)
+
+    --console.log("prefs.load()..")
+
+    local prefs_data = "--disk_read_failure" --Real value will be read from disk.
+
+    local prefs_path = filename
+
+    --read prefs data
+    local fh = io.open( prefs_path, "rb" )
+    if( fh )then
+        prefs_data = fh:read("*all")
+        fh:close()
+        fh = nil
+
+    else
+        logging.warning("xac_prefs.load(): No prefs file found!")
+        return
+    end
+
+
+
+
+    --import prefs data if read was good
+    if( prefs_data )then
+
+        local prefs_f,error = loadstring( prefs_data )
+        if( prefs_f )then
+
+            local blank_env = {}
+            setfenv( prefs_f, blank_env )
+            local new_prefs = prefs_f()
+
+            if( new_prefs )then
+                xac_prefs.values = new_prefs
+            end
+
+
+        else
+            logging.warning("xac corrupt prefs data: " .. error)
+            logging.debug(" xac prefs data size: " .. #prefs_data .. " bytes")
+            logging.debug(" xac prefs data raw:\n" .. tostring(prefs_data) )
+
+        end
+
+    end
+
+
+end --prefs.load()
+
+xac_prefs.save = function(filename)
+
+    --console.log("prefs.save()..")
+
+    local prefs_blob = "--Auto Generated Gizmo Preferences Data\nreturn" .. vardump_lua2(xac_prefs.values)
+    --console.log( prefs_blob )
+
+    local prefs_path = filename
+
+    --write prefs data
+    local fh = io.open( prefs_path, "wb" )
+    if( fh )then
+        --prefs_data = fh:read("*all")
+        fh:write( prefs_blob )
+        fh:close()
+        fh = nil
+
+        --logging.warning("prefs saved. (" .. prefs_path ..  ")")
+
+    else
+        error("xac_prefs.save(): Failed: (" .. prefs_path ..  ")")
+
+    end --check file handle is not nil
+
+end --prefs.save()
+
+xac_prefs.set = function( key, value )
+
+    --Check to see if we already have a prefs value for this item.
+    --If we do we will update it. If we do not we will create a new item.
+
+    if( xac_prefs.get(key, nil) == nil )then
+        --We could not find a prefs item for this key, create a new one.
+
+        local new_prefs_pair = {
+            name = key,
+            value = value
+        }
+        table.insert( xac_prefs.values, new_prefs_pair )
+
+    else
+        --Record already exists, locate and modify
+
+        for k,v in pairs( xac_prefs.values ) do
+            if( v )then
+                if( v.name == key )then
+                    --logging.debug("xac_prefs.set: " .. tostring(key) .. "  updated to: " .. tostring(v.value) )
+                    v.value = value --set the new value
+                    return
+                end
+            end
+
+        end
+
+    end
+
+end --xac_prefs.set
+
+xac_prefs.get = function( key, default )
+    if( xac_prefs.values )then
+
+        for k,v in pairs( xac_prefs.values ) do
+            --console.log(k)
+            --console.log(v)
+
+            if( v )then
+                if( v.name == key )then
+                    --console.log("xac_prefs.get: " .. tostring(key) .. "  return: " .. tostring(v.value) )
+                    return v.value
+                end
+            else
+                --blank value?
+                error("xac_prefs.get: found key: " .. tostring( key ) .. " but value is blank." )
+            end
+
+        end
+
+        --console.warn("prefs.get: no value found for: " .. tostring(key))
+        return default
+
+    else
+        error("xac_prefs.values == nil")
+        return default
+    end
+end --xac_prefs.get
+
+xac_prefs.debug = function()
+    logging.debug(( vardump_lua2(xac_prefs.values) ))
+end --prefs.debug
 
 -- ##################################Helper BEGIN##############################################
 
@@ -245,6 +390,142 @@ end
 
 -- ##################################Helper END##############################################
 
+function vardump_lua2(value, depth, key)
+
+    if( depth == nil )then
+        --console.log("fw vardump_lua v14.03.16.1747")
+    end
+
+
+    local linePrefix = ""
+    local spaces = ""
+
+    local ret_blob = ""
+
+
+    if key ~= nil then
+        linePrefix = ""
+        if( depth > 0 )then
+            linePrefix = key.." = "
+        end
+    end
+
+
+    if depth == nil then
+        depth = 0
+    else
+        depth = depth + 1
+        for i=1, depth-1 do
+            spaces = spaces .. " "
+        end
+    end
 
 
 
+
+
+    if type(value) == 'table' then
+
+        local mTable = getmetatable(value)
+        if mTable == nil then
+            if( depth > 0 )then
+                --b_print(spaces ..linePrefix.."{")
+                ret_blob = ret_blob .. (spaces ..linePrefix.."{") .. "\n"
+            end
+
+        else
+            --b_print(spaces .."{")
+            ret_blob = ret_blob .. (spaces .."{") .. "\n"
+            value = mTable
+        end
+
+        --recursion happens here.
+        for tableKey, tableValue in pairs(value) do
+            ret_blob = ret_blob .. vardump_lua2(tableValue, depth, tableKey)
+        end
+
+
+        if( depth > 1 )then
+            --comma on the end
+            ret_blob = ret_blob .. (spaces .."},") .. "\n"
+
+        elseif( depth > 0 )then
+            --NO comma on the end
+            ret_blob = ret_blob .. (spaces .."},") .. "\n"
+
+        end
+
+
+
+    elseif
+    type(value)	== 'function' or
+            type(value)	== 'thread' or
+            type(value)	== 'userdata' or
+            value		== nil
+    then
+
+        --b_print(spaces..tostring(value))
+        --do nothing
+
+
+
+    else
+
+        local d_type = type(value)
+        if( d_type ) == "string" then
+            --b_print(spaces..linePrefix.. "\"" .. tostring(value) .. "\"," )
+            ret_blob = ret_blob .. (spaces..linePrefix.. "\"" .. tostring(value) .. "\"" )
+
+            if( depth > 1 )then
+                ret_blob = ret_blob .. ","
+            end
+
+            ret_blob = ret_blob .. "\n"
+
+
+        elseif( d_type ) == "number" then
+            --b_print(spaces..linePrefix..tostring(value)..",")
+            ret_blob = ret_blob .. (spaces..linePrefix..tostring(value) )
+
+            if( depth > 1 )then
+                ret_blob = ret_blob .. ","
+            end
+
+            ret_blob = ret_blob .. "\n"
+
+
+            --this never runs - see code above that deals with tables and recursion.
+            --elseif( d_type ) == "table" then
+            --	b_print(spaces..linePrefix.."{"..tostring(value))
+
+        else
+            --booleans are rendered here.
+            --b_print(spaces..linePrefix..tostring(value)..",")
+            ret_blob = ret_blob .. (spaces..linePrefix..tostring(value) )
+
+            if( depth > 1 )then
+                ret_blob = ret_blob .. ","
+            end
+
+            --data type info
+            --ret_blob = ret_blob .. " --".. type(value)
+
+            ret_blob = ret_blob .. "\n"
+
+
+        end
+
+
+
+    end --end data type detect.
+
+
+    if( depth > 0 )then
+        return ret_blob
+    else
+        --parent wrapper, turns the entire blob into a nice easy to digest table.
+        return "{\n" .. ret_blob .. "}"
+    end
+
+
+end

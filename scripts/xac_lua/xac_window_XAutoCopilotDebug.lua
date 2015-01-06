@@ -35,7 +35,7 @@ function XAutoCopilotDebug_OnCreate()
     local widht = 200
     local hight = 160
     --XAutoCopilotDebug.help2_h 	= gui.newCustomWidget( XAutoCopilotDebug.gui_h, "XAutoCopilotDebug_help2", left, oben, widht, hight) --will resize instantly anyway
-    --gui.newButton(XAutoCopilotDebug.gui_h, "XAutoCopilotDebug_btnStart", "Debug", xac_left, xac_top + 125, xac_width - 30)
+    gui.newButton(XAutoCopilotDebug.gui_h, "XAutoCopilotDebug_btnStart", "Debug", xac_left, xac_top + 125, xac_width - 30)
 
 end
 
@@ -44,7 +44,7 @@ function XAutoCopilotDebug_OnBeforeClose()
 end
 
 function XAutoCopilotDebug_btnStart_OnClick()
-
+    xac_prefs.debug()
 end
 
 function XAutoCopilotDebug_helpIcon_OnDraw()
@@ -75,7 +75,7 @@ end
 
 ToolXAutoCopilotDebug = {
     active = true,
-    texture = gfx.loadPng(acf.getFolder() .. "scripts/xac_lua/icons/Flight.png"),
+    texture = gfx.loadPng(gizmo.getFolder() .. "firmware/icons/" .. tostring( "nuclear.png" )),
     name = "XAutoCopilotDebug",
     run = function(self)
         if (XAutoCopilotDebug) then

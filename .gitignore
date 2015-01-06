@@ -221,3 +221,6 @@ pip-log.txt
 .idea
 >>>>>>> a913e2fd09223a1317e197959ed8e2b0ee879514
 *.iml
+
+#project
+xac_prefs.txt

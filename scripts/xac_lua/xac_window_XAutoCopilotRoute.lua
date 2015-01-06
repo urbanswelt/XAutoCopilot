@@ -43,21 +43,34 @@ function XAutoCopilotRoute_OnCreate()
     local top = 30
     local width = 60
 
-    -- right side
-    XAutoCopilotRoute.corte = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "KMMHKSFO", left, top, width)
-    XAutoCopilotRoute.fltnbr = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "KOM1234", left, top + 15, width)
-    XAutoCopilotRoute.coi = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "99", left, top + 30, width)
-    XAutoCopilotRoute.crzfl = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "200", left, top + 45, width)
+    local corte = xac_prefs.get("XAutoCopilotRoute.corte","KMMHKSFO")
+    local fltnbr = xac_prefs.get("XAutoCopilotRoute.fltnbr","KOM1234")
+    local coi = xac_prefs.get("XAutoCopilotRoute.coi","99")
+    local crzfl = xac_prefs.get("XAutoCopilotRoute.crzfl","200")
 
-    XAutoCopilotRoute.fuel_taxi = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "0.2", left, top + 70, width)
-    XAutoCopilotRoute.fuel_reserve = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "5.00", left, top + 85, width)
-    XAutoCopilotRoute.fuel_final_h = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "00", left, top + 100, width - 30)
-    XAutoCopilotRoute.fuel_final_m = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "30", left + 30, top + 100, width - 30)
-    XAutoCopilotRoute.fuel_extra_h = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "00", left, top + 115, width - 30)
-    XAutoCopilotRoute.fuel_extra_m = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", "00", left + 30, top + 115, width - 30)
+    -- right side
+    XAutoCopilotRoute.corte = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", corte, left, top, width)
+    XAutoCopilotRoute.fltnbr = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", fltnbr, left, top + 15, width)
+    XAutoCopilotRoute.coi = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", coi, left, top + 30, width)
+    XAutoCopilotRoute.crzfl = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", crzfl, left, top + 45, width)
+
+    local fuel_taxi = xac_prefs.get("XAutoCopilotRoute.fuel_taxi","0.2")
+    local fuel_reserve = xac_prefs.get("XAutoCopilotRoute.fuel_reserve","5.00")
+    local fuel_final_h = xac_prefs.get("XAutoCopilotRoute.fuel_final_h","00")
+    local fuel_final_m = xac_prefs.get("XAutoCopilotRoute.fuel_final_m","30")
+    local fuel_extra_h = xac_prefs.get("XAutoCopilotRoute.fuel_extra_h","00")
+    local fuel_extra_m = xac_prefs.get("XAutoCopilotRoute.fuel_extra_m","00")
+
+    XAutoCopilotRoute.fuel_taxi = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", fuel_taxi, left, top + 70, width)
+    XAutoCopilotRoute.fuel_reserve = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", fuel_reserve, left, top + 85, width)
+    XAutoCopilotRoute.fuel_final_h = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", fuel_final_h, left, top + 100, width - 30)
+    XAutoCopilotRoute.fuel_final_m = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", fuel_final_m, left + 30, top + 100, width - 30)
+    XAutoCopilotRoute.fuel_extra_h = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", fuel_extra_h, left, top + 115, width - 30)
+    XAutoCopilotRoute.fuel_extra_m = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", fuel_extra_m, left + 30, top + 115, width - 30)
 
     -- help icon
     XAutoCopilotRoute.helpIcon_h 	= gui.newCustomWidget( XAutoCopilotRoute.gui_h, "XAutoCopilotRoute_helpIcon", XAutoCopilotRoute.w-20, 20, 17, 17)
+    XAutoCopilotRoute.diskIcon_h 	= gui.newCustomWidget( XAutoCopilotRoute.gui_h, "XAutoCopilotRoute_diskIcon", XAutoCopilotRoute.w-40, 20, 17, 17)
 end
 
 function XAutoCopilotRoute_helpIcon_OnDraw()
@@ -67,12 +80,20 @@ function XAutoCopilotRoute_helpIcon_OnDraw()
     gfx.setColor(color.white)
     gfx.useTexture(icons.get(icon_file))
     gfx.drawTexturedQuad( 0,0, 16, 16 )
+end
 
+function XAutoCopilotRoute_diskIcon_OnDraw()
+    --icon
+    local icon_file = "disk.png"
+    gfx.texOn()
+    gfx.setColor(color.white)
+    gfx.useTexture(icons.get(icon_file))
+    gfx.drawTexturedQuad( 0,0, 16, 16 )
 end
 
 function XAutoCopilotRoute_helpIcon_OnMouseDown ()
     --message
-    local left = 2
+    --[[local left = 2
     local top = 20
     local width = 50
 
@@ -88,11 +109,27 @@ function XAutoCopilotRoute_helpIcon_OnMouseDown ()
         gui.newLabel(XAutoCopilotDebug.gui_h, "ignored", lines[i], left, top, width);top = top + 15
     end
 
-    gui.showWindow(XAutoCopilotDebug.gui_h)
+    gui.showWindow(XAutoCopilotDebug.gui_h)]]
+
+    toast.newInfo("Debug Info", "This Window is only for testing\nHave a nice day!")
  end
 
+function XAutoCopilotRoute_diskIcon_OnMouseDown ()
+    local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs.txt"
+    xac_prefs.set( "XAutoCopilotRoute.corte", gui.getWidgetValue(XAutoCopilotRoute.corte) )
+    xac_prefs.set( "XAutoCopilotRoute.fltnbr", gui.getWidgetValue(XAutoCopilotRoute.fltnbr) )
+    xac_prefs.set( "XAutoCopilotRoute.coi", gui.getWidgetValue(XAutoCopilotRoute.coi) )
+    xac_prefs.set( "XAutoCopilotRoute.crzfl", gui.getWidgetValue(XAutoCopilotRoute.crzfl) )
 
+    xac_prefs.set( "XAutoCopilotRoute.fuel_taxi", gui.getWidgetValue(XAutoCopilotRoute.fuel_taxi) )
+    xac_prefs.set( "XAutoCopilotRoute.fuel_reserve", gui.getWidgetValue(XAutoCopilotRoute.fuel_reserve) )
+    xac_prefs.set( "XAutoCopilotRoute.fuel_final_h", gui.getWidgetValue(XAutoCopilotRoute.fuel_final_h) )
+    xac_prefs.set( "XAutoCopilotRoute.fuel_final_m", gui.getWidgetValue(XAutoCopilotRoute.fuel_final_m) )
+    xac_prefs.set( "XAutoCopilotRoute.fuel_extra_h", gui.getWidgetValue(XAutoCopilotRoute.fuel_extra_h) )
+    xac_prefs.set( "XAutoCopilotRoute.fuel_extra_m", gui.getWidgetValue(XAutoCopilotRoute.fuel_extra_m) )
 
+    xac_prefs.save(filename)
+end
 
 function XAutoCopilotRoute_btnStart_OnClick()
     dref.setInt(xac_route_crzflinft, gui.getWidgetValue(XAutoCopilotRoute.crzfl) * 100)

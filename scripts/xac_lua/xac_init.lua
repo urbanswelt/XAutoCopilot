@@ -45,3 +45,7 @@ logging.debug("loaded NewFeature_api..")
 --temp extensions
 --dofile("xac_lua/tmp/FMCExplorer.lua")
 --logging.debug("loaded temp extensions..")
+
+-- load preferences if exist
+local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs.txt"
+xac_prefs.load(filename)
