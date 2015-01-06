@@ -30,7 +30,8 @@ function XAutoCopilotUpdater_OnCreate()
     local xac_width = 100
 
 
-    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnStart", "Update", xac_left, xac_top + 125, xac_width - 30)
+    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnStart", "Update", xac_left, xac_top + 125, xac_width - 50)
+    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotReboot_btnStart", "Reboot", xac_left + 120, xac_top + 125, xac_width - 50)
 
     -- help icon
     XAutoCopilotUpdater.helpIcon_h 	= gui.newCustomWidget( XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_helpIcon", XAutoCopilotUpdater.w-20, 20, 17, 17)
@@ -124,8 +125,12 @@ function XAutoCopilotUpdater_btnStart_OnClick()
     --http_updater_save(filename,data)
 
     if xac_new_updater == 1 then
-
+        xac_update_updater ()
     end
+end
+
+function XAutoCopilotReboot_btnStart_OnClick()
+    gizmo.reboot()
 end
 
 function xac_update_updater ()
