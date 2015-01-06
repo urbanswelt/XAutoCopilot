@@ -45,22 +45,39 @@ end
 
 function XAutoCopilotDebug_btnStart_OnClick()
     --local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/xac_init.lua'
-    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/updater_version.txt'
-    http.get( url, 'http_updater_get' )
+
 end
 
 -- set Version for updater
 xac_updater_version = 201506012053
 xac_version = 201506012053
 
-function http_updater_get( data, url, size )
-    local data = data
+function xac_updater_check ()
+    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/xac_updater_version'
+    http.get( url, 'http_updater_check' )
+end
+
+function http_updater_check( data, url, size )
+    local data = tonumber(data)
     if data > xac_updater_version then
         toast.newInfo("UPDATER", "A new Updater is available")
     end
 
     --local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs2.txt"
     --httpupdater.save(filename,data)
+end
+
+
+function xac_update_check ()
+    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/xac_version'
+    http.get( url, 'http_update_check' )
+end
+
+function http_update_check( data, url, size )
+    local data = tonumber(data)
+    if data > xac_updater_version then
+        toast.newInfo("UPDATE", "A new Update for XAC is available")
+    end
 end
 
 
