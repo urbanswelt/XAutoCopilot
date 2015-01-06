@@ -45,12 +45,24 @@ function XAutoCopilotBriefingApproach_OnCreate()
     local top = 30
     local width = 60
 
+    local desctalt = xac_prefs.get("XAutoCopilotBriefingApproach.desctalt","3000")
+    local transition = xac_prefs.get("XAutoCopilotBriefingApproach.transition","18000")
+    local goaround = xac_prefs.get("XAutoCopilotBriefingApproach.goaround","5000")
+    local mda = xac_prefs.get("XAutoCopilotBriefingApproach.mda","460")
+    local dh = xac_prefs.get("XAutoCopilotBriefingApproach.dh","213")
+
+    local temperature = xac_prefs.get("XAutoCopilotBriefingApproach.temperature","22")
+    local mag = xac_prefs.get("XAutoCopilotBriefingApproach.mag","300")
+    local wind = xac_prefs.get("XAutoCopilotBriefingApproach.wind","7")
+    local tower = xac_prefs.get("XAutoCopilotBriefingApproach.tower","122.00")
+    local station = xac_prefs.get("XAutoCopilotBriefingApproach.station","122.00")
+
     -- left side
-    XAutoCopilotBriefingApproach.desctalt = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", "3000", left, top, width)
-    XAutoCopilotBriefingApproach.transition = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", "18000", left, top + 15, width)
-    XAutoCopilotBriefingApproach.goaround = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", "5000", left, top + 30, width)
-    XAutoCopilotBriefingApproach.mda = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", "460", left, top + 45, width - 30)
-    XAutoCopilotBriefingApproach.dh = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", "213", left + 30, top + 45, width - 30)
+    XAutoCopilotBriefingApproach.desctalt = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", desctalt, left, top, width)
+    XAutoCopilotBriefingApproach.transition = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", transition, left, top + 15, width)
+    XAutoCopilotBriefingApproach.goaround = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", goaround, left, top + 30, width)
+    XAutoCopilotBriefingApproach.mda = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", mda, left, top + 45, width - 30)
+    XAutoCopilotBriefingApproach.dh = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", dh, left + 30, top + 45, width - 30)
 
     XAutoCopilotBriefingApproach.conf3 = gui.newLabel(XAutoCopilotBriefingApproach.gui_h, "ignored", "CONF3", left + 20, top + 60, width)
     XAutoCopilotBriefingApproach.conf4 = gui.newLabel(XAutoCopilotBriefingApproach.gui_h, "ignored", "FULL", left + 20, top + 60, width)
@@ -58,18 +70,62 @@ function XAutoCopilotBriefingApproach_OnCreate()
     XAutoCopilotBriefingApproach.land_conf = gui.newCheckbox(XAutoCopilotBriefingApproach.gui_h, "XAutoCopilotBriefingApproach_chkLandconf", "", left, top + 60, width - 30)
 
     XAutoCopilotBriefingApproach.qnh_inHg = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", string.sub(dref.getFloat(xac_barometer_sealevel_inhg), 1, 5), left, top + 85, width)
-    XAutoCopilotBriefingApproach.temperature = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", "22", left, top + 100, width)
-    XAutoCopilotBriefingApproach.mag = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", "300", left, top + 115, width - 30)
-    XAutoCopilotBriefingApproach.wind = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", "7", left + 30, top + 115, width - 30)
-    XAutoCopilotBriefingApproach.tower = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", "122.00", left, top + 130, width)
-    XAutoCopilotBriefingApproach.station = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", "122.00", left, top + 145, width)
+    XAutoCopilotBriefingApproach.temperature = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", temperature, left, top + 100, width)
+    XAutoCopilotBriefingApproach.mag = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", mag, left, top + 115, width - 30)
+    XAutoCopilotBriefingApproach.wind = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", wind, left + 30, top + 115, width - 30)
+    XAutoCopilotBriefingApproach.tower = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", tower, left, top + 130, width)
+    XAutoCopilotBriefingApproach.station = gui.newTextBox(XAutoCopilotBriefingApproach.gui_h, "ignored", station, left, top + 145, width)
 
     gui.newButton(XAutoCopilotBriefingApproach.gui_h, "XAutoCopilotBriefingApproach_btnStart", "Confirmed", left, top + 165, width)
+
+    -- help + save icon
+    XAutoCopilotBriefingApproach.helpIcon_h 	= gui.newCustomWidget( XAutoCopilotBriefingApproach.gui_h, "XAutoCopilotBriefingApproach_helpIcon", XAutoCopilotBriefingApproach.w-20, 20, 17, 17)
+    XAutoCopilotBriefingApproach.diskIcon_h 	= gui.newCustomWidget( XAutoCopilotBriefingApproach.gui_h, "XAutoCopilotBriefingApproach_diskIcon", XAutoCopilotBriefingApproach.w-40, 20, 17, 17)
 
     gui.hideWidget(XAutoCopilotBriefingApproach.catI)
     gui.hideWidget(XAutoCopilotBriefingApproach.catII)
     gui.hideWidget(XAutoCopilotBriefingApproach.conf3)
     gui.hideWidget(XAutoCopilotBriefingApproach.conf4)
+end
+
+function XAutoCopilotBriefingApproach_helpIcon_OnDraw()
+    --icon
+    local icon_file = "help.png"
+    gfx.texOn()
+    gfx.setColor(color.white)
+    gfx.useTexture(icons.get(icon_file))
+    gfx.drawTexturedQuad( 0,0, 16, 16 )
+end
+
+function XAutoCopilotBriefingApproach_diskIcon_OnDraw()
+    --icon
+    local icon_file = "disk.png"
+    gfx.texOn()
+    gfx.setColor(color.white)
+    gfx.useTexture(icons.get(icon_file))
+    gfx.drawTexturedQuad( 0,0, 16, 16 )
+end
+
+function XAutoCopilotBriefingApproach_helpIcon_OnMouseDown ()
+    --message
+    toast.newInfo("Approach Window Info", "This Window is only for testing\nHave a nice day!")
+end
+
+function XAutoCopilotBriefingApproach_diskIcon_OnMouseDown ()
+    local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs.txt"
+
+    xac_prefs.set( "XAutoCopilotBriefingApproach.desctalt", gui.getWidgetValue(XAutoCopilotBriefingApproach.desctalt) )
+    xac_prefs.set( "XAutoCopilotBriefingApproach.transition", gui.getWidgetValue(XAutoCopilotBriefingApproach.transition) )
+    xac_prefs.set( "XAutoCopilotBriefingApproach.goaround", gui.getWidgetValue(XAutoCopilotBriefingApproach.goaround) )
+    xac_prefs.set( "XAutoCopilotBriefingApproach.mda", gui.getWidgetValue(XAutoCopilotBriefingApproach.mda) )
+    xac_prefs.set( "XAutoCopilotBriefingApproach.dh", gui.getWidgetValue(XAutoCopilotBriefingApproach.dh) )
+    xac_prefs.set( "XAutoCopilotBriefingApproach.temperature", gui.getWidgetValue(XAutoCopilotBriefingApproach.temperature) )
+    xac_prefs.set( "XAutoCopilotBriefingApproach.mag", gui.getWidgetValue(XAutoCopilotBriefingApproach.mag) )
+    xac_prefs.set( "XAutoCopilotBriefingApproach.wind", gui.getWidgetValue(XAutoCopilotBriefingApproach.wind) )
+    xac_prefs.set( "XAutoCopilotBriefingApproach.tower", gui.getWidgetValue(XAutoCopilotBriefingApproach.tower) )
+    xac_prefs.set( "XAutoCopilotBriefingApproach.station", gui.getWidgetValue(XAutoCopilotBriefingApproach.station) )
+
+    xac_prefs.save(filename)
 end
 
 function XAutoCopilotBriefingApproach_chkCat_OnClick()
@@ -105,7 +161,6 @@ function XAutoCopilotBriefingApproach_chkLandconf_OnClick()
         gui.showWidget(XAutoCopilotBriefingApproach.conf3)
     end
 end
-
 
 function XAutoCopilotBriefingApproach_btnStart_OnClick()
     dref.setInt(xac_click_perf, 1)

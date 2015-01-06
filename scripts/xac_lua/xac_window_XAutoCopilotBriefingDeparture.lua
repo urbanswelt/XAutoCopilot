@@ -39,18 +39,68 @@ function XAutoCopilotBriefingDeparture_OnCreate()
     local top = 30
     local width = 60
 
+    local initalt = xac_prefs.get("XAutoCopilotBriefingDeparture.initalt","9000")
+    local transition = xac_prefs.get("XAutoCopilotBriefingDeparture.transition","18000")
+    local flaps = xac_prefs.get("XAutoCopilotBriefingDeparture.flaps","2/UP2.0")
+    local flex = xac_prefs.get("XAutoCopilotBriefingDeparture.flex","F50")
+
+    local squawk = xac_prefs.get("XAutoCopilotBriefingDeparture.squawk","2000")
+    local tower = xac_prefs.get("XAutoCopilotBriefingDeparture.tower","122.00")
+    local station = xac_prefs.get("XAutoCopilotBriefingDeparture.station","122.00")
+
     -- left side
-    XAutoCopilotBriefingDeparture.initalt = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "9000", left, top, width)
-    XAutoCopilotBriefingDeparture.transition = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "18000", left, top + 15, width)
-    XAutoCopilotBriefingDeparture.flaps = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "2/UP2.0", left, top + 30, width)
-    XAutoCopilotBriefingDeparture.flex = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "F50", left, top + 45, width)
+    XAutoCopilotBriefingDeparture.initalt = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", initalt, left, top, width)
+    XAutoCopilotBriefingDeparture.transition = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", transition, left, top + 15, width)
+    XAutoCopilotBriefingDeparture.flaps = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", flaps, left, top + 30, width)
+    XAutoCopilotBriefingDeparture.flex = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", flex, left, top + 45, width)
 
     XAutoCopilotBriefingDeparture.qnh_inHg = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", string.sub(dref.getFloat(xac_barometer_sealevel_inhg), 1, 5), left, top + 70, width)
-    XAutoCopilotBriefingDeparture.squawk = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "2000", left, top + 85, width)
-    XAutoCopilotBriefingDeparture.tower = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "122.00", left, top + 100, width)
-    XAutoCopilotBriefingDeparture.station = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", "122.00", left, top + 115, width)
+    XAutoCopilotBriefingDeparture.squawk = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", squawk, left, top + 85, width)
+    XAutoCopilotBriefingDeparture.tower = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", tower, left, top + 100, width)
+    XAutoCopilotBriefingDeparture.station = gui.newTextBox(XAutoCopilotBriefingDeparture.gui_h, "ignored", station, left, top + 115, width)
 
     gui.newButton(XAutoCopilotBriefingDeparture.gui_h, "XAutoCopilotBriefingDeparture_btnStart", "Confirmed", left, top + 135, width)
+
+    -- help + save icon
+    XAutoCopilotBriefingDeparture.helpIcon_h 	= gui.newCustomWidget( XAutoCopilotBriefingDeparture.gui_h, "XAutoCopilotBriefingDeparture_helpIcon", XAutoCopilotBriefingDeparture.w-20, 20, 17, 17)
+    XAutoCopilotBriefingDeparture.diskIcon_h 	= gui.newCustomWidget( XAutoCopilotBriefingDeparture.gui_h, "XAutoCopilotBriefingDeparture_diskIcon", XAutoCopilotBriefingDeparture.w-40, 20, 17, 17)
+end
+
+function XAutoCopilotBriefingDeparture_helpIcon_OnDraw()
+    --icon
+    local icon_file = "help.png"
+    gfx.texOn()
+    gfx.setColor(color.white)
+    gfx.useTexture(icons.get(icon_file))
+    gfx.drawTexturedQuad( 0,0, 16, 16 )
+end
+
+function XAutoCopilotBriefingDeparture_diskIcon_OnDraw()
+    --icon
+    local icon_file = "disk.png"
+    gfx.texOn()
+    gfx.setColor(color.white)
+    gfx.useTexture(icons.get(icon_file))
+    gfx.drawTexturedQuad( 0,0, 16, 16 )
+end
+
+function XAutoCopilotBriefingDeparture_helpIcon_OnMouseDown ()
+    --message
+    toast.newInfo("Departure Window Info", "This Window is only for testing\nHave a nice day!")
+end
+
+function XAutoCopilotBriefingDeparture_diskIcon_OnMouseDown ()
+    local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs.txt"
+
+    xac_prefs.set( "XAutoCopilotBriefingDeparture.initalt", gui.getWidgetValue(XAutoCopilotBriefingDeparture.initalt) )
+    xac_prefs.set( "XAutoCopilotBriefingDeparture.transition", gui.getWidgetValue(XAutoCopilotBriefingDeparture.transition) )
+    xac_prefs.set( "XAutoCopilotBriefingDeparture.flaps", gui.getWidgetValue(XAutoCopilotBriefingDeparture.flaps) )
+    xac_prefs.set( "XAutoCopilotBriefingDeparture.flex", gui.getWidgetValue(XAutoCopilotBriefingDeparture.flex) )
+    xac_prefs.set( "XAutoCopilotBriefingDeparture.squawk", gui.getWidgetValue(XAutoCopilotBriefingDeparture.squawk) )
+    xac_prefs.set( "XAutoCopilotBriefingDeparture.tower", gui.getWidgetValue(XAutoCopilotBriefingDeparture.tower) )
+    xac_prefs.set( "XAutoCopilotBriefingDeparture.station", gui.getWidgetValue(XAutoCopilotBriefingDeparture.station) )
+
+    xac_prefs.save(filename)
 end
 
 function XAutoCopilotBriefingDeparture_btnStart_OnClick()

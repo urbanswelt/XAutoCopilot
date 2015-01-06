@@ -68,7 +68,7 @@ function XAutoCopilotRoute_OnCreate()
     XAutoCopilotRoute.fuel_extra_h = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", fuel_extra_h, left, top + 115, width - 30)
     XAutoCopilotRoute.fuel_extra_m = gui.newTextBox(XAutoCopilotRoute.gui_h, "ignored", fuel_extra_m, left + 30, top + 115, width - 30)
 
-    -- help icon
+    -- help + save icon
     XAutoCopilotRoute.helpIcon_h 	= gui.newCustomWidget( XAutoCopilotRoute.gui_h, "XAutoCopilotRoute_helpIcon", XAutoCopilotRoute.w-20, 20, 17, 17)
     XAutoCopilotRoute.diskIcon_h 	= gui.newCustomWidget( XAutoCopilotRoute.gui_h, "XAutoCopilotRoute_diskIcon", XAutoCopilotRoute.w-40, 20, 17, 17)
 end
@@ -111,11 +111,12 @@ function XAutoCopilotRoute_helpIcon_OnMouseDown ()
 
     gui.showWindow(XAutoCopilotDebug.gui_h)]]
 
-    toast.newInfo("Debug Info", "This Window is only for testing\nHave a nice day!")
+    toast.newInfo("Route Window Info", "This Window is only for testing\nHave a nice day!")
  end
 
 function XAutoCopilotRoute_diskIcon_OnMouseDown ()
     local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs.txt"
+
     xac_prefs.set( "XAutoCopilotRoute.corte", gui.getWidgetValue(XAutoCopilotRoute.corte) )
     xac_prefs.set( "XAutoCopilotRoute.fltnbr", gui.getWidgetValue(XAutoCopilotRoute.fltnbr) )
     xac_prefs.set( "XAutoCopilotRoute.coi", gui.getWidgetValue(XAutoCopilotRoute.coi) )
