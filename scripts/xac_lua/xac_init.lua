@@ -5,6 +5,10 @@
 -- Time: 19:24
 --
 
+-- set Version for updates
+xac_updater_version = 201506012043
+xac_version = 201506012053
+
 dofile("xac_lua/xac_datarefs.lua")
 logging.debug("loaded xac_datarefs..")
 
@@ -26,11 +30,11 @@ logging.debug("loaded xac_window_XAutoCopilotBriefingApproach..")
 dofile("xac_lua/xac_window_XAutoCopilotFlightInfo.lua")
 logging.debug("loaded xac_window_XAutoCopilotFlightInfo..")
 
---dofile("xac_lua/xac_window_XAutoCopilotUpdater.lua")
---logging.debug("loaded xac_window_XAutoCopilotUpdater..")
+dofile("xac_lua/xac_window_XAutoCopilotUpdater.lua")
+logging.debug("loaded xac_window_XAutoCopilotUpdater..")
 
-dofile("xac_lua/xac_window_XAutoCopilotDebug.lua")
-logging.debug("loaded xac_window_XAutoCopilotDebug..")
+--dofile("xac_lua/xac_window_XAutoCopilotDebug.lua")
+--logging.debug("loaded xac_window_XAutoCopilotDebug..")
 
 -- Dataref in DRE w/o edit the xplane dataref.txt / activate only for testing !(longer loadtime)
 --dofile("xac_lua/xac_publish_dataref.lua")

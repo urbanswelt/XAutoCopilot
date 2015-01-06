@@ -29,14 +29,85 @@ function XAutoCopilotUpdater_OnCreate()
     local xac_width = 100
 
 
-    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnStart", "Debug", xac_left, xac_top + 125, xac_width - 30)
+    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnStart", "Update", xac_left, xac_top + 125, xac_width - 30)
+
+    -- help icon
+    XAutoCopilotUpdater.helpIcon_h 	= gui.newCustomWidget( XAutoCopilotUpdater.gui_h, "XAutoCopilotDebug_helpIcon", XAutoCopilotUpdater.w-20, 20, 17, 17)
+end
+
+function XAutoCopilotUpdater_helpIcon_OnDraw()
+    --icon
+    local icon_file = "help.png"
+    gfx.texOn()
+    gfx.setColor(color.white)
+    gfx.useTexture(icons.get(icon_file))
+    gfx.drawTexturedQuad( 0,0, 16, 16 )
+
+end
+
+function XAutoCopilotUpdater_helpIcon_OnMouseDown ()
+    --toast.test()
+    toast.newInfo("Updater", "This Window is only for testing\nHave a nice day!")
+end
+
+local tmr_oneshot = timer.newOneShot( "check_for_updates", 20.0 )
+
+function check_for_updates()
+    xac_updater_check ()
+    xac_update_check ()
 end
 
 
+function xac_updater_check ()
+    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/xac_updater_version'
+    http.get( url, 'http_updater_check' )
+end
+
+function http_updater_check( data, url, size )
+    local data = tonumber(data)
+    if data > xac_updater_version then
+        toast.newInfo("UPDATER", "A new Updater is available")
+    end
+end
+
+
+function xac_update_check ()
+    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/xac_version'
+    http.get( url, 'http_update_check' )
+end
+
+function http_update_check( data, url, size )
+    local data = tonumber(data)
+    if data > xac_version then
+        toast.newInfo("UPDATE", "A new Update for XAC is available")
+    end
+end
+
+
+http_updater_save = function(filename,data)
+
+    local data_blob = data
+    local data_path = filename
+
+    --write data
+    local fh = io.open( data_path, "wb" )
+    if( fh )then
+        fh:write( data_blob )
+        fh:close()
+        fh = nil
+
+    else
+        error("http_updater_save(): Failed: (" .. data_path ..  ")")
+
+    end --check file handle is not nil
+
+end --http_updater.save()
 
 
 function XAutoCopilotUpdater_btnStart_OnClick()
-	toast.newError("Bugi", "What is wronge here Ben ?")
+    --local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/xac_init.lua'
+    --local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs2.txt"
+    --http_updater_save(filename,data)
 end
 
 function XAutoCopilotUpdater_OnUpdate()
@@ -46,7 +117,7 @@ end
 
 ToolXAutoCopilotUpdater = {
     active = true,
-    texture = gfx.loadPng(acf.getFolder() .. "scripts/xac_lua/icons/Flight.png"),
+    texture = gfx.loadPng(gizmo.getFolder() .. "firmware/icons/" .. tostring( "ipod_cast.png" )),
     name = "XAutoCopilotUpdater",
     run = function(self)
         if (XAutoCopilotUpdater) then
