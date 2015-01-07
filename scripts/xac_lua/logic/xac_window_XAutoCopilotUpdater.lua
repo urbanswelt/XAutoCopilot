@@ -118,7 +118,10 @@ function Network_Error()
 end
 
 function XAutoCopilotUpdater_btnCheck_OnClick()
-    check_for_updates()
+    --check_for_updates()
+    logging.debug(xac_update.url)
+    logging.debug(xac_update.finish)
+    --logging.debug(fruittable.banana)
 end
 
 function XAutoCopilotUpdater_btnUpdate_OnClick()
@@ -132,25 +135,43 @@ end
 function xac_update_updater ()
     local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua'
     http.get( url, 'http_update_updater' )
+
 end
+
+
+xac_update = {}
 
 function http_update_updater( data, url, size )
     local data = data
+    local url = url
+    local size = size
+    local finish = 1
+
     --logging.debug(data)
-    local filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua"
+    --local filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua"
 
     if (data) then
-        http_update_save(filename,data)
+        --http_update_save(filename,data)
+        xac_update.data = data
+        xac_update.url = url
+        xac_update.size = size
+        xac_update.finish = finish
     else
         Network_Error()
     end
 end
 
 
+
+
 function XAutoCopilotUpdater_OnUpdate()
 
+if xac_update.finish == 1 then
+    sound.say("finish")
+    xac_update.finish = 0
 end
 
+end
 
 ToolXAutoCopilotUpdater = {
     active = true,
