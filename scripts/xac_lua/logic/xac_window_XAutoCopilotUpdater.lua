@@ -133,7 +133,7 @@ function XAutoCopilotUpdater_btnReboot_OnClick()
 end
 
 function xac_update_updater ()
-    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua'
+    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/testdownload'
     http.get( url, 'http_update_updater' )
 
 end
