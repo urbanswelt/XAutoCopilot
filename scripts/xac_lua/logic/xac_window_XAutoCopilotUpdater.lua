@@ -59,17 +59,17 @@ function check_for_updates()
     xac_update_check ()
 end
 
-
 function xac_updater_check ()
     local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/version_updater'
     http.get( url, 'http_updater_check' )
 end
 
 function http_updater_check( data, url, size )
+    local size = size
     local data = tonumber(data)
     if (data) then
         if data > xac_updater_version then
-            toast.newInfo("UPDATER", "A new Updater is available")
+            toast.newInfo("UPDATER", "A new Updater is available" size)
             xac_new_updater = 1
         end
     else
@@ -96,7 +96,7 @@ function http_update_check( data, url, size )
 end
 
 
-http_updater_save = function(filename,data)
+http_update_save = function(filename,data)
 
     local data_blob = data
     local data_path = filename
@@ -120,10 +120,6 @@ function Network_Error()
 end
 
 function XAutoCopilotUpdater_btnStart_OnClick()
-    --local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/xac_init.lua'
-    --local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs2.txt"
-    --http_updater_save(filename,data)
-
     if xac_new_updater == 1 then
         xac_update_updater ()
     end
@@ -144,7 +140,7 @@ function http_update_updater( data, url, size )
     local filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua"
 
     if (data) then
-        http_updater_save(filename,data)
+        http_update_save(filename,data)
     else
         Network_Error()
     end
