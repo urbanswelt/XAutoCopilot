@@ -65,11 +65,10 @@ function xac_updater_check ()
 end
 
 function http_updater_check( data, url, size )
-    local size = size
     local data = tonumber(data)
     if (data) then
         if data > xac_updater_version then
-            toast.newInfo("UPDATER", "A new Updater is available" size)
+            toast.newInfo("UPDATER", "A new Updater is available")
             xac_new_updater = 1
         end
     else
