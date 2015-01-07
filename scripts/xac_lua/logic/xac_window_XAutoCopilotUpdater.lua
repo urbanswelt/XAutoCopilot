@@ -30,8 +30,9 @@ function XAutoCopilotUpdater_OnCreate()
     local xac_width = 100
 
 
-    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnStart", "Update", xac_left, xac_top + 125, xac_width - 50)
-    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotReboot_btnStart", "Reboot", xac_left + 120, xac_top + 125, xac_width - 50)
+    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnCheck", "Check", xac_left, xac_top + 125, xac_width - 50)
+    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnUpdate", "Update", xac_left + 60, xac_top + 125, xac_width - 50)
+    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnReboot", "Reboot", xac_left + 120, xac_top + 125, xac_width - 50)
 
     -- help icon
     XAutoCopilotUpdater.helpIcon_h 	= gui.newCustomWidget( XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_helpIcon", XAutoCopilotUpdater.w-20, 20, 17, 17)
@@ -76,7 +77,6 @@ function http_updater_check( data, url, size )
     end
 end
 
-
 function xac_update_check ()
     local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/version'
     http.get( url, 'http_update_check' )
@@ -93,7 +93,6 @@ function http_update_check( data, url, size )
         Network_Error()
     end
 end
-
 
 http_update_save = function(filename,data)
 
@@ -118,13 +117,15 @@ function Network_Error()
     toast.newError("Network", "Network Error")
 end
 
-function XAutoCopilotUpdater_btnStart_OnClick()
-    if xac_new_updater == 1 then
-        xac_update_updater ()
-    end
+function XAutoCopilotUpdater_btnCheck_OnClick()
+    check_for_updates()
 end
 
-function XAutoCopilotReboot_btnStart_OnClick()
+function XAutoCopilotUpdater_btnUpdate_OnClick()
+    xac_update_updater ()
+end
+
+function XAutoCopilotUpdater_btnReboot_OnClick()
     gizmo.reboot()
 end
 
