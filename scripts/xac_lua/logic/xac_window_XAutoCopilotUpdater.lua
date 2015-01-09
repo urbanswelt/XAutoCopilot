@@ -163,7 +163,7 @@ end
 function XAutoCopilotUpdater_btnReboot_OnClick()
     --gizmo.reboot()
     local filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua"
-    local file = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua"
+    local filetosave = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater2.lua"
     --http_update_save(filename,data)
 
     local fh = io.open( filename, "r" )
@@ -180,10 +180,12 @@ function XAutoCopilotUpdater_btnReboot_OnClick()
     logging.debug(xac_update.updater.size .." remote")
     logging.debug(somewhat .." fsize")
 
+    http_update_save(filetosave,xac_update.updater.data)
+
 end
 
 function fsize (file)
-    local file = io.open( file, "r" )
+    local file = assert(io.open( file, "r" ))
     local current = file:seek()      -- get current position
     local size = file:seek("end")    -- get file size
     file:seek("set", current)        -- restore position
