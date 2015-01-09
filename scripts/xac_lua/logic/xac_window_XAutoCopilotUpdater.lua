@@ -10,7 +10,7 @@ xac_updater_version = 201506012350
 
 xac_update = {}
 --updater script
-xac_update.updater = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua", data = "", size = "", status = "0" }
+xac_update.updater = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua", data = "", size = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua" }
 
 --xac root script`s
 xac_update.init = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/xac_init.lua", data = "", size = "", status = "0" }
@@ -151,24 +151,16 @@ end
 
 function XAutoCopilotUpdater_btnCheck_OnClick()
     check_for_updates()
-end
-
-function XAutoCopilotUpdater_btnUpdate_OnClick()
     xac_trigger_update()
 end
 
-function XAutoCopilotUpdater_btnReboot_OnClick()
-    --gizmo.reboot()
-    local filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua"
-    local filetosave = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua"
+function XAutoCopilotUpdater_btnUpdate_OnClick()
     --http_update_save(filename,data)
+    http_update_save(xac_update.updater.filename, xac_update.updater.data)
+end
 
-
-    local somewhat = fsize(filename)
-    logging.debug(xac_update.updater.size .. " remote")
-    logging.debug(somewhat .. " local")
-
-    http_update_save(filetosave, xac_update.updater.data)
+function XAutoCopilotUpdater_btnReboot_OnClick()
+    gizmo.reboot()
 end
 
 function fsize(file)
