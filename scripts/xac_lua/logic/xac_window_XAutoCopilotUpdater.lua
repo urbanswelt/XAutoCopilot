@@ -31,10 +31,10 @@ xac_update.flightinfo = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts
 xac_update.route = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua" }
 
 --folder FirmewarePreview
-xac_update.color = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmewarePreview/color_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmewarePreview/color_api.lua" }
-xac_update.icons = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmewarePreview/icons_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmewarePreview/icons_api.lua" }
-xac_update.toast = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmewarePreview/toast_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmewarePreview/toast_api.lua" }
-xac_update.info = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmewarePreview/Info.txt", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmewarePreview/Info.txt" }
+xac_update.color = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmewarePreview/color_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/color_api.lua" }
+xac_update.icons = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmewarePreview/icons_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/icons_api.lua" }
+xac_update.toast = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmewarePreview/toast_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/toast_api.lua" }
+xac_update.info = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmewarePreview/Info.txt", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/Info.txt" }
 
 
 XAutoCopilotUpdater = {
@@ -57,7 +57,8 @@ function XAutoCopilotUpdater_OnCreate()
     local top = 30
     local width = 100
 
-    XAutoCopilotUpdater.updater = gui.newLabel(XAutoCopilotUpdater.gui_h, "ignored", "New Updater file", left, top, width); top = top + 15
+    XAutoCopilotUpdater.updatertext = gui.newLabel(XAutoCopilotUpdater.gui_h, "ignored", "New Updater file", left, top, width); top = top + 15
+    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnUpdate", "Update", left + 120, top - 15, width - 50)
     gui.newLabel(XAutoCopilotUpdater.gui_h, "ignored", "XAC files was changed", left, top, width); top = top + 15
 
     local left = 10
@@ -71,7 +72,7 @@ function XAutoCopilotUpdater_OnCreate()
     -- help icon
     XAutoCopilotUpdater.helpIcon_h = gui.newCustomWidget(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_helpIcon", XAutoCopilotUpdater.w - 20, 20, 17, 17)
 
-    gui.hideWidget(XAutoCopilotUpdater.updater)
+    gui.hideWidget(XAutoCopilotUpdater.updatertext)
 end
 
 function XAutoCopilotUpdater_helpIcon_OnDraw()
@@ -226,109 +227,126 @@ function xac_http_update_get(data, url, size)
         xac_update.init.data = data
         xac_update.init.size = size
         xac_update.init.status = status
+        xac_update.init.localsize = fsize(xac_update.init.filename)
     end
 
     if xac_update.version.url == url and dataread == 1 then
         xac_update.version.data = data
         xac_update.version.size = size
         xac_update.version.status = status
+        xac_update.version.localsize = fsize(xac_update.version.filename)
     end
 
     if xac_update.vupdater.url == url and dataread == 1 then
         xac_update.vupdater.data = data
         xac_update.vupdater.size = size
         xac_update.vupdater.status = status
+        xac_update.vupdater.localsize = fsize(xac_update.vupdater.filename)
     end
 
     if xac_update.changelog.url == url and dataread == 1 then
         xac_update.changelog.data = data
         xac_update.changelog.size = size
         xac_update.changelog.status = status
+        xac_update.changelog.localsize = fsize(xac_update.changelog.filename)
     end
 
     if xac_update.datarefs.url == url and dataread == 1 then
         xac_update.datarefs.data = data
         xac_update.datarefs.size = size
         xac_update.datarefs.status = status
+        xac_update.datarefs.localsize = fsize(xac_update.datarefs.filename)
     end
 
     if xac_update.pdatarefs.url == url and dataread == 1 then
         xac_update.pdatarefs.data = data
         xac_update.pdatarefs.size = size
         xac_update.pdatarefs.status = status
+        xac_update.pdatarefs.localsize = fsize(xac_update.pdatarefs.filename)
     end
 
     if xac_update.helper.url == url and dataread == 1 then
         xac_update.helper.data = data
         xac_update.helper.size = size
         xac_update.helper.status = status
+        xac_update.helper.localsize = fsize(xac_update.helper.filename)
     end
 
     if xac_update.copilot.url == url and dataread == 1 then
         xac_update.copilot.data = data
         xac_update.copilot.size = size
         xac_update.copilot.status = status
+        xac_update.copilot.localsize = fsize(xac_update.copilot.filename)
     end
 
     if xac_update.approach.url == url and dataread == 1 then
         xac_update.approach.data = data
         xac_update.approach.size = size
         xac_update.approach.status = status
+        xac_update.approach.localsize = fsize(xac_update.approach.filename)
     end
 
     if xac_update.departure.url == url and dataread == 1 then
         xac_update.departure.data = data
         xac_update.departure.size = size
         xac_update.departure.status = status
+        xac_update.departure.localsize = fsize(xac_update.departure.filename)
     end
 
     if xac_update.debug.url == url and dataread == 1 then
         xac_update.debug.data = data
         xac_update.debug.size = size
         xac_update.debug.status = status
+        xac_update.debug.localsize = fsize(xac_update.debug.filename)
     end
 
     if xac_update.flightinfo.url == url and dataread == 1 then
         xac_update.flightinfo.data = data
         xac_update.flightinfo.size = size
         xac_update.flightinfo.status = status
+        xac_update.flightinfo.localsize = fsize(xac_update.flightinfo.filename)
     end
 
     if xac_update.route.url == url and dataread == 1 then
         xac_update.route.data = data
         xac_update.route.size = size
         xac_update.route.status = status
+        xac_update.route.localsize = fsize(xac_update.route.filename)
     end
 
     if xac_update.color.url == url and dataread == 1 then
         xac_update.color.data = data
         xac_update.color.size = size
         xac_update.color.status = status
+        xac_update.color.localsize = fsize(xac_update.color.filename)
     end
 
     if xac_update.icons.url == url and dataread == 1 then
         xac_update.icons.data = data
         xac_update.icons.size = size
         xac_update.icons.status = status
+        xac_update.icons.localsize = fsize(xac_update.icons.filename)
     end
 
     if xac_update.toast.url == url and dataread == 1 then
         xac_update.toast.data = data
         xac_update.toast.size = size
         xac_update.toast.status = status
+        xac_update.toast.localsize = fsize(xac_update.toast.filename)
     end
 
     if xac_update.info.url == url and dataread == 1 then
         xac_update.info.data = data
         xac_update.info.size = size
         xac_update.info.status = status
+        xac_update.info.localsize = fsize(xac_update.info.filename)
     end
 end
 
 function XAutoCopilotUpdater_OnUpdate()
 
     if xac_update.updater.status == 1 and xac_update.updater.size ~= fsize(xac_update.updater.filename) then
-        gui.showWidget(XAutoCopilotUpdater.updater)
+        gui.showWidget(XAutoCopilotUpdater.updatertext)
         xac_update.updater.status = 2
     end
 
