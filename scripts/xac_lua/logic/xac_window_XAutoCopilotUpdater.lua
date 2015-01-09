@@ -219,7 +219,7 @@ function xac_http_update_get(data, url, size)
         xac_update.updater.data = data
         xac_update.updater.size = size
         xac_update.updater.status = status
-        xac_update.updater.localsize = fsize(xac_update.updater.filename)
+        xac_update.updater.localsize = fsize(xac_update.updater.filename) --test
     end
     --write to other script tables
     if xac_update.init.url == url and dataread == 1 then
