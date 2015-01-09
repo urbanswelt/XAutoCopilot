@@ -220,6 +220,7 @@ function round(num, idp)
     --http://snippets.luacode.org/snippets/Round_a_Number_to_given_number_of_decimal_places_17
 end
 
+
 --preferences adapted from Gizmo Firmeware FIXME change for more then 1 pref "table" usage
 --https://github.com/benrussell/Gizmo-Firmware
 xac_prefs = {} --global prefs table
