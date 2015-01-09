@@ -175,10 +175,21 @@ function XAutoCopilotUpdater_btnReboot_OnClick()
         logging.warning("No file found!")
         return
     end
-
+    local somewhat = fsize (filename)
     logging.debug(filesize .." local")
     logging.debug(xac_update.updater.size .." remote")
+    logging.debug(somewhat .." fsize")
+
 end
+
+function fsize (file)
+    local file = io.open( file, "r" )
+    local current = file:seek()      -- get current position
+    local size = file:seek("end")    -- get file size
+    file:seek("set", current)        -- restore position
+    return size
+end
+
 
 function xac_trigger_update ()
     http.get( xac_update.updater.url, 'xac_http_update_get' )
