@@ -165,9 +165,8 @@ function XAutoCopilotUpdater_btnReboot_OnClick()
 
 
     local somewhat = fsize(filename)
-    logging.debug(filesize .. " local")
     logging.debug(xac_update.updater.size .. " remote")
-    logging.debug(somewhat .. " fsize")
+    logging.debug(somewhat .. " local")
 
     http_update_save(filetosave, xac_update.updater.data)
 end
