@@ -85,7 +85,7 @@ function DepartureWaypoint()
     local route_pointtype = Split((table2[3]), '=')
 
     dref.setString(xac_daparture_info, route_routepart[2] .. ":" .. route_dir1[1] .. " " .. route_pointtype[2] .. ":" .. route_dir2[1])
-    dref.setString(xac_daparture_apt,route_dir1[1])
+    dref.setString(xac_daparture_apt, route_dir1[1])
 end
 
 function ApproachWaypoint()
@@ -215,7 +215,7 @@ function AutoFlap()
 end
 
 function round(num, idp)
-    local mult = 10^(idp or 0)
+    local mult = 10 ^ (idp or 0)
     return math.floor(num * mult + 0.5) / mult
     --http://snippets.luacode.org/snippets/Round_a_Number_to_given_number_of_decimal_places_17
 end
@@ -236,8 +236,8 @@ xac_prefs.load = function(filename)
     local prefs_path = filename
 
     --read prefs data
-    local fh = io.open( prefs_path, "rb" )
-    if( fh )then
+    local fh = io.open(prefs_path, "rb")
+    if (fh) then
         prefs_data = fh:read("*all")
         fh:close()
         fh = nil
@@ -251,16 +251,16 @@ xac_prefs.load = function(filename)
 
 
     --import prefs data if read was good
-    if( prefs_data )then
+    if (prefs_data) then
 
-        local prefs_f,error = loadstring( prefs_data )
-        if( prefs_f )then
+        local prefs_f, error = loadstring(prefs_data)
+        if (prefs_f) then
 
             local blank_env = {}
-            setfenv( prefs_f, blank_env )
+            setfenv(prefs_f, blank_env)
             local new_prefs = prefs_f()
 
-            if( new_prefs )then
+            if (new_prefs) then
                 xac_prefs.values = new_prefs
             end
 
@@ -268,13 +268,9 @@ xac_prefs.load = function(filename)
         else
             logging.warning("xac corrupt prefs data: " .. error)
             logging.debug(" xac prefs data size: " .. #prefs_data .. " bytes")
-            logging.debug(" xac prefs data raw:\n" .. tostring(prefs_data) )
-
+            logging.debug(" xac prefs data raw:\n" .. tostring(prefs_data))
         end
-
     end
-
-
 end --prefs.load()
 
 xac_prefs.save = function(filename)
@@ -287,71 +283,65 @@ xac_prefs.save = function(filename)
     local prefs_path = filename
 
     --write prefs data
-    local fh = io.open( prefs_path, "wb" )
-    if( fh )then
+    local fh = io.open(prefs_path, "wb")
+    if (fh) then
         --prefs_data = fh:read("*all")
-        fh:write( prefs_blob )
+        fh:write(prefs_blob)
         fh:close()
         fh = nil
 
         --logging.warning("prefs saved. (" .. prefs_path ..  ")")
 
     else
-        error("xac_prefs.save(): Failed: (" .. prefs_path ..  ")")
-
+        error("xac_prefs.save(): Failed: (" .. prefs_path .. ")")
     end --check file handle is not nil
-
 end --prefs.save()
 
-xac_prefs.set = function( key, value )
+xac_prefs.set = function(key, value)
 
     --Check to see if we already have a prefs value for this item.
     --If we do we will update it. If we do not we will create a new item.
 
-    if( xac_prefs.get(key, nil) == nil )then
+    if (xac_prefs.get(key, nil) == nil) then
         --We could not find a prefs item for this key, create a new one.
 
         local new_prefs_pair = {
             name = key,
             value = value
         }
-        table.insert( xac_prefs.values, new_prefs_pair )
+        table.insert(xac_prefs.values, new_prefs_pair)
 
     else
         --Record already exists, locate and modify
 
-        for k,v in pairs( xac_prefs.values ) do
-            if( v )then
-                if( v.name == key )then
+        for k, v in pairs(xac_prefs.values) do
+            if (v) then
+                if (v.name == key) then
                     --logging.debug("xac_prefs.set: " .. tostring(key) .. "  updated to: " .. tostring(v.value) )
                     v.value = value --set the new value
                     return
                 end
             end
-
         end
-
     end
-
 end --xac_prefs.set
 
-xac_prefs.get = function( key, default )
-    if( xac_prefs.values )then
+xac_prefs.get = function(key, default)
+    if (xac_prefs.values) then
 
-        for k,v in pairs( xac_prefs.values ) do
+        for k, v in pairs(xac_prefs.values) do
             --console.log(k)
             --console.log(v)
 
-            if( v )then
-                if( v.name == key )then
+            if (v) then
+                if (v.name == key) then
                     --console.log("xac_prefs.get: " .. tostring(key) .. "  return: " .. tostring(v.value) )
                     return v.value
                 end
             else
                 --blank value?
-                error("xac_prefs.get: found key: " .. tostring( key ) .. " but value is blank." )
+                error("xac_prefs.get: found key: " .. tostring(key) .. " but value is blank.")
             end
-
         end
 
         --console.warn("prefs.get: no value found for: " .. tostring(key))
@@ -364,7 +354,7 @@ xac_prefs.get = function( key, default )
 end --xac_prefs.get
 
 xac_prefs.debug = function()
-    logging.debug(( vardump_lua2(xac_prefs.values) ))
+    logging.debug((vardump_lua2(xac_prefs.values)))
 end --prefs.debug
 
 -- ##################################Helper BEGIN##############################################
@@ -393,7 +383,7 @@ end --prefs.debug
 
 function vardump_lua2(value, depth, key)
 
-    if( depth == nil )then
+    if (depth == nil) then
         --console.log("fw vardump_lua v14.03.16.1747")
     end
 
@@ -406,8 +396,8 @@ function vardump_lua2(value, depth, key)
 
     if key ~= nil then
         linePrefix = ""
-        if( depth > 0 )then
-            linePrefix = key.." = "
+        if (depth > 0) then
+            linePrefix = key .. " = "
         end
     end
 
@@ -416,7 +406,7 @@ function vardump_lua2(value, depth, key)
         depth = 0
     else
         depth = depth + 1
-        for i=1, depth-1 do
+        for i = 1, depth - 1 do
             spaces = spaces .. " "
         end
     end
@@ -429,14 +419,14 @@ function vardump_lua2(value, depth, key)
 
         local mTable = getmetatable(value)
         if mTable == nil then
-            if( depth > 0 )then
+            if (depth > 0) then
                 --b_print(spaces ..linePrefix.."{")
-                ret_blob = ret_blob .. (spaces ..linePrefix.."{") .. "\n"
+                ret_blob = ret_blob .. (spaces .. linePrefix .. "{") .. "\n"
             end
 
         else
             --b_print(spaces .."{")
-            ret_blob = ret_blob .. (spaces .."{") .. "\n"
+            ret_blob = ret_blob .. (spaces .. "{") .. "\n"
             value = mTable
         end
 
@@ -446,23 +436,22 @@ function vardump_lua2(value, depth, key)
         end
 
 
-        if( depth > 1 )then
+        if (depth > 1) then
             --comma on the end
-            ret_blob = ret_blob .. (spaces .."},") .. "\n"
+            ret_blob = ret_blob .. (spaces .. "},") .. "\n"
 
-        elseif( depth > 0 )then
+        elseif (depth > 0) then
             --NO comma on the end
-            ret_blob = ret_blob .. (spaces .."},") .. "\n"
-
+            ret_blob = ret_blob .. (spaces .. "},") .. "\n"
         end
 
 
 
     elseif
-    type(value)	== 'function' or
-            type(value)	== 'thread' or
-            type(value)	== 'userdata' or
-            value		== nil
+    type(value) == 'function' or
+            type(value) == 'thread' or
+            type(value) == 'userdata' or
+            value == nil
     then
 
         --b_print(spaces..tostring(value))
@@ -473,22 +462,22 @@ function vardump_lua2(value, depth, key)
     else
 
         local d_type = type(value)
-        if( d_type ) == "string" then
+        if (d_type) == "string" then
             --b_print(spaces..linePrefix.. "\"" .. tostring(value) .. "\"," )
-            ret_blob = ret_blob .. (spaces..linePrefix.. "\"" .. tostring(value) .. "\"" )
+            ret_blob = ret_blob .. (spaces .. linePrefix .. "\"" .. tostring(value) .. "\"")
 
-            if( depth > 1 )then
+            if (depth > 1) then
                 ret_blob = ret_blob .. ","
             end
 
             ret_blob = ret_blob .. "\n"
 
 
-        elseif( d_type ) == "number" then
+        elseif (d_type) == "number" then
             --b_print(spaces..linePrefix..tostring(value)..",")
-            ret_blob = ret_blob .. (spaces..linePrefix..tostring(value) )
+            ret_blob = ret_blob .. (spaces .. linePrefix .. tostring(value))
 
-            if( depth > 1 )then
+            if (depth > 1) then
                 ret_blob = ret_blob .. ","
             end
 
@@ -502,9 +491,9 @@ function vardump_lua2(value, depth, key)
         else
             --booleans are rendered here.
             --b_print(spaces..linePrefix..tostring(value)..",")
-            ret_blob = ret_blob .. (spaces..linePrefix..tostring(value) )
+            ret_blob = ret_blob .. (spaces .. linePrefix .. tostring(value))
 
-            if( depth > 1 )then
+            if (depth > 1) then
                 ret_blob = ret_blob .. ","
             end
 
@@ -512,21 +501,14 @@ function vardump_lua2(value, depth, key)
             --ret_blob = ret_blob .. " --".. type(value)
 
             ret_blob = ret_blob .. "\n"
-
-
         end
-
-
-
     end --end data type detect.
 
 
-    if( depth > 0 )then
+    if (depth > 0) then
         return ret_blob
     else
         --parent wrapper, turns the entire blob into a nice easy to digest table.
         return "{\n" .. ret_blob .. "}"
     end
-
-
 end

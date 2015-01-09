@@ -31,54 +31,53 @@ local icon_save = icons.get("save.png")
 
 API: >= 14.04
 */]]
-icons.get = function( icon_name, no_cache )
-	
-	--console.log("icons.get: " .. icon_name)
-	
-	
-	if( icon_name == nil )then
-		--FIXME: return a nice broke-image icon
-		return 0
-	end
-	
-	
-	
+icons.get = function(icon_name, no_cache)
 
-	local filename = gizmo.getFolder() .. "firmware/icons/" .. tostring( icon_name )
-
-	--console.log("full filename: " .. filename)
-	
-	
-	--define a local function that includes desired error handling.
-	local function f_loadPng( filename )
-		local ret,err = gfx.loadPng( filename )
-		if( ret == nil )then
-			console.warn( err )
-			return icons.get("page_white_error.png")
-		else
-			return ret
-		end
-	end
-	
-
-	--caller can override caching and still retain easy access to icons.
-	if( no_cache )then
-		--return assert( gfx.loadPng( filename ) )
-		return assert( f_loadPng(filename) )
-	end
+    --console.log("icons.get: " .. icon_name)
 
 
-	--normal ops. check cache.
-	if( icons.cache[ filename ] == nil )then
-		--icons.cache[ filename ] = assert( gfx.loadPng( filename ) )
-		icons.cache[ filename ] = assert( f_loadPng( filename ) )
-	--else
-	--	console.log("icons: cache hit!")
-	end
+    if (icon_name == nil) then
+        --FIXME: return a nice broke-image icon
+        return 0
+    end
 
 
-	return icons.cache[ filename ]
 
+
+    local filename = gizmo.getFolder() .. "firmware/icons/" .. tostring(icon_name)
+
+    --console.log("full filename: " .. filename)
+
+
+    --define a local function that includes desired error handling.
+    local function f_loadPng(filename)
+        local ret, err = gfx.loadPng(filename)
+        if (ret == nil) then
+            console.warn(err)
+            return icons.get("page_white_error.png")
+        else
+            return ret
+        end
+    end
+
+
+    --caller can override caching and still retain easy access to icons.
+    if (no_cache) then
+        --return assert( gfx.loadPng( filename ) )
+        return assert(f_loadPng(filename))
+    end
+
+
+    --normal ops. check cache.
+    if (icons.cache[filename] == nil) then
+        --icons.cache[ filename ] = assert( gfx.loadPng( filename ) )
+        icons.cache[filename] = assert(f_loadPng(filename))
+        --else
+        --	console.log("icons: cache hit!")
+    end
+
+
+    return icons.cache[filename]
 end
 
 

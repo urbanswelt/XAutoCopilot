@@ -242,9 +242,9 @@ function OnFirstFrame()
 
     -- fcu
     xac_baro_push_bat = dref.getDataref("sim/custom/xap/fcu/baro_push_bat")
-	xac_baro_pull_bat = dref.getDataref("sim/custom/xap/fcu/baro_pull_bat")
-	xac_baro_man_sel = dref.getDataref("sim/custom/xap/baro_man_sel")
-	
+    xac_baro_pull_bat = dref.getDataref("sim/custom/xap/fcu/baro_pull_bat")
+    xac_baro_man_sel = dref.getDataref("sim/custom/xap/baro_man_sel")
+
     xac_ap1 = dref.getDataref("sim/custom/xap/fcu/ap1")
     xac_alt100x = dref.getDataref("sim/custom/xap/fcu/alt100x")
     --xac_alt1000x = dref.getDataref("sim/custom/xap/fcu/alt1000x") does not work ?
