@@ -31,10 +31,10 @@ xac_update.flightinfo = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts
 xac_update.route = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua" }
 
 --folder FirmewarePreview
-xac_update.color = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmewarePreview/color_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/color_api.lua" }
-xac_update.icons = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmewarePreview/icons_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/icons_api.lua" }
-xac_update.toast = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmewarePreview/toast_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/toast_api.lua" }
-xac_update.info = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmewarePreview/Info.txt", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/Info.txt" }
+xac_update.color = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmwarePreview/color_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/color_api.lua" }
+xac_update.icons = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmwarePreview/icons_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/icons_api.lua" }
+xac_update.toast = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmwarePreview/toast_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/toast_api.lua" }
+xac_update.info = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmwarePreview/Info.txt", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/Info.txt" }
 
 
 XAutoCopilotUpdater = {
@@ -57,22 +57,31 @@ function XAutoCopilotUpdater_OnCreate()
     local top = 30
     local width = 100
 
-    XAutoCopilotUpdater.updatertext = gui.newLabel(XAutoCopilotUpdater.gui_h, "ignored", "New Updater file", left, top, width); top = top + 15
-    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnUpdate", "Update", left + 120, top - 15, width - 50)
-    gui.newLabel(XAutoCopilotUpdater.gui_h, "ignored", "XAC files was changed", left, top, width); top = top + 15
+    XAutoCopilotUpdater.updatertext = gui.newLabel(XAutoCopilotUpdater.gui_h, "ignored", "New Updater file", left, top, width)
+    XAutoCopilotUpdater.updaterbutton = gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnUpdateUpdater", "Update", left + 130, top, width - 50)
+
+    local left = 10
+    local top = 60
+    local width = 100
+
+    XAutoCopilotUpdater.updatetext = gui.newLabel(XAutoCopilotUpdater.gui_h, "ignored", "XAC files was changed", left, top, width)
+    XAutoCopilotUpdater.updatebutton = gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnUpdate", "Update", left + 130, top, width - 50)
 
     local left = 10
     local top = 30
     local width = 100
 
     gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnCheck", "Check", left, top + 125, width - 50)
-    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnUpdate", "Update", left + 60, top + 125, width - 50)
-    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnReboot", "Reboot", left + 120, top + 125, width - 50)
+    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnReboot", "Reboot", left + 60, top + 125, width - 50)
 
     -- help icon
     XAutoCopilotUpdater.helpIcon_h = gui.newCustomWidget(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_helpIcon", XAutoCopilotUpdater.w - 20, 20, 17, 17)
 
     gui.hideWidget(XAutoCopilotUpdater.updatertext)
+    gui.hideWidget(XAutoCopilotUpdater.updaterbutton)
+
+    gui.hideWidget(XAutoCopilotUpdater.updatetext)
+    gui.hideWidget(XAutoCopilotUpdater.updatebutton)
 end
 
 function XAutoCopilotUpdater_helpIcon_OnDraw()
@@ -162,6 +171,11 @@ function XAutoCopilotUpdater_btnUpdate_OnClick()
     --http_update_save(xac_update.updater.filename, xac_update.updater.data)
 end
 
+function XAutoCopilotUpdater_btnUpdateUpdater_OnClick()
+    --http_update_save(filename,data)
+    http_update_save(xac_update.updater.filename, xac_update.updater.data)
+end
+
 function XAutoCopilotUpdater_btnReboot_OnClick()
     gizmo.reboot()
 end
@@ -174,7 +188,6 @@ function fsize(file)
     file:close()
     return size
 end
-
 
 function xac_trigger_update()
     http.get(xac_update.updater.url, 'xac_http_update_get')
@@ -196,9 +209,6 @@ function xac_trigger_update()
     http.get(xac_update.toast.url, 'xac_http_update_get')
     http.get(xac_update.info.url, 'xac_http_update_get')
 end
-
---local filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua"
---http_update_save(filename,data)
 
 function xac_http_update_get(data, url, size)
     local data = data
@@ -347,9 +357,9 @@ function XAutoCopilotUpdater_OnUpdate()
 
     if xac_update.updater.status == 1 and xac_update.updater.size ~= fsize(xac_update.updater.filename) then
         gui.showWidget(XAutoCopilotUpdater.updatertext)
+        gui.showWidget(XAutoCopilotUpdater.updaterbutton)
         xac_update.updater.status = 2
     end
-
 end
 
 ToolXAutoCopilotUpdater = {
