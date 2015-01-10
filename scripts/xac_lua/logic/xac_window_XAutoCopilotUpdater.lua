@@ -38,11 +38,13 @@ xac_update.info = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_l
 
 -- -- set Version for updates year, month, day, hour, minutes
 --xac_version = 201501082240
-local version = lines_from(xac_update.version.filename))
-local version2 =lines_from(xac_update.vupdater.filename))
+-- -- set Version for updates year, month, day, hour, minutes
+--xac_version = 201501082240
+local version = lines_from(xac_update.version.filename)
+local vupdater =lines_from(xac_update.vupdater.filename)
 
 xac_version = tonumber(version[1])
-xac_updater_version = tonumber(version2[1])
+xac_updater_version = tonumber(vupdater[1])
 
 XAutoCopilotUpdater = {
     gui_h = gui.newWindow("XAutoCopilotUpdater"),
