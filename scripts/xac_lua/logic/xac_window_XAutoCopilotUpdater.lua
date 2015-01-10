@@ -181,6 +181,7 @@ function XAutoCopilotUpdater_btnReboot_OnClick()
 end
 
 function fsize(file)
+    if not file_exists(file) then return {} end
     local file = assert(io.open(file, "r"))
     local current = file:seek() -- get current position
     local size = file:seek("end") -- get file size
