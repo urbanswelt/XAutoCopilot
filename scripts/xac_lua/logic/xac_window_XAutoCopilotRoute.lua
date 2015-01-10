@@ -111,7 +111,7 @@ function XAutoCopilotRoute_helpIcon_OnMouseDown()
 
     gui.showWindow(XAutoCopilotDebug.gui_h)]]
 
-    toast.newInfo("Route Window Info", "This Window is only for testing\nHave a nice day!")
+    --toast.newInfo("Route Window Info", "This Window is only for testing\nHave a nice day!")
 end
 
 function XAutoCopilotRoute_diskIcon_OnMouseDown()

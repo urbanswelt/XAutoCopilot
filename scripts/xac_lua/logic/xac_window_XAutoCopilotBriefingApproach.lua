@@ -108,7 +108,7 @@ end
 
 function XAutoCopilotBriefingApproach_helpIcon_OnMouseDown()
     --message
-    toast.newInfo("Approach Window Info", "This Window is only for testing\nHave a nice day!")
+    --toast.newInfo("Approach Window Info", "This Window is only for testing\nHave a nice day!")
 end
 
 function XAutoCopilotBriefingApproach_diskIcon_OnMouseDown()
