@@ -36,12 +36,6 @@ logging.debug("loaded xac_window_XAutoCopilotUpdater..")
 --dofile("xac_lua/logic/xac_publish_dataref.lua")
 --logging.debug("loaded xac_publish_dataref..")
 
---New Firmware Features for Gizmo but not released from Ben now
-dofile("xac_lua/logic/FirmwarePreview/toast_api.lua")
-dofile("xac_lua/logic/FirmwarePreview/color_api.lua")
-dofile("xac_lua/logic/FirmwarePreview/icons_api.lua")
-logging.debug("loaded NewFeature_api..")
-
 -- load preferences if exist
 local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs.txt"
 xac_prefs.load(filename)
