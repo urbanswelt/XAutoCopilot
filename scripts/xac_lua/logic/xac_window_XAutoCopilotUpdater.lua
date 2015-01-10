@@ -109,6 +109,12 @@ function XAutoCopilotUpdater_OnUpdate()
         xac_update.updater.status = 2
     end
 
+    if xac_update.vupdater.status == 1 and xac_updater_version ~= tonumber(xac_update.vupdater.data) then
+        gui.showWidget(XAutoCopilotUpdater.updatertext)
+        gui.showWidget(XAutoCopilotUpdater.updaterbutton)
+        xac_update.vupdater.status = 2
+    end
+
     if xac_update.init.status == 1 and xac_update.init.size ~= fsize(xac_update.init.filename) then
         gui.showWidget(XAutoCopilotUpdater.updatetext)
         gui.showWidget(XAutoCopilotUpdater.updatebutton)
@@ -119,12 +125,6 @@ function XAutoCopilotUpdater_OnUpdate()
         gui.showWidget(XAutoCopilotUpdater.updatetext)
         gui.showWidget(XAutoCopilotUpdater.updatebutton)
         xac_update.version.status = 2
-    end
-
-    if xac_update.vupdater.status == 1 and xac_updater_version ~= tonumber(xac_update.vupdater.data) then
-        gui.showWidget(XAutoCopilotUpdater.updatetext)
-        gui.showWidget(XAutoCopilotUpdater.updatebutton)
-        xac_update.vupdater.status = 2
     end
 
     if xac_update.changelog.status == 1 and xac_update.changelog.size ~= fsize(xac_update.changelog.filename) then
