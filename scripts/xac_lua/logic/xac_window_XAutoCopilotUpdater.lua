@@ -265,11 +265,6 @@ function XAutoCopilotUpdater_btnUpdate_OnClick()
         xac_update.version.status = 3
     end
 
-    if xac_update.vupdater.status == 2 then
-        http_update_save(xac_update.vupdater.filename, xac_update.vupdater.data)
-        xac_update.vupdater.status = 3
-    end
-
     if xac_update.changelog.status == 2 then
         http_update_save(xac_update.changelog.filename, xac_update.changelog.data)
         xac_update.changelog.status = 3
@@ -346,6 +341,11 @@ function XAutoCopilotUpdater_btnUpdateUpdater_OnClick()
     if xac_update.updater.status == 2 then
         http_update_save(xac_update.updater.filename, xac_update.updater.data)
         xac_update.updater.status = 3
+    end
+
+    if xac_update.vupdater.status == 2 then
+        http_update_save(xac_update.vupdater.filename, xac_update.vupdater.data)
+        xac_update.vupdater.status = 3
     end
 end
 
