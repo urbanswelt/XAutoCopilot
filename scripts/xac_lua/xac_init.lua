@@ -5,10 +5,6 @@
 -- Time: 19:24
 --
 
--- -- set Version for updates year, month, day, hour, minutes
---xac_version = 201501082240
-xac_version = tonumber(lines_from(xac_update.version.filename))
-
 dofile("xac_lua/logic/xac_datarefs.lua")
 logging.debug("loaded xac_datarefs..")
 

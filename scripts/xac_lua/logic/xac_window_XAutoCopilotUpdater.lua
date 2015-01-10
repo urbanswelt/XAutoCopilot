@@ -6,7 +6,7 @@
 -- 
 -- set Version for updates year, month, day, hour, minutes
 --xac_updater_version = 201501101345
-xac_updater_version = tonumber(lines_from(xac_update.vupdater.filename))
+
 
 xac_update = {}
 --updater script
@@ -36,6 +36,12 @@ xac_update.icons = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_
 xac_update.toast = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmwarePreview/toast_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/toast_api.lua" }
 xac_update.info = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmwarePreview/Info.txt", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/Info.txt" }
 
+-- -- set Version for updates year, month, day, hour, minutes
+--xac_version = 201501082240
+local version = tonumber(lines_from(xac_update.version.filename))
+local version2 =tonumber(lines_from(xac_update.vupdater.filename))
+xac_version = version
+xac_updater_version = version2
 
 XAutoCopilotUpdater = {
     gui_h = gui.newWindow("XAutoCopilotUpdater"),
