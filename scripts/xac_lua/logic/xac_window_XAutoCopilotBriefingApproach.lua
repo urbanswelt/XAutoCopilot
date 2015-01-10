@@ -90,19 +90,19 @@ end
 
 function XAutoCopilotBriefingApproach_helpIcon_OnDraw()
     --icon
-    local icon_file = "help.png"
+    local icon_file = gfx.loadPng(gizmo.getFolder() .. "firmware/icons/" .. tostring("help.png"))
     gfx.texOn()
-    gfx.setColor(color.white)
-    gfx.useTexture(icons.get(icon_file))
+    --gfx.setColor(color.white)
+    gfx.useTexture(icon_file)
     gfx.drawTexturedQuad(0, 0, 16, 16)
 end
 
 function XAutoCopilotBriefingApproach_diskIcon_OnDraw()
     --icon
-    local icon_file = "disk.png"
+    local icon_file = gfx.loadPng(gizmo.getFolder() .. "firmware/icons/" .. tostring("disk.png"))
     gfx.texOn()
-    gfx.setColor(color.white)
-    gfx.useTexture(icons.get(icon_file))
+    --gfx.setColor(color.white)
+    gfx.useTexture(icon_file)
     gfx.drawTexturedQuad(0, 0, 16, 16)
 end
 

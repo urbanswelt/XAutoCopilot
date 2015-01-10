@@ -227,7 +227,7 @@ function XAutoCopilotUpdater_diskIcon_OnDraw()
     local icon_file = gfx.loadPng(gizmo.getFolder() .. "firmware/icons/" .. tostring("disk.png"))
     gfx.texOn()
     --gfx.setColor(color.white)
-    gfx.useTexture(icons.get(icon_file))
+    gfx.useTexture(icon_file)
     gfx.drawTexturedQuad(0, 0, 16, 16)
 end
 
