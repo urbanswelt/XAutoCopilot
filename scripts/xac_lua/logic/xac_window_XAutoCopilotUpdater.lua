@@ -5,7 +5,8 @@
 -- Time: 20:49
 -- 
 -- set Version for updates year, month, day, hour, minutes
-xac_updater_version = 201501101345
+--xac_updater_version = 201501101345
+xac_updater_version = tonumber(lines_from(xac_update.vupdater.filename))
 
 xac_update = {}
 --updater script
@@ -109,13 +110,13 @@ function XAutoCopilotUpdater_OnUpdate()
         xac_update.init.status = 2
     end
 
-    if xac_update.version.status == 1 and xac_update.version.size ~= fsize(xac_update.version.filename) then
+    if xac_update.version.status == 1 and xac_version ~= tonumber(xac_update.version.data) then
         gui.showWidget(XAutoCopilotUpdater.updatetext)
         gui.showWidget(XAutoCopilotUpdater.updatebutton)
         xac_update.version.status = 2
     end
 
-    if xac_update.vupdater.status == 1 and xac_update.vupdater.size ~= fsize(xac_update.vupdater.filename) then
+    if xac_update.vupdater.status == 1 and xac_updater_version ~= tonumber(xac_update.vupdater.data) then
         gui.showWidget(XAutoCopilotUpdater.updatetext)
         gui.showWidget(XAutoCopilotUpdater.updatebutton)
         xac_update.vupdater.status = 2
