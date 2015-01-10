@@ -232,9 +232,9 @@ function XAutoCopilotUpdater_diskIcon_OnDraw()
 end
 
 function XAutoCopilotUpdater_helpIcon_OnMouseDown()
-    --toast.test()
-    --toast.newInfo("Updater", "This Window is only for testing\nHave a nice day!")
+
 end
+
 
 function XAutoCopilotUpdater_diskIcon_OnMouseDown()
     local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs.txt"
