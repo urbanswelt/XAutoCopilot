@@ -4,9 +4,6 @@
 -- Date: 01.07.2014
 -- Time: 20:49
 -- 
--- set Version for updates year, month, day, hour, minutes
---xac_updater_version = 201501101345
-
 
 xac_update = {}
 --updater script
@@ -38,8 +35,7 @@ xac_update.info = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_l
 
 -- -- set Version for updates year, month, day, hour, minutes
 --xac_version = 201501082240
--- -- set Version for updates year, month, day, hour, minutes
---xac_version = 201501082240
+
 local version = lines_from(xac_update.version.filename)
 local vupdater =lines_from(xac_update.vupdater.filename)
 
