@@ -80,7 +80,7 @@ function XAutoCopilotUpdater_OnCreate()
     XAutoCopilotUpdater.autochktext = gui.newLabel(XAutoCopilotUpdater.gui_h, "ignored", "New Version Check on Start", left + 30, top - 50, width - 80)
 
     gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnCheck", "Check", left, top, width - 50)
-    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnReboot", "Reboot", left + 60, top, width - 50)
+    XAutoCopilotUpdater.rebootbutton = gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnReboot", "Reboot", left + 60, top, width - 50)
 
     -- help + save icon
     XAutoCopilotUpdater.helpIcon_h = gui.newCustomWidget(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_helpIcon", XAutoCopilotUpdater.w - 20, 20, 17, 17)
@@ -90,6 +90,7 @@ function XAutoCopilotUpdater_OnCreate()
     gui.hideWidget(XAutoCopilotUpdater.updaterbutton)
     gui.hideWidget(XAutoCopilotUpdater.updatetext)
     gui.hideWidget(XAutoCopilotUpdater.updatebutton)
+    gui.hideWidget(XAutoCopilotUpdater.rebootbutton)
 
     local autochk = xac_prefs.get("XAutoCopilotUpdater.autochk", 1)
 
@@ -258,82 +259,100 @@ function XAutoCopilotUpdater_btnUpdate_OnClick()
     if xac_update.init.status == 2 then
         http_update_save(xac_update.init.filename, xac_update.init.data)
         xac_update.init.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.version.status == 2 then
         http_update_save(xac_update.version.filename, xac_update.version.data)
         xac_update.version.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.changelog.status == 2 then
         http_update_save(xac_update.changelog.filename, xac_update.changelog.data)
         xac_update.changelog.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.datarefs.status == 2 then
         http_update_save(xac_update.datarefs.filename, xac_update.datarefs.data)
         xac_update.datarefs.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.pdatarefs.status == 2 then
         http_update_save(xac_update.pdatarefs.filename, xac_update.pdatarefs.data)
         xac_update.pdatarefs.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.helper.status == 2 then
         http_update_save(xac_update.helper.filename, xac_update.helper.data)
         xac_update.helper.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.copilot.status == 2 then
         http_update_save(xac_update.copilot.filename, xac_update.copilot.data)
         xac_update.copilot.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.approach.status == 2 then
         http_update_save(xac_update.approach.filename, xac_update.approach.data)
         xac_update.approach.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.departure.status == 2 then
         http_update_save(xac_update.departure.filename, xac_update.departure.data)
         xac_update.departure.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.debug.status == 2 then
         http_update_save(xac_update.debug.filename, xac_update.debug.data)
         xac_update.debug.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.flightinfo.status == 2 then
         http_update_save(xac_update.flightinfo.filename, xac_update.flightinfo.data)
         xac_update.flightinfo.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.route.status == 2 then
         http_update_save(xac_update.route.filename, xac_update.route.data)
         xac_update.route.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.color.status == 2 then
         http_update_save(xac_update.color.filename, xac_update.color.data)
         xac_update.color.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.icons.status == 2 then
         http_update_save(xac_update.icons.filename, xac_update.icons.data)
         xac_update.icons.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.toast.status == 2 then
         http_update_save(xac_update.toast.filename, xac_update.toast.data)
         xac_update.toast.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
     if xac_update.info.status == 2 then
         http_update_save(xac_update.info.filename, xac_update.info.data)
         xac_update.info.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
+
+    local tmr_oneshot = timer.newOneShot("show_reboot_button", 5.0)
 end
 
 function XAutoCopilotUpdater_btnUpdateUpdater_OnClick()
@@ -341,12 +360,20 @@ function XAutoCopilotUpdater_btnUpdateUpdater_OnClick()
     if xac_update.updater.status == 2 then
         http_update_save(xac_update.updater.filename, xac_update.updater.data)
         xac_update.updater.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updaterbutton)
     end
 
     if xac_update.vupdater.status == 2 then
         http_update_save(xac_update.vupdater.filename, xac_update.vupdater.data)
         xac_update.vupdater.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updaterbutton)
     end
+
+    local tmr_oneshot = timer.newOneShot("show_reboot_button", 5.0)
+end
+
+function show_reboot_button ()
+    gui.showWidget(XAutoCopilotUpdater.rebootbutton)
 end
 
 function XAutoCopilotUpdater_btnReboot_OnClick()
