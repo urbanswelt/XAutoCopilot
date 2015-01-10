@@ -61,6 +61,16 @@ function table_length(table_name)
     return count
 end
 
+function fsize(file)
+    if not file_exists(file) then return {} end
+    local file = assert(io.open(file, "r"))
+    local current = file:seek() -- get current position
+    local size = file:seek("end") -- get file size
+    file:seek("set", current) -- restore position
+    file:close()
+    return size
+end
+
 function DepartureWaypoint()
     local file = acf.getFolder() .. "FlightPlans/tmpplan.txt" --our file destination
     local lines = lines_from(file) -- line seperated table for all entrys

@@ -5,8 +5,7 @@
 -- Time: 20:49
 -- 
 -- set Version for updates year, month, day, hour, minutes
---xac_updater_version = 201501082240
-xac_updater_version = 201506012350
+xac_updater_version = 201501101345
 
 xac_update = {}
 --updater script
@@ -68,20 +67,143 @@ function XAutoCopilotUpdater_OnCreate()
     XAutoCopilotUpdater.updatebutton = gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnUpdate", "Update", left + 130, top, width - 50)
 
     local left = 10
-    local top = 30
+    local top = 155
     local width = 100
 
-    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnCheck", "Check", left, top + 125, width - 50)
-    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnReboot", "Reboot", left + 60, top + 125, width - 50)
+    XAutoCopilotUpdater.autochk = gui.newCheckbox(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdaterautochk", "", left, top - 50, width - 80)
+    XAutoCopilotUpdater.autochktext = gui.newLabel(XAutoCopilotUpdater.gui_h, "ignored", "New Version Check on Start", left + 30, top - 50, width - 80)
 
-    -- help icon
+    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnCheck", "Check", left, top, width - 50)
+    gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnReboot", "Reboot", left + 60, top, width - 50)
+
+    -- help + save icon
     XAutoCopilotUpdater.helpIcon_h = gui.newCustomWidget(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_helpIcon", XAutoCopilotUpdater.w - 20, 20, 17, 17)
+    XAutoCopilotUpdater.diskIcon_h = gui.newCustomWidget(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_diskIcon", XAutoCopilotUpdater.w - 40, 20, 17, 17)
 
     gui.hideWidget(XAutoCopilotUpdater.updatertext)
     gui.hideWidget(XAutoCopilotUpdater.updaterbutton)
-
     gui.hideWidget(XAutoCopilotUpdater.updatetext)
     gui.hideWidget(XAutoCopilotUpdater.updatebutton)
+
+    local autochk = xac_prefs.get("XAutoCopilotUpdater.autochk", 1)
+
+    if autochk == true then
+        gui.setWidgetValue(XAutoCopilotUpdater.autochk, 1)
+        local tmr_oneshot = timer.newOneShot("check_for_updates", 20.0)
+    else
+        gui.setWidgetValue(XAutoCopilotUpdater.autochk, 0)
+    end
+end
+
+function XAutoCopilotUpdater_OnUpdate()
+
+    if xac_update.updater.status == 1 and xac_update.updater.size ~= fsize(xac_update.updater.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatertext)
+        gui.showWidget(XAutoCopilotUpdater.updaterbutton)
+        xac_update.updater.status = 2
+    end
+
+    if xac_update.init.status == 1 and xac_update.init.size ~= fsize(xac_update.init.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.init.status = 2
+    end
+
+    if xac_update.version.status == 1 and xac_update.version.size ~= fsize(xac_update.version.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.version.status = 2
+    end
+
+    if xac_update.vupdater.status == 1 and xac_update.vupdater.size ~= fsize(xac_update.vupdater.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.vupdater.status = 2
+    end
+
+    if xac_update.changelog.status == 1 and xac_update.changelog.size ~= fsize(xac_update.changelog.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.changelog.status = 2
+    end
+
+    if xac_update.datarefs.status == 1 and xac_update.datarefs.size ~= fsize(xac_update.datarefs.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.datarefs.status = 2
+    end
+
+    if xac_update.pdatarefs.status == 1 and xac_update.pdatarefs.size ~= fsize(xac_update.pdatarefs.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.pdatarefs.status = 2
+    end
+
+    if xac_update.helper.status == 1 and xac_update.helper.size ~= fsize(xac_update.helper.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.helper.status = 2
+    end
+
+    if xac_update.copilot.status == 1 and xac_update.copilot.size ~= fsize(xac_update.copilot.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.copilot.status = 2
+    end
+
+    if xac_update.approach.status == 1 and xac_update.approach.size ~= fsize(xac_update.approach.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.approach.status = 2
+    end
+
+    if xac_update.departure.status == 1 and xac_update.departure.size ~= fsize(xac_update.departure.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.departure.status = 2
+    end
+
+    if xac_update.debug.status == 1 and xac_update.debug.size ~= fsize(xac_update.debug.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.debug.status = 2
+    end
+
+    if xac_update.flightinfo.status == 1 and xac_update.flightinfo.size ~= fsize(xac_update.flightinfo.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.flightinfo.status = 2
+    end
+
+    if xac_update.route.status == 1 and xac_update.route.size ~= fsize(xac_update.route.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.route.status = 2
+    end
+
+    if xac_update.color.status == 1 and xac_update.color.size ~= fsize(xac_update.color.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.color.status = 2
+    end
+
+    if xac_update.icons.status == 1 and xac_update.icons.size ~= fsize(xac_update.icons.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.icons.status = 2
+    end
+
+    if xac_update.toast.status == 1 and xac_update.toast.size ~= fsize(xac_update.toast.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.toast.status = 2
+    end
+
+    if xac_update.info.status == 1 and xac_update.info.size ~= fsize(xac_update.info.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.info.status = 2
+    end
 end
 
 function XAutoCopilotUpdater_helpIcon_OnDraw()
@@ -93,12 +215,137 @@ function XAutoCopilotUpdater_helpIcon_OnDraw()
     gfx.drawTexturedQuad(0, 0, 16, 16)
 end
 
+function XAutoCopilotUpdater_diskIcon_OnDraw()
+    --icon
+    local icon_file = "disk.png"
+    gfx.texOn()
+    gfx.setColor(color.white)
+    gfx.useTexture(icons.get(icon_file))
+    gfx.drawTexturedQuad(0, 0, 16, 16)
+end
+
 function XAutoCopilotUpdater_helpIcon_OnMouseDown()
     --toast.test()
     toast.newInfo("Updater", "This Window is only for testing\nHave a nice day!")
 end
 
-local tmr_oneshot = timer.newOneShot("check_for_updates", 20.0)
+function XAutoCopilotUpdater_diskIcon_OnMouseDown()
+    local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs.txt"
+    xac_prefs.set("XAutoCopilotUpdater.autochk", gui.getWidgetValue(XAutoCopilotUpdater.autochk))
+    xac_prefs.save(filename)
+end
+
+function XAutoCopilotUpdater_btnCheck_OnClick()
+
+    if gui.getWidgetValue(XAutoCopilotUpdater.autochk) == true then
+        xac_trigger_update()
+    end
+
+    if gui.getWidgetValue(XAutoCopilotUpdater.autochk) == false then
+        check_for_updates()
+        xac_trigger_update()
+    end
+end
+
+function XAutoCopilotUpdater_btnUpdate_OnClick()
+    --http_update_save(filename,data)
+    if xac_update.init.status == 2 then
+        http_update_save(xac_update.init.filename, xac_update.init.data)
+        xac_update.init.status = 3
+    end
+
+    if xac_update.version.status == 2 then
+        http_update_save(xac_update.version.filename, xac_update.version.data)
+        xac_update.version.status = 3
+    end
+
+    if xac_update.vupdater.status == 2 then
+        http_update_save(xac_update.vupdater.filename, xac_update.vupdater.data)
+        xac_update.vupdater.status = 3
+    end
+
+    if xac_update.changelog.status == 2 then
+        http_update_save(xac_update.changelog.filename, xac_update.changelog.data)
+        xac_update.changelog.status = 3
+    end
+
+    if xac_update.datarefs.status == 2 then
+        http_update_save(xac_update.datarefs.filename, xac_update.datarefs.data)
+        xac_update.datarefs.status = 3
+    end
+
+    if xac_update.pdatarefs.status == 2 then
+        http_update_save(xac_update.pdatarefs.filename, xac_update.pdatarefs.data)
+        xac_update.pdatarefs.status = 3
+    end
+
+    if xac_update.helper.status == 2 then
+        http_update_save(xac_update.helper.filename, xac_update.helper.data)
+        xac_update.helper.status = 3
+    end
+
+    if xac_update.copilot.status == 2 then
+        http_update_save(xac_update.copilot.filename, xac_update.copilot.data)
+        xac_update.copilot.status = 3
+    end
+
+    if xac_update.approach.status == 2 then
+        http_update_save(xac_update.approach.filename, xac_update.approach.data)
+        xac_update.approach.status = 3
+    end
+
+    if xac_update.departure.status == 2 then
+        http_update_save(xac_update.departure.filename, xac_update.departure.data)
+        xac_update.departure.status = 3
+    end
+
+    if xac_update.debug.status == 2 then
+        http_update_save(xac_update.debug.filename, xac_update.debug.data)
+        xac_update.debug.status = 3
+    end
+
+    if xac_update.flightinfo.status == 2 then
+        http_update_save(xac_update.flightinfo.filename, xac_update.flightinfo.data)
+        xac_update.flightinfo.status = 3
+    end
+
+    if xac_update.route.status == 2 then
+        http_update_save(xac_update.route.filename, xac_update.route.data)
+        xac_update.route.status = 3
+    end
+
+    if xac_update.color.status == 2 then
+        http_update_save(xac_update.color.filename, xac_update.color.data)
+        xac_update.color.status = 3
+    end
+
+    if xac_update.icons.status == 2 then
+        http_update_save(xac_update.icons.filename, xac_update.icons.data)
+        xac_update.icons.status = 3
+    end
+
+    if xac_update.toast.status == 2 then
+        http_update_save(xac_update.toast.filename, xac_update.toast.data)
+        xac_update.toast.status = 3
+    end
+
+    if xac_update.info.status == 2 then
+        http_update_save(xac_update.info.filename, xac_update.info.data)
+        xac_update.info.status = 3
+    end
+end
+
+function XAutoCopilotUpdater_btnUpdateUpdater_OnClick()
+    --http_update_save(filename,data)
+    if xac_update.updater.status == 2 then
+        http_update_save(xac_update.updater.filename, xac_update.updater.data)
+        xac_update.updater.status = 3
+    end
+end
+
+function XAutoCopilotUpdater_btnReboot_OnClick()
+    gizmo.reboot()
+end
 
 function check_for_updates()
     xac_updater_check()
@@ -115,10 +362,9 @@ function http_updater_check(data, url, size)
     if (data) then
         if data ~= xac_updater_version then
             toast.newInfo("NEW UPDATER SCRIPT", "Version: " .. data .. "\nCurrent: " .. xac_updater_version .. "")
-            xac_new_updater = 1
         end
     else
-        Network_Error("Download Updater Check")
+        Network_Error("Version Updater Check")
     end
 end
 
@@ -132,10 +378,9 @@ function http_update_check(data, url, size)
     if (data) then
         if data ~= xac_version then
             toast.newInfo("NEW UPDATES FOR XAC", "Version: " .. data .. "\nCurrent: " .. xac_version .. "")
-            xac_new_update = 1
         end
     else
-        Network_Error("Download Update Check")
+        Network_Error("XAC Version Update Check")
     end
 end
 
@@ -154,40 +399,11 @@ http_update_save = function(filename, data)
     else
         error("http_update_save(): Failed: (" .. data_path .. ")")
     end --check file handle is not nil
-end --http_updater.save()
+end --http_update_save()
 
 function Network_Error(modul)
     local modul = modul
     toast.newError("Network Error", modul)
-end
-
-function XAutoCopilotUpdater_btnCheck_OnClick()
-    check_for_updates()
-    xac_trigger_update()
-end
-
-function XAutoCopilotUpdater_btnUpdate_OnClick()
-    --http_update_save(filename,data)
-    --http_update_save(xac_update.updater.filename, xac_update.updater.data)
-end
-
-function XAutoCopilotUpdater_btnUpdateUpdater_OnClick()
-    --http_update_save(filename,data)
-    http_update_save(xac_update.updater.filename, xac_update.updater.data)
-end
-
-function XAutoCopilotUpdater_btnReboot_OnClick()
-    gizmo.reboot()
-end
-
-function fsize(file)
-    if not file_exists(file) then return {} end
-    local file = assert(io.open(file, "r"))
-    local current = file:seek() -- get current position
-    local size = file:seek("end") -- get file size
-    file:seek("set", current) -- restore position
-    file:close()
-    return size
 end
 
 function xac_trigger_update()
@@ -223,7 +439,7 @@ function xac_http_update_get(data, url, size)
     end
 
     if size < 1 and xac_update.updater.url == url then
-        Network_Error("Download Update Script") --later in window !!!
+        Network_Error("Download Update Scripts") --later in window !!!
     end
 
     --write to updater table
@@ -351,15 +567,6 @@ function xac_http_update_get(data, url, size)
         xac_update.info.size = size
         xac_update.info.status = status
         xac_update.info.localsize = fsize(xac_update.info.filename)
-    end
-end
-
-function XAutoCopilotUpdater_OnUpdate()
-
-    if xac_update.updater.status == 1 and xac_update.updater.size ~= fsize(xac_update.updater.filename) then
-        gui.showWidget(XAutoCopilotUpdater.updatertext)
-        gui.showWidget(XAutoCopilotUpdater.updaterbutton)
-        xac_update.updater.status = 2
     end
 end
 
