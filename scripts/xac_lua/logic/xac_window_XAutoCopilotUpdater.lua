@@ -202,7 +202,7 @@ function XAutoCopilotUpdater_diskIcon_OnDraw()
 end
 
 function XAutoCopilotUpdater_helpIcon_OnMouseDown()
-infocube.plate =  "STRING"
+
 end
 
 
