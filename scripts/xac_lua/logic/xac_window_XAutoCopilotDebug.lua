@@ -47,15 +47,15 @@ end
 
 function XAutoCopilotDebug_helpIcon_OnDraw()
     --icon
-    local icon_file = "help.png"
+    local icon_file = gfx.loadPng(gizmo.getFolder() .. "firmware/icons/" .. tostring("help.png"))
     gfx.texOn()
-    gfx.setColor(color.white)
-    gfx.useTexture(icons.get(icon_file))
+    gfx.setColor(xaccolor.white)
+    gfx.useTexture(icon_file)
     gfx.drawTexturedQuad(0, 0, 16, 16)
 end
 
 function XAutoCopilotDebug_helpIcon_OnMouseDown()
-    --toast.test()
+    --infocube.test()
     toast.newInfo("Debug Info", "This Window is only for testing\nHave a nice day!")
 end
 

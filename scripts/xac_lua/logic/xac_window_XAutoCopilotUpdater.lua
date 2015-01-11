@@ -27,12 +27,6 @@ xac_update.debug = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_
 xac_update.flightinfo = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotFlightInfo.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotFlightInfo.lua" }
 xac_update.route = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua" }
 
---folder FirmewarePreview
---xac_update.color = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmwarePreview/color_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/color_api.lua" }
---xac_update.icons = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmwarePreview/icons_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/icons_api.lua" }
---xac_update.toast = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmwarePreview/toast_api.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/toast_api.lua" }
---xac_update.info = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/FirmwarePreview/Info.txt", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/FirmwarePreview/Info.txt" }
-
 -- -- set Version for updates year, month, day, hour, minutes
 --xac_version = 201501082240
 
@@ -187,37 +181,13 @@ function XAutoCopilotUpdater_OnUpdate()
         gui.showWidget(XAutoCopilotUpdater.updatebutton)
         xac_update.route.status = 2
     end
-
-    --if xac_update.color.status == 1 and xac_update.color.size ~= fsize(xac_update.color.filename) then
-    --    gui.showWidget(XAutoCopilotUpdater.updatetext)
-    --    gui.showWidget(XAutoCopilotUpdater.updatebutton)
-    --    xac_update.color.status = 2
-    --end
-
-    --if xac_update.icons.status == 1 and xac_update.icons.size ~= fsize(xac_update.icons.filename) then
-    --    gui.showWidget(XAutoCopilotUpdater.updatetext)
-    --    gui.showWidget(XAutoCopilotUpdater.updatebutton)
-    --    xac_update.icons.status = 2
-    --end
-
-    --if xac_update.toast.status == 1 and xac_update.toast.size ~= fsize(xac_update.toast.filename) then
-    --    gui.showWidget(XAutoCopilotUpdater.updatetext)
-    --    gui.showWidget(XAutoCopilotUpdater.updatebutton)
-    --    xac_update.toast.status = 2
-    --end
-
-    --if xac_update.info.status == 1 and xac_update.info.size ~= fsize(xac_update.info.filename) then
-    --    gui.showWidget(XAutoCopilotUpdater.updatetext)
-    --    gui.showWidget(XAutoCopilotUpdater.updatebutton)
-    --    xac_update.info.status = 2
-    --end
 end
 
 function XAutoCopilotUpdater_helpIcon_OnDraw()
     --icon
     local icon_file = gfx.loadPng(gizmo.getFolder() .. "firmware/icons/" .. tostring("help.png"))
     gfx.texOn()
-    --gfx.setColor(color.white)
+    gfx.setColor(xaccolor.white)
     gfx.useTexture(icon_file)
     gfx.drawTexturedQuad(0, 0, 16, 16)
 end
@@ -226,13 +196,13 @@ function XAutoCopilotUpdater_diskIcon_OnDraw()
     --icon
     local icon_file = gfx.loadPng(gizmo.getFolder() .. "firmware/icons/" .. tostring("disk.png"))
     gfx.texOn()
-    --gfx.setColor(color.white)
+    gfx.setColor(xaccolor.white)
     gfx.useTexture(icon_file)
     gfx.drawTexturedQuad(0, 0, 16, 16)
 end
 
 function XAutoCopilotUpdater_helpIcon_OnMouseDown()
-
+infocube.plate =  "STRING"
 end
 
 
@@ -328,30 +298,6 @@ function XAutoCopilotUpdater_btnUpdate_OnClick()
         gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
-    --if xac_update.color.status == 2 then
-    --    http_update_save(xac_update.color.filename, xac_update.color.data)
-    --    xac_update.color.status = 3
-    --    gui.hideWidget(XAutoCopilotUpdater.updatebutton)
-    --end
-
-    --if xac_update.icons.status == 2 then
-    --    http_update_save(xac_update.icons.filename, xac_update.icons.data)
-    --    xac_update.icons.status = 3
-    --    gui.hideWidget(XAutoCopilotUpdater.updatebutton)
-    --end
-
-    --if xac_update.toast.status == 2 then
-    --    http_update_save(xac_update.toast.filename, xac_update.toast.data)
-    --    xac_update.toast.status = 3
-    --    gui.hideWidget(XAutoCopilotUpdater.updatebutton)
-    --end
-
-    --if xac_update.info.status == 2 then
-    --    http_update_save(xac_update.info.filename, xac_update.info.data)
-    --    xac_update.info.status = 3
-    --    gui.hideWidget(XAutoCopilotUpdater.updatebutton)
-    --end
-
     local tmr_oneshot = timer.newOneShot("show_reboot_button", 5.0)
 end
 
@@ -394,7 +340,7 @@ function http_updater_check(data, url, size)
     local data = tonumber(data)
     if (data) then
         if data ~= xac_updater_version then
-            --toast.newInfo("NEW UPDATER SCRIPT", "Version: " .. data .. "\nCurrent: " .. xac_updater_version .. "")
+            --infocube.newInfo("NEW UPDATER SCRIPT", "Version: " .. data .. "\nCurrent: " .. xac_updater_version .. "")
         end
     else
         Network_Error("Version Updater Check")
@@ -410,7 +356,7 @@ function http_update_check(data, url, size)
     local data = tonumber(data)
     if (data) then
         if data ~= xac_version then
-            --toast.newInfo("NEW UPDATES FOR XAC", "Version: " .. data .. "\nCurrent: " .. xac_version .. "")
+            --infocube.newInfo("NEW UPDATES FOR XAC", "Version: " .. data .. "\nCurrent: " .. xac_version .. "")
         end
     else
         Network_Error("XAC Version Update Check")
@@ -436,7 +382,7 @@ end --http_update_save()
 
 function Network_Error(modul)
     local modul = modul
-    --toast.newError("Network Error", modul)
+    --infocube.newError("Network Error", modul)
 end
 
 function xac_trigger_update()
@@ -454,10 +400,6 @@ function xac_trigger_update()
     http.get(xac_update.debug.url, 'xac_http_update_get')
     http.get(xac_update.flightinfo.url, 'xac_http_update_get')
     http.get(xac_update.route.url, 'xac_http_update_get')
-    --http.get(xac_update.color.url, 'xac_http_update_get')
-    --http.get(xac_update.icons.url, 'xac_http_update_get')
-    --http.get(xac_update.toast.url, 'xac_http_update_get')
-    --http.get(xac_update.info.url, 'xac_http_update_get')
 end
 
 function xac_http_update_get(data, url, size)
@@ -573,34 +515,6 @@ function xac_http_update_get(data, url, size)
         xac_update.route.status = status
         xac_update.route.localsize = fsize(xac_update.route.filename)
     end
-
-    --if xac_update.color.url == url and dataread == 1 then
-    --    xac_update.color.data = data
-    --    xac_update.color.size = size
-    --    xac_update.color.status = status
-    --    xac_update.color.localsize = fsize(xac_update.color.filename)
-    --end
-
-    --if xac_update.icons.url == url and dataread == 1 then
-    --    xac_update.icons.data = data
-    --    xac_update.icons.size = size
-    --    xac_update.icons.status = status
-    --    xac_update.icons.localsize = fsize(xac_update.icons.filename)
-    --end
-
-    --if xac_update.toast.url == url and dataread == 1 then
-    --    xac_update.toast.data = data
-    --    xac_update.toast.size = size
-    --    xac_update.toast.status = status
-    --    xac_update.toast.localsize = fsize(xac_update.toast.filename)
-    --end
-
-    --if xac_update.info.url == url and dataread == 1 then
-    --    xac_update.info.data = data
-    --    xac_update.info.size = size
-    --    xac_update.info.status = status
-    --    xac_update.info.localsize = fsize(xac_update.info.filename)
-    --end
 end
 
 ToolXAutoCopilotUpdater = {

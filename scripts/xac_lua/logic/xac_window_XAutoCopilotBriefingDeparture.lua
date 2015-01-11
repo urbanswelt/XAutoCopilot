@@ -70,7 +70,7 @@ function XAutoCopilotBriefingDeparture_helpIcon_OnDraw()
     --icon
     local icon_file = gfx.loadPng(gizmo.getFolder() .. "firmware/icons/" .. tostring("help.png"))
     gfx.texOn()
-    --gfx.setColor(color.white)
+    gfx.setColor(xaccolor.white)
     gfx.useTexture(icon_file)
     gfx.drawTexturedQuad(0, 0, 16, 16)
 end
@@ -79,14 +79,14 @@ function XAutoCopilotBriefingDeparture_diskIcon_OnDraw()
     --icon
     local icon_file = gfx.loadPng(gizmo.getFolder() .. "firmware/icons/" .. tostring("disk.png"))
     gfx.texOn()
-    --gfx.setColor(color.white)
+    gfx.setColor(xaccolor.white)
     gfx.useTexture(icon_file)
     gfx.drawTexturedQuad(0, 0, 16, 16)
 end
 
 function XAutoCopilotBriefingDeparture_helpIcon_OnMouseDown()
     --message
-    --toast.newInfo("Departure Window Info", "This Window is only for testing\nHave a nice day!")
+    --infocube.newInfo("Departure Window Info", "This Window is only for testing\nHave a nice day!")
 end
 
 function XAutoCopilotBriefingDeparture_diskIcon_OnMouseDown()
