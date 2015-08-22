@@ -123,7 +123,9 @@ function OnUpdate_XAutoCopilot_btnPreparation()
         dref.setInt(xac_chocks_r, 1)
         dref.setInt(xac_cone, 1)
         dref.setInt(xac_nv_block_pin, 1)
-
+        dref.setInt(xac_ml_gear_lockup_clutch_l, 1)
+        dref.setInt(xac_ml_gear_lockup_clutch_r, 1)
+        
         dref.setString(xac_route_state, "BOARDING")
         dref.setInt(xac_p_f_l_kn, 1)
         dref.setInt(xac_p_f_r_kn, 1)
