@@ -101,7 +101,8 @@ function OnFirstFrame()
     xac_cover_st_pres_port_rf = dref.getDataref("sim/custom/xap/cover_st_pres_port_rf")
     xac_cover_st_pres_port_rr = dref.getDataref("sim/custom/xap/cover_st_pres_port_rr")
     xac_nv_block_pin = dref.getDataref("sim/custom/xap/nv_block_pin")
-
+    xac_ml_gear_lockup_clutch_l = dref.getDataref("sim/custom/xap/ml_gear_lockup_clutch_l")
+    xac_ml_gear_lockup_clutch_r = dref.getDataref("sim/custom/xap/ml_gear_lockup_clutch_r")
 
     -- doors / menu
     xac_p_f_l_kn = dref.getDataref("sim/custom/xap/doors/p_f_l_kn")
