@@ -38,6 +38,7 @@ function Split(str, delim, maxNb)
     end
     return result
 end
+
 -- get all lines from a file, returns an empty list/table if the file does not exist
 function lines_from(file)
     if not file_exists(file) then return {} end
@@ -232,11 +233,11 @@ end
 --xac xaccolor table for global use
 
 xaccolor = {}
-xaccolor.white = {1,1,1,1 }
-xaccolor.red = {1,0,0,1 }
-xaccolor.yellow = {1,1,0,1 }
-xaccolor.blue = {0,0,1,1 }
-xaccolor.black = {0,0,0,1 }
+xaccolor.white = { 1, 1, 1, 1 }
+xaccolor.red = { 1, 0, 0, 1 }
+xaccolor.yellow = { 1, 1, 0, 1 }
+xaccolor.blue = { 0, 0, 1, 1 }
+xaccolor.black = { 0, 0, 0, 1 }
 
 --preferences adapted from Gizmo Firmeware FIXME change for more then 1 pref "table" usage
 --https://github.com/benrussell/Gizmo-Firmware

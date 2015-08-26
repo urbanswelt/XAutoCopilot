@@ -31,7 +31,7 @@ xac_update.route = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_
 --xac_version = 201501082240
 
 local version = lines_from(xac_update.version.filename)
-local vupdater =lines_from(xac_update.vupdater.filename)
+local vupdater = lines_from(xac_update.vupdater.filename)
 
 xac_version = tonumber(version[1])
 xac_updater_version = tonumber(vupdater[1])
@@ -202,7 +202,6 @@ function XAutoCopilotUpdater_diskIcon_OnDraw()
 end
 
 function XAutoCopilotUpdater_helpIcon_OnMouseDown()
-
 end
 
 
@@ -318,7 +317,7 @@ function XAutoCopilotUpdater_btnUpdateUpdater_OnClick()
     local tmr_oneshot = timer.newOneShot("show_reboot_button", 5.0)
 end
 
-function show_reboot_button ()
+function show_reboot_button()
     gui.showWidget(XAutoCopilotUpdater.rebootbutton)
 end
 

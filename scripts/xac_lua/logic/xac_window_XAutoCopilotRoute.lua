@@ -176,7 +176,7 @@ function XAutoCopilotRoute_btnFuelStart_OnClick()
     -- Block is changing, we must start 2 loop´s
     timer.newOneShot("Fuelloop1", (0.1))
     timer.newOneShot("Fuelloop2", (3.0))
-	XAutoCopilotRoute.fuelfinish = 1
+    XAutoCopilotRoute.fuelfinish = 1
 end
 
 function Fuelloop1()
