@@ -696,91 +696,98 @@ function OnUpdate_XAutoCopilot_btnbeforeStart()
     end
 end
 
-
+--- -START UP
 function XAutoCopilot_btnStart_OnClick()
+    dref.setString(xac_route_state, "START UP")
     gui.hideWindow(XAutoCopilot.gui_h)
     gui.hideWidget(XAutoCopilot.btnstart)
     dref.setIntV(xac_state_start, 1, 1)
     event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnStart")
 end
 
---function XAutoCopilot_btnStart_OnClick()
---    gui.hideWindow(XAutoCopilot.gui_h)
---    gui.hideWidget(XAutoCopilot.btnstart)
---    dref.setIntV(xac_state_start, 1, 1)
---    event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnStart")
---end
---
---function OnUpdate_XAutoCopilot_btnStart()
---
---    if dref.getIntV(xac_state_start, 1, 1) == 1 then
---        dref.setInt(xac_t1_pump1, 1)
---        dref.setInt(xac_t1_pump2, 1)
---        dref.setInt(xac_t2_pump1, 1)
---        dref.setInt(xac_t2_pump2, 1)
---        dref.setInt(xac_t3_pump1, 1)
---        dref.setInt(xac_t3_pump2, 1)
---        dref.setInt(xac_startsel, 1)
---        dref.setInt(xac_eng1msw, 1)
---        dref.setIntV(xac_state_start, 2, 1)
---        dref.setIntV(xac_state_start, 1, 0)
---    end
---
---    if dref.getIntV(xac_state_start, 2, 1) == 1 and
---            dref.getFloatV(xac_n2_percent, 1, 1) > 50.0 then
---        dref.setInt(xac_eng2msw, 1)
---        dref.setIntV(xac_state_start, 3, 1)
---        dref.setIntV(xac_state_start, 2, 0)
---    end
---
---    if dref.getIntV(xac_state_start, 3, 1) == 1 and
---            dref.getFloatV(xac_n2_percent, 2, 1) > 50.0 then
---        dref.setIntV(xac_state_start, 4, 1)
---        dref.setIntV(xac_state_start, 3, 0)
---        gui.hideWidget(XAutoCopilot.start)
---        gui.showWidget(XAutoCopilot.btnafterstart)
---        gui.showWidget(XAutoCopilot.afterstart)
---        gui.showWindow(XAutoCopilot.gui_h)
---        OnUpdate_XAutoCopilot_btnStart = nil
---    end
---end
---
---function XAutoCopilot_btnafterStart_OnClick()
---    gui.hideWindow(XAutoCopilot.gui_h)
---    gui.hideWidget(XAutoCopilot.btnafterstart)
---    dref.setIntV(xac_state_afterstart, 1, 1)
---    event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnafterStart")
---end
---
---function OnUpdate_XAutoCopilot_btnafterStart()
---
---    if dref.getIntV(xac_state_afterstart, 1, 1) == 1 then
---        dref.setInt(xac_startsel, 0)
---        dref.setInt(xac_apu_blvlv, 0)
---        dref.setInt(xac_pack1, 1)
---        dref.setInt(xac_pack2, 1)
---        dref.setFloat(xac_speedbrake, -0.5)
---        dref.setInt(xac_brake_auto_max, 1)
---        dref.setFloat(xac_rudder_trim, 0.0)
---        dref.setInt(xac_APU_switch, 0)
---        dref.setIntV(xac_state_afterstart, 2, 1)
---        dref.setIntV(xac_state_afterstart, 1, 0)
---    end
---
---    if dref.getIntV(xac_state_afterstart, 2, 1) == 1 then
---        dref.setInt(xac_click_perf, 1)
---        dref.setIntV(xac_state_afterstart, 3, 1)
---        dref.setIntV(xac_state_afterstart, 2, 0)
---        timer.newOneShot("AutoFlap", 2.0)
---        gui.hideWidget(XAutoCopilot.afterstart)
---        gui.showWidget(XAutoCopilot.btntaxi)
---        gui.showWidget(XAutoCopilot.taxi)
---        gui.showWidget(XAutoCopilot.fm)
---        gui.showWidget(XAutoCopilot.chkFM)
---        gui.showWindow(XAutoCopilot.gui_h)
---        OnUpdate_XAutoCopilot_btnafterStart = nil
---    end
---end
+function OnUpdate_XAutoCopilot_btnStart()
+
+    if dref.getIntV(xac_state_start, 1, 1) == 1 then
+        logging.debug("OnUpdate_XAutoCopilot_btnStart")
+        dref.setInt(dref.getDataref("sim/custom/xap/fuel/t1_pump1"), 1) --Fuel Pumps|ON
+        dref.setInt(dref.getDataref("sim/custom/xap/fuel/t1_pump2"), 1) --Fuel Pumps|ON
+        dref.setInt(dref.getDataref("sim/custom/xap/fuel/t3_pump1"), 1) --Fuel Pumps|ON
+        dref.setInt(dref.getDataref("sim/custom/xap/fuel/t3_pump2"), 1) --Fuel Pumps|ON
+        dref.setInt(dref.getDataref("sim/custom/xap/fuel/t2_pump1"), 1) --Fuel Pumps|ON
+        dref.setInt(dref.getDataref("sim/custom/xap/fuel/t2_pump2"), 1) --Fuel Pumps|ON
+        dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 1) --ECAM FUEL Pumps|ALL GREEN
+        dref.setInt(dref.getDataref("sim/custom/xap/engines/startsel"), 1) --Engine Mode Selector|IGN
+        dref.setInt(dref.getDataref("sim/custom/xap/engines/eng2msw"), 1) --Eng2 Master|ON
+        dref.setIntV(xac_state_start, 2, 1)
+        dref.setIntV(xac_state_start, 1, 0)
+    end
+
+    if dref.getIntV(xac_state_start, 2, 1) == 1 and
+            dref.getFloatV(dref.getDataref("sim/cockpit2/engine/indicators/N2_percent"), 2, 1) > 50.0 then
+        dref.setInt(dref.getDataref("sim/custom/xap/engines/eng1msw"), 1) --Eng1 Master|ON
+        dref.setIntV(xac_state_start, 3, 1)
+        dref.setIntV(xac_state_start, 2, 0)
+    end
+
+    if dref.getIntV(xac_state_start, 3, 1) == 1 and
+            dref.getFloatV(dref.getDataref("sim/cockpit2/engine/indicators/N2_percent"), 1, 1) > 50.0 then
+        dref.setIntV(xac_state_start, 4, 1)
+        dref.setIntV(xac_state_start, 3, 0)
+        gui.hideWidget(XAutoCopilot.start)
+        gui.showWidget(XAutoCopilot.btnafterstart)
+        gui.showWidget(XAutoCopilot.afterstart)
+        gui.showWindow(XAutoCopilot.gui_h)
+        OnUpdate_XAutoCopilot_btnStart = nil
+    end
+end
+
+--- -AFTER ENGINE START
+function XAutoCopilot_btnafterStart_OnClick()
+    dref.setString(xac_route_state, "AFTER ENGINE START")
+    gui.hideWindow(XAutoCopilot.gui_h)
+    gui.hideWidget(XAutoCopilot.btnafterstart)
+    dref.setIntV(xac_state_afterstart, 1, 1)
+    event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnafterStart")
+end
+
+function OnUpdate_XAutoCopilot_btnafterStart()
+
+    if dref.getIntV(xac_state_afterstart, 1, 1) == 1 then
+        logging.debug("OnUpdate_XAutoCopilot_btnafterStart")
+
+
+
+
+
+    end
+    --    if dref.getIntV(xac_state_afterstart, 1, 1) == 1 then
+    --        dref.setInt(xac_startsel, 0)
+    --        dref.setInt(xac_apu_blvlv, 0)
+    --        dref.setInt(xac_pack1, 1)
+    --        dref.setInt(xac_pack2, 1)
+    --        dref.setFloat(xac_speedbrake, -0.5)
+    --        dref.setInt(xac_brake_auto_max, 1)
+    --        dref.setFloat(xac_rudder_trim, 0.0)
+    --        dref.setInt(xac_APU_switch, 0)
+    --        dref.setIntV(xac_state_afterstart, 2, 1)
+    --        dref.setIntV(xac_state_afterstart, 1, 0)
+    --    end
+    --
+    --    if dref.getIntV(xac_state_afterstart, 2, 1) == 1 then
+    --        dref.setInt(xac_click_perf, 1)
+    --        dref.setIntV(xac_state_afterstart, 3, 1)
+    --        dref.setIntV(xac_state_afterstart, 2, 0)
+    --        timer.newOneShot("AutoFlap", 2.0)
+    --        gui.hideWidget(XAutoCopilot.afterstart)
+    --        gui.showWidget(XAutoCopilot.btntaxi)
+    --        gui.showWidget(XAutoCopilot.taxi)
+    --        gui.showWidget(XAutoCopilot.fm)
+    --        gui.showWidget(XAutoCopilot.chkFM)
+    --        gui.showWindow(XAutoCopilot.gui_h)
+    --        OnUpdate_XAutoCopilot_btnafterStart = nil
+    --    end
+end
+
 --
 --function XAutoCopilot_btnTaxi_OnClick()
 --    gui.hideWindow(XAutoCopilot.gui_h)
