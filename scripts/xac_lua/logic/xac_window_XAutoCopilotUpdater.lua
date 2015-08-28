@@ -68,7 +68,7 @@ function XAutoCopilotUpdater_OnCreate()
     end
 
     if branchchk == true then
-        gui.showWidget(XAutoCopilotUpdater.rebootbutton)
+        --gui.showWidget(XAutoCopilotUpdater.rebootbutton)
         gui.setWidgetValue(XAutoCopilotUpdater.branchchk, 1)
         xac_update = {}
         --updater script

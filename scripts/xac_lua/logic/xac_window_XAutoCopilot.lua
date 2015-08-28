@@ -3,9 +3,6 @@
 -- User: larsurban
 -- Date: 23.01.14
 -- Time: 19:41
---
-
-
 
 XAutoCopilot = {
     gui_h = gui.newWindow("XAutoCopilot"),
