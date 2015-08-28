@@ -29,14 +29,14 @@ xac_update.flightinfo = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/sc
 xac_update.route = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua" }
 ]]
 
--- -- set Version for updates year, month, day, hour, minutes
+--[[-- -- set Version for updates year, month, day, hour, minutes
 --xac_version = 201501082240
 
 local version = lines_from(xac_update.version.filename)
 local vupdater = lines_from(xac_update.vupdater.filename)
 
 xac_version = tonumber(version[1])
-xac_updater_version = tonumber(vupdater[1])
+xac_updater_version = tonumber(vupdater[1])]]
 
 XAutoCopilotUpdater = {
     gui_h = gui.newWindow("XAutoCopilotUpdater"),
@@ -125,7 +125,14 @@ function XAutoCopilotUpdater_OnCreate()
         xac_update.flightinfo = { url = "http://xac.urbanswelt.de/develop/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotFlightInfo.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotFlightInfo.lua" }
         xac_update.route = { url = "http://xac.urbanswelt.de/develop/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua" }
 
+        -- -- set Version for updates year, month, day, hour, minutes
+        --xac_version = 201501082240
 
+        local version = lines_from(xac_update.version.filename)
+        local vupdater = lines_from(xac_update.vupdater.filename)
+
+        xac_version = tonumber(version[1])
+        xac_updater_version = tonumber(vupdater[1])
     else
         gui.setWidgetValue(XAutoCopilotUpdater.branchchk, 0)
         xac_update = {}
@@ -150,6 +157,14 @@ function XAutoCopilotUpdater_OnCreate()
         xac_update.flightinfo = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotFlightInfo.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotFlightInfo.lua" }
         xac_update.route = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua" }
 
+        -- -- set Version for updates year, month, day, hour, minutes
+        --xac_version = 201501082240
+
+        local version = lines_from(xac_update.version.filename)
+        local vupdater = lines_from(xac_update.vupdater.filename)
+
+        xac_version = tonumber(version[1])
+        xac_updater_version = tonumber(vupdater[1])
     end
 end
 
