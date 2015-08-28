@@ -768,33 +768,23 @@ function OnUpdate_XAutoCopilot_btnafterStart()
         timer.newOneShot("AutoFlap", 2.0)
         dref.setInt(dref.getDataref("sim/cockpit/engine/APU_switch"), 0) --Apu Master|OFF
         dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 9) --ECAM DOOR Condition|SLIDES ARMED
+        dref.setIntV(xac_state_afterstart, 2, 1)
+        dref.setIntV(xac_state_afterstart, 1, 0)
     end
-    --    if dref.getIntV(xac_state_afterstart, 1, 1) == 1 then
-    --        dref.setInt(xac_startsel, 0)
-    --        dref.setInt(xac_apu_blvlv, 0)
-    --        dref.setInt(xac_pack1, 1)
-    --        dref.setInt(xac_pack2, 1)
-    --        dref.setFloat(xac_speedbrake, -0.5)
-    --        dref.setInt(xac_brake_auto_max, 1)
-    --        dref.setFloat(xac_rudder_trim, 0.0)
-    --        dref.setInt(xac_APU_switch, 0)
-    --        dref.setIntV(xac_state_afterstart, 2, 1)
-    --        dref.setIntV(xac_state_afterstart, 1, 0)
-    --    end
-    --
-    --    if dref.getIntV(xac_state_afterstart, 2, 1) == 1 then
-    --        dref.setInt(xac_click_perf, 1)
-    --        dref.setIntV(xac_state_afterstart, 3, 1)
-    --        dref.setIntV(xac_state_afterstart, 2, 0)
-    --        timer.newOneShot("AutoFlap", 2.0)
-    --        gui.hideWidget(XAutoCopilot.afterstart)
-    --        gui.showWidget(XAutoCopilot.btntaxi)
-    --        gui.showWidget(XAutoCopilot.taxi)
-    --        gui.showWidget(XAutoCopilot.fm)
-    --        gui.showWidget(XAutoCopilot.chkFM)
-    --        gui.showWindow(XAutoCopilot.gui_h)
-    --        OnUpdate_XAutoCopilot_btnafterStart = nil
-    --    end
+
+    if dref.getIntV(xac_state_afterstart, 2, 1) == 1 then
+        --dref.setInt(xac_click_perf, 1)
+        timer.newOneShot("AutoFlap", 2.0)
+        gui.hideWidget(XAutoCopilot.afterstart)
+        gui.showWidget(XAutoCopilot.btntaxi)
+        gui.showWidget(XAutoCopilot.taxi)
+        gui.showWidget(XAutoCopilot.fm)
+        gui.showWidget(XAutoCopilot.chkFM)
+        gui.showWindow(XAutoCopilot.gui_h)
+        --dref.setIntV(xac_state_afterstart, 3, 1)
+        dref.setIntV(xac_state_afterstart, 2, 0)
+        OnUpdate_XAutoCopilot_btnafterStart = nil
+    end
 end
 
 --
