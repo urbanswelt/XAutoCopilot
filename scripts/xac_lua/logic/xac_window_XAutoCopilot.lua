@@ -611,20 +611,19 @@ function OnUpdate_XAutoCopilot_btnPreparation()
     end
 end
 
---##############################################################################################
-
-
+--- -BEFORE START UP
 function XAutoCopilot_btnbeforeStart_OnClick()
     dref.setString(xac_route_state, "BEFORE START UP")
     gui.hideWindow(XAutoCopilot.gui_h)
     gui.hideWidget(XAutoCopilot.btnbeforestart)
     gui.hideWidget(XAutoCopilot.pushback)
     gui.hideWidget(XAutoCopilot.chkPushback)
+    gui.hideWidget(XAutoCopilot.beforestart)
     dref.setIntV(xac_state_beforestart, 1, 1)
     event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnbeforeStart")
 end
 
---sim/custom/xap/groundserv/pwr_tow
+
 function XAutoCopilot_chkPushback_OnClick()
 
     local chkPushback = gui.getWidgetValue(XAutoCopilot.chkPushback)
@@ -637,81 +636,74 @@ function XAutoCopilot_chkPushback_OnClick()
     end
 end
 
-function OnUpdate_XAutoCopilot_btnbeforeStart() --TODO
-
-if dref.getIntV(xac_state_beforestart, 1, 1) == 1 then
-    logging.debug("OnUpdate_XAutoCopilot_btnbeforeStart")
-    dref.setInt(dref.getDataref("sim/custom/xap/doors/p_f_l_kn"), 0) --Left Front Passenger Door|CLOSE
-    dref.setInt(dref.getDataref("sim/custom/xap/doors/c_f_kn"), 0) --Cargo Door, Front CLOSE
-    dref.setInt(dref.getDataref("sim/custom/xap/doors/c_b_kn"), 0) --Cargo Door, Back CLOSE
-    dref.setInt(dref.getDataref("sim/custom/xap/groundserv/stair/str_on"), 0) --Stairway/Gangway|DISS
-    dref.setInt(dref.getDataref("sim/custom/xap/wheels/ant_skeed"), 0) --Antiskid|DISC
-    dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 9) --ECAM DOOR Condition
-    dref.setInt(dref.getDataref("sim/custom/xap/extlight/beacon_sw"), 1) --ECAM DOOR Condition
-    dref.setIntV(xac_state_beforestart, 2, 1)
-    dref.setIntV(xac_state_beforestart, 1, 0)
-end
-
-if dref.getIntV(xac_state_chk_box, 2, 1) == 1 and
-        dref.getIntV(xac_state_beforestart, 2, 1) == 1
-then
+function BEFORE_START_START1()
+    logging.debug("BEFORE_START_START1")
     dref.setInt(dref.getDataref("sim/custom/xap/groundserv/call_tow"), 1) --call pushback Truck
     dref.setInt(dref.getDataref("sim/custom/xap/chklst/chklst01"), 2) --Jardesign Checklist
+    dref.setIntV(xac_state_beforestart, 3, 1)
     dref.setIntV(xac_state_beforestart, 2, 0)
-    else
-        dref.setFloat(dref.getDataref("sim/flightmodel/controls/parkbrake"), 1.0) --Parking Brake ON
-        dref.setInt(dref.getDataref("sim/custom/xap/chklst/chklst01"), 2) --Jardesign Checklist
-        dref.setIntV(xac_state_beforestart, 2, 0)
-end
 end
 
---        dref.setInt(xac_tanker_on, 0)
---        dref.setInt(xac_load_on, 0)
---        dref.setInt(xac_p_f_l_kn, 0)
---        dref.setInt(xac_p_f_r_kn, 0)
---        dref.setInt(xac_p_b_l_kn, 0)
---        dref.setInt(xac_p_b_r_kn, 0)
---        dref.setInt(xac_c_f_kn, 0)
---        dref.setInt(xac_c_b_kn, 0)
---        dref.setInt(xac_cater_on, 0)
---
---        if dref.getIntV(xac_state_chk_box, 1, 1) == 1 then
---            dref.setInt(xac_stair_on, 0)
---        end
---
---        dref.setIntV(xac_state_beforestart, 2, 1)
---        dref.setIntV(xac_state_beforestart, 1, 0)
---    end
---
---    if dref.getIntV(xac_state_beforestart, 2, 1) == 1 and
---            dref.getFloat(xac_p_f_l_now) == 0.0 and
---            dref.getFloat(xac_p_f_r_now) == 0.0 and
---            dref.getFloat(xac_p_b_l_now) == 0.0 and
---            dref.getFloat(xac_p_b_r_now) == 0.0 and
---            dref.getFloat(xac_c_f_now) == 0.0 and
---            dref.getFloat(xac_c_b_now) == 0.0 and
---            dref.getFloat(xac_move_to_cater) > 19.0
---        -- dref.getFloat(xac_move_to_stair) > 37.0
---    then
---        dref.setInt(xac_show_cater, 0)
---        dref.setInt(xac_show_stair, 0)
---        dref.setInt(xac_show_tanker, 0)
---        dref.setInt(xac_load_on, 0)
---        dref.setInt(xac_fasten_seat_belts, 1)
---        dref.setInt(xac_no_smoking, 1)
---        dref.setInt(xac_beacon_sw, 1)
---        dref.setIntV(xac_state_beforestart, 3, 1)
---        dref.setIntV(xac_state_beforestart, 2, 0)
---        gui.hideWidget(XAutoCopilot.beforestart)
---gui.hideWidget(XAutoCopilot.chkPushback)
+function BEFORE_START_START2()
+    logging.debug("BEFORE_START_START2")
+    dref.setFloat(dref.getDataref("sim/flightmodel/controls/parkbrake"), 1.0) --Parking Brake ON
+    dref.setInt(dref.getDataref("sim/custom/xap/chklst/chklst01"), 2) --Jardesign Checklist
+    dref.setIntV(xac_state_beforestart, 3, 1)
+    dref.setIntV(xac_state_beforestart, 2, 0)
+end
 
---        gui.showWidget(XAutoCopilot.btnstart)
---        gui.showWidget(XAutoCopilot.start)
---        gui.showWindow(XAutoCopilot.gui_h)
---        OnUpdate_XAutoCopilot_btnbeforeStart = nil
---    end
---end
---
+function BEFORE_START_START3()
+    logging.debug("BEFORE_START_START3")
+    gui.hideWidget(XAutoCopilot.chkPushback)
+
+    gui.showWidget(XAutoCopilot.btnstart)
+    gui.showWidget(XAutoCopilot.start)
+    gui.showWindow(XAutoCopilot.gui_h)
+
+    dref.setIntV(xac_state_beforestart, 4, 1)
+    dref.setIntV(xac_state_beforestart, 3, 0)
+    OnUpdate_XAutoCopilot_btnbeforeStart = nil
+end
+
+function OnUpdate_XAutoCopilot_btnbeforeStart()
+
+    if dref.getIntV(xac_state_beforestart, 1, 1) == 1 then
+        logging.debug("OnUpdate_XAutoCopilot_btnbeforeStart")
+        dref.setInt(dref.getDataref("sim/custom/xap/doors/p_f_l_kn"), 0) --Left Front Passenger Door|CLOSE
+        dref.setInt(dref.getDataref("sim/custom/xap/doors/c_f_kn"), 0) --Cargo Door, Front CLOSE
+        dref.setInt(dref.getDataref("sim/custom/xap/doors/c_b_kn"), 0) --Cargo Door, Back CLOSE
+        dref.setInt(dref.getDataref("sim/custom/xap/groundserv/stair/str_on"), 0) --Stairway/Gangway|DISS
+        dref.setInt(dref.getDataref("sim/custom/xap/groundserv/load_on"), 0) --loadsheet off
+        dref.setInt(dref.getDataref("sim/custom/xap/wheels/ant_skeed"), 0) --Antiskid|DISC
+        dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 9) --ECAM DOOR Condition
+        dref.setInt(dref.getDataref("sim/custom/xap/extlight/beacon_sw"), 1) --ECAM DOOR Condition
+        dref.setIntV(xac_state_beforestart, 2, 1)
+        dref.setIntV(xac_state_beforestart, 1, 0)
+    end
+
+
+    if dref.getIntV(xac_state_chk_box, 2, 1) == 1 and dref.getIntV(xac_state_beforestart, 2, 1) == 1 then
+        local tmr_bstart1 = timer.newOneShot("BEFORE_START_START1", 10.0)
+    end
+
+    if dref.getIntV(xac_state_chk_box, 2, 1) == 0 and dref.getIntV(xac_state_beforestart, 2, 1) == 1 then
+        local tmr_bstart2 = timer.newOneShot("BEFORE_START_START2", 10.0)
+    end
+
+
+    if dref.getIntV(xac_state_beforestart, 3, 1) == 1 then
+        local tmr_bstart3 = timer.newOneShot("BEFORE_START_START3", 25.0)
+    end
+end
+
+
+function XAutoCopilot_btnStart_OnClick()
+    gui.hideWindow(XAutoCopilot.gui_h)
+    gui.hideWidget(XAutoCopilot.btnstart)
+    dref.setIntV(xac_state_start, 1, 1)
+    event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnStart")
+end
+
 --function XAutoCopilot_btnStart_OnClick()
 --    gui.hideWindow(XAutoCopilot.gui_h)
 --    gui.hideWidget(XAutoCopilot.btnstart)
