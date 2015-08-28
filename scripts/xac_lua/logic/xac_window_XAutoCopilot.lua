@@ -755,10 +755,19 @@ function OnUpdate_XAutoCopilot_btnafterStart()
     if dref.getIntV(xac_state_afterstart, 1, 1) == 1 then
         logging.debug("OnUpdate_XAutoCopilot_btnafterStart")
 
-
-
-
-
+        dref.setInt(dref.getDataref("sim/custom/xap/engines/startsel"), 0) --Engine Mode Selector|NORM
+        dref.setInt(dref.getDataref("sim/custom/xap/groundserv/show_tow"), 0) --Tow Truck|DISS
+        dref.setFloat(dref.getDataref("sim/flightmodel/controls/parkbrake"), 1.0) --Parking Brake|ON
+        dref.setInt(dref.getDataref("sim/custom/xap/wheels/ant_skeed"), 1) --Afterpush Antiskid|ON
+        dref.setInt(dref.getDataref("sim/custom/xap/ewd_clr"), 0) --ECAM Anti Skid/NWS off Memo
+        dref.setInt(dref.getDataref("sim/custom/xap/indicators/mastcaut"), 0) --Master Caution Button|CLEAR
+        dref.setInt(dref.getDataref("sim/custom/xap/bleed/apu_blvlv"), 0) --Apu Bleed|OFF
+        dref.setFloat(dref.getDataref("sim/cockpit2/controls/speedbrake_ratio"), -0.5) --Spoilers|ARM
+        dref.setFloat(dref.getDataref("sim/cockpit2/controls/rudder_trim"), 0.0) --Rudder Trim|ZERO
+-- TODO ANti Ice
+        timer.newOneShot("AutoFlap", 2.0)
+        dref.setInt(dref.getDataref("sim/cockpit/engine/APU_switch"), 0) --Apu Master|OFF
+        dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 9) --ECAM DOOR Condition|SLIDES ARMED
     end
     --    if dref.getIntV(xac_state_afterstart, 1, 1) == 1 then
     --        dref.setInt(xac_startsel, 0)
