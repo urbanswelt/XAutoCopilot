@@ -38,7 +38,7 @@ local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs.txt"
 xac_prefs.load(filename)
 
 
-local debugon = xac_prefs.get("XAutoCopilotUpdater.autochk", 1)
+local debugon = xac_prefs.get("XAutoCopilotUpdater.branchchk", 1)
 
 if debugon == true then
     dofile("xac_lua/logic/xac_window_XAutoCopilotDebug.lua")
