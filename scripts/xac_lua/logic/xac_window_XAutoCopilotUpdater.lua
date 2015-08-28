@@ -408,11 +408,13 @@ function xac_updater_check()
 
     if branchchk == true then
         local url = 'http://xac.urbanswelt.de/develop/XAutoCopilot/scripts/xac_lua/version_updater'
+        http.get(url, 'http_updater_check')
     else
         local url = 'http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/version_updater'
+        http.get(url, 'http_updater_check')
     end
 
-    http.get(url, 'http_updater_check')
+
 end
 
 function http_updater_check(data, url, size)
@@ -431,10 +433,12 @@ function xac_update_check()
 
     if branchchk == true then
         local url = 'http://xac.urbanswelt.de/develop/XAutoCopilot/scripts/xac_lua/version'
+        http.get(url, 'http_update_check')
     else
         local url = 'http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/version'
+        http.get(url, 'http_update_check')
     end
-    http.get(url, 'http_update_check')
+
 end
 
 function http_update_check(data, url, size)
