@@ -7,25 +7,25 @@
 
 xac_update = {}
 --updater script
-xac_update.updater = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua" }
+xac_update.updater = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotUpdater.lua" }
 
 --xac root script`s
-xac_update.init = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/xac_init.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/xac_init.lua" }
-xac_update.version = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/version", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/version" }
-xac_update.vupdater = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/version_updater", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/version_updater" }
-xac_update.changelog = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/version_changelog", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/version_changelog" }
+xac_update.init = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/xac_init.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/xac_init.lua" }
+xac_update.version = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/version", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/version" }
+xac_update.vupdater = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/version_updater", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/version_updater" }
+xac_update.changelog = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/version_changelog", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/version_changelog" }
 
 --folder help/icons/prefs not really needed yet
 --folder logic
-xac_update.datarefs = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_datarefs.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_datarefs.lua" }
-xac_update.pdatarefs = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_publish_dataref.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_publish_dataref.lua" }
-xac_update.helper = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_function_helper.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_function_helper.lua" }
-xac_update.copilot = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilot.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilot.lua" }
-xac_update.approach = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotBriefingApproach.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotBriefingApproach.lua" }
-xac_update.departure = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotBriefingDeparture.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotBriefingDeparture.lua" }
-xac_update.debug = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotDebug.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotDebug.lua" }
-xac_update.flightinfo = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotFlightInfo.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotFlightInfo.lua" }
-xac_update.route = { url = "http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua" }
+xac_update.datarefs = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/logic/xac_datarefs.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_datarefs.lua" }
+xac_update.pdatarefs = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/logic/xac_publish_dataref.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_publish_dataref.lua" }
+xac_update.helper = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/logic/xac_function_helper.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_function_helper.lua" }
+xac_update.copilot = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilot.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilot.lua" }
+xac_update.approach = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotBriefingApproach.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotBriefingApproach.lua" }
+xac_update.departure = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotBriefingDeparture.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotBriefingDeparture.lua" }
+xac_update.debug = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotDebug.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotDebug.lua" }
+xac_update.flightinfo = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotFlightInfo.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotFlightInfo.lua" }
+xac_update.route = { url = "http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotRoute.lua" }
 
 -- -- set Version for updates year, month, day, hour, minutes
 --xac_version = 201501082240
@@ -331,7 +331,7 @@ function check_for_updates()
 end
 
 function xac_updater_check()
-    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/version_updater'
+    local url = 'http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/version_updater'
     http.get(url, 'http_updater_check')
 end
 
@@ -347,7 +347,7 @@ function http_updater_check(data, url, size)
 end
 
 function xac_update_check()
-    local url = 'http://labor.urbanswelt.de/XAutoCopilot/scripts/xac_lua/version'
+    local url = 'http://xac.urbanswelt.de/master/XAutoCopilot/scripts/xac_lua/version'
     http.get(url, 'http_update_check')
 end
 
