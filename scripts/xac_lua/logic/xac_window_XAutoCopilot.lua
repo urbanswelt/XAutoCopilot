@@ -764,17 +764,16 @@ function OnUpdate_XAutoCopilot_btnafterStart()
         dref.setInt(dref.getDataref("sim/custom/xap/bleed/apu_blvlv"), 0) --Apu Bleed|OFF
         dref.setFloat(dref.getDataref("sim/cockpit2/controls/speedbrake_ratio"), -0.5) --Spoilers|ARM
         dref.setFloat(dref.getDataref("sim/cockpit2/controls/rudder_trim"), 0.0) --Rudder Trim|ZERO
--- TODO ANti Ice
+-- TODO ANti Ice + APU check failure in Autocheck
         timer.newOneShot("AutoFlap", 2.0)
-        dref.setInt(dref.getDataref("sim/cockpit/engine/APU_switch"), 0) --Apu Master|OFF
+        --dref.setInt(dref.getDataref("sim/cockpit/engine/APU_switch"), 0) --Apu Master|OFF
         dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 9) --ECAM DOOR Condition|SLIDES ARMED
-        dref.setIntV(xac_state_afterstart, 2, 1)
+       -- dref.setIntV(xac_state_afterstart, 2, 1)
         dref.setIntV(xac_state_afterstart, 1, 0)
     end
 
     if dref.getIntV(xac_state_afterstart, 2, 1) == 1 then
         --dref.setInt(xac_click_perf, 1)
-        timer.newOneShot("AutoFlap", 2.0)
         gui.hideWidget(XAutoCopilot.afterstart)
         gui.showWidget(XAutoCopilot.btntaxi)
         gui.showWidget(XAutoCopilot.taxi)
@@ -787,37 +786,38 @@ function OnUpdate_XAutoCopilot_btnafterStart()
     end
 end
 
+--- -TAXI
+function XAutoCopilot_btnTaxi_OnClick()
+    gui.hideWindow(XAutoCopilot.gui_h)
+    gui.hideWidget(XAutoCopilot.btntaxi)
+    gui.hideWidget(XAutoCopilot.fm)
+    gui.hideWidget(XAutoCopilot.chkFM)
+
+    dref.setIntV(xac_state_taxi, 1, 1)
+    event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnTaxi")
+end
 --
---function XAutoCopilot_btnTaxi_OnClick()
---    gui.hideWindow(XAutoCopilot.gui_h)
---    gui.hideWidget(XAutoCopilot.btntaxi)
---    gui.hideWidget(XAutoCopilot.fm)
---    gui.hideWidget(XAutoCopilot.chkFM)
---
---    dref.setIntV(xac_state_taxi, 1, 1)
---    event.register("OnUpdate", "OnUpdate_XAutoCopilot_btnTaxi")
---end
---
---function XAutoCopilot_chkFM_OnClick()
---
---    local chkFM = gui.getWidgetValue(XAutoCopilot.chkFM)
---    if chkFM then
---        --checked FM Car
---        dref.setIntV(xac_state_chk_box, 3, 1)
---    else
---        --unchecked FM Car
---        dref.setIntV(xac_state_chk_box, 3, 0)
---    end
---end
---
---function OnUpdate_XAutoCopilot_btnTaxi()
---    if dref.getIntV(xac_state_taxi, 1, 1) == 1 then
---        dref.setString(xac_route_state, "TAXI OUT")
---
---        if dref.getIntV(xac_state_chk_box, 2, 1) == 1 then
---            dref.setInt(xac_fm_on, 1)
---        end
---        -- speedcontrol
+function XAutoCopilot_chkFM_OnClick()
+
+    local chkFM = gui.getWidgetValue(XAutoCopilot.chkFM)
+    if chkFM then
+        --checked FM Car
+        dref.setIntV(xac_state_chk_box, 3, 1)
+    else
+        --unchecked FM Car
+        dref.setIntV(xac_state_chk_box, 3, 0)
+    end
+end
+
+function OnUpdate_XAutoCopilot_btnTaxi()
+    if dref.getIntV(xac_state_taxi, 1, 1) == 1 then
+        logging.debug("OnUpdate_XAutoCopilot_btnTaxi")
+        dref.setString(xac_route_state, "TAXI OUT")
+
+        if dref.getIntV(xac_state_chk_box, 2, 1) == 1 then
+            dref.setInt(dref.getDataref("sim/custom/xap/groundserv/gnd_fm_on"), 1)
+        end
+        -- speedcontrol
 --        dref.setInt(xac_nose_sw, 1)
 --        dref.setFloat(xac_parbrake, 0.0)
 --        dref.setIntV(xac_state_taxi, 2, 1)
@@ -827,8 +827,8 @@ end
 --        gui.showWidget(XAutoCopilot.atholdingpoint)
 --        gui.showWindow(XAutoCopilot.gui_h)
 --        OnUpdate_XAutoCopilot_btnTaxi = nil
---    end
---end
+    end
+end
 --
 --
 --function XAutoCopilot_btnAtHoldingPoint_OnClick()
