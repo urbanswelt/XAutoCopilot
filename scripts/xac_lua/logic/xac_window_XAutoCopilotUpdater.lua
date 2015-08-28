@@ -75,8 +75,8 @@ function XAutoCopilotUpdater_OnCreate()
     XAutoCopilotUpdater.autochk = gui.newCheckbox(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdaterautochk", "", left, top - 50, width - 80)
     XAutoCopilotUpdater.autochktext = gui.newLabel(XAutoCopilotUpdater.gui_h, "ignored", "New Version Check on Start", left + 30, top - 50, width - 80)
 
-    XAutoCopilotUpdater.branchchk = gui.newCheckbox(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdaterbranchchk", "", left, top - 80, width - 80)
-    XAutoCopilotUpdater.branchtext = gui.newLabel(XAutoCopilotUpdater.gui_h, "ignored", "Development Version", left + 30, top - 80, width - 80)
+    XAutoCopilotUpdater.branchchk = gui.newCheckbox(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdaterbranchchk", "", left, top - 30, width - 80)
+    XAutoCopilotUpdater.branchtext = gui.newLabel(XAutoCopilotUpdater.gui_h, "ignored", "Development Version", left + 30, top - 30, width - 80)
 
     gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnCheck", "Check", left, top, width - 50)
     XAutoCopilotUpdater.rebootbutton = gui.newButton(XAutoCopilotUpdater.gui_h, "XAutoCopilotUpdater_btnReboot", "Reboot", left + 60, top, width - 50)
@@ -280,6 +280,7 @@ end
 function XAutoCopilotUpdater_diskIcon_OnMouseDown()
     local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs.txt"
     xac_prefs.set("XAutoCopilotUpdater.autochk", gui.getWidgetValue(XAutoCopilotUpdater.autochk))
+    xac_prefs.set("XAutoCopilotUpdater.branchchk", gui.getWidgetValue(XAutoCopilotUpdater.branchchk))
     xac_prefs.save(filename)
 end
 
