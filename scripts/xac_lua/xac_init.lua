@@ -29,9 +29,6 @@ logging.debug("loaded xac_window_XAutoCopilotFlightInfo..")
 dofile("xac_lua/logic/xac_window_XAutoCopilotUpdater.lua")
 logging.debug("loaded xac_window_XAutoCopilotUpdater..")
 
-dofile("xac_lua/logic/xac_window_XAutoCopilotDebug.lua")
-logging.debug("loaded xac_window_XAutoCopilotDebug..")
-
 -- Dataref in DRE w/o edit the xplane dataref.txt / activate only for testing !(longer loadtime)
 --dofile("xac_lua/logic/xac_publish_dataref.lua")
 --logging.debug("loaded xac_publish_dataref..")
@@ -40,3 +37,10 @@ logging.debug("loaded xac_window_XAutoCopilotDebug..")
 local filename = acf.getFolder() .. "scripts/xac_lua/prefs/xac_prefs.txt"
 xac_prefs.load(filename)
 
+
+local debugon = xac_prefs.get("XAutoCopilotUpdater.autochk", 1)
+
+if debugon == true then
+    dofile("xac_lua/logic/xac_window_XAutoCopilotDebug.lua")
+    logging.debug("loaded xac_window_XAutoCopilotDebug..")
+end
