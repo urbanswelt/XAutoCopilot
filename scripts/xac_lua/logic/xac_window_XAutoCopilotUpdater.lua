@@ -2,7 +2,7 @@
 -- Created by IntelliJ IDEA.
 -- User: larsurban
 -- Date: 01.07.2014
--- Time: 20:49
+-- Time: 20:49  --
 -- 
 XAutoCopilotUpdater = {
     gui_h = gui.newWindow("XAutoCopilotUpdater"),
