@@ -6,7 +6,7 @@ This is a script for [X-Plane](http://x-plane.com/), written in LUA for the Gizm
 
 ## currently included
 [A320 NEO from JarDesign](http://airbus320neo.com/)
-- automatically checklist, based on FCOM 03
+- automatically checklist, based on [FCOM 03.03](http://forums.x-plane.org/index.php?app=downloads&showfile=27377)
 - All Animations included ( open door´s / cargo / stair ....)
 - Cockpit preparation with original wait time of Aligned NAV (7 minutes)
 - ~~Automaticaly Anti Ice on/ off~~
