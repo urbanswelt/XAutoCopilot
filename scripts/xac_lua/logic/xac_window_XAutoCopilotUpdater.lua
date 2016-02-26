@@ -86,7 +86,8 @@ function XAutoCopilotUpdater_OnCreate()
         xac_update.pdatarefs = { url = "http://xac.urbanswelt.de/develop/XAutoCopilot/scripts/xac_lua/logic/xac_publish_dataref.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_publish_dataref.lua" }
         xac_update.helper = { url = "http://xac.urbanswelt.de/develop/XAutoCopilot/scripts/xac_lua/logic/xac_function_helper.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_function_helper.lua" }
         xac_update.copilot = { url = "http://xac.urbanswelt.de/develop/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilot.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilot.lua" }
-        xac_update.approach = { url = "http://xac.urbanswelt.de/develop/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotBriefingApproach.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotBriefingApproach.lua" }
+        xac_update.copilotC17 = { url = "http://xac.urbanswelt.de/develop/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotC17.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotC17.lua" }
+		xac_update.approach = { url = "http://xac.urbanswelt.de/develop/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotBriefingApproach.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotBriefingApproach.lua" }
         xac_update.departure = { url = "http://xac.urbanswelt.de/develop/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotBriefingDeparture.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotBriefingDeparture.lua" }
         xac_update.debug = { url = "http://xac.urbanswelt.de/develop/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotDebug.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotDebug.lua" }
         xac_update.flightinfo = { url = "http://xac.urbanswelt.de/develop/XAutoCopilot/scripts/xac_lua/logic/xac_window_XAutoCopilotFlightInfo.lua", data = "", size = "", localsize = "", status = "0", filename = acf.getFolder() .. "scripts/xac_lua/logic/xac_window_XAutoCopilotFlightInfo.lua" }
@@ -191,6 +192,12 @@ function XAutoCopilotUpdater_OnUpdate()
         xac_update.copilot.status = 2
     end
 
+	if xac_update.copilotC17.status == 1 and xac_update.copilotC17.size ~= fsize(xac_update.copilotC17.filename) then
+        gui.showWidget(XAutoCopilotUpdater.updatetext)
+        gui.showWidget(XAutoCopilotUpdater.updatebutton)
+        xac_update.copilot.status = 2
+    end
+	
     if xac_update.approach.status == 1 and xac_update.approach.size ~= fsize(xac_update.approach.filename) then
         gui.showWidget(XAutoCopilotUpdater.updatetext)
         gui.showWidget(XAutoCopilotUpdater.updatebutton)
@@ -307,6 +314,12 @@ function XAutoCopilotUpdater_btnUpdate_OnClick()
         gui.hideWidget(XAutoCopilotUpdater.updatebutton)
     end
 
+    if xac_update.copilotC17.status == 2 then
+        http_update_save(xac_update.copilotC17.filename, xac_update.copilotC17.data)
+        xac_update.copilotC17.status = 3
+        gui.hideWidget(XAutoCopilotUpdater.updatebutton)
+    end
+	
     if xac_update.approach.status == 2 then
         http_update_save(xac_update.approach.filename, xac_update.approach.data)
         xac_update.approach.status = 3
@@ -451,6 +464,7 @@ function xac_trigger_update()
     http.get(xac_update.pdatarefs.url, 'xac_http_update_get')
     http.get(xac_update.helper.url, 'xac_http_update_get')
     http.get(xac_update.copilot.url, 'xac_http_update_get')
+	http.get(xac_update.copilotC17.url, 'xac_http_update_get')
     http.get(xac_update.approach.url, 'xac_http_update_get')
     http.get(xac_update.departure.url, 'xac_http_update_get')
     http.get(xac_update.debug.url, 'xac_http_update_get')
@@ -535,6 +549,13 @@ function xac_http_update_get(data, url, size)
         xac_update.copilot.size = size
         xac_update.copilot.status = status
         xac_update.copilot.localsize = fsize(xac_update.copilot.filename)
+    end
+	
+	if xac_update.copilotC17.url == url and dataread == 1 then
+        xac_update.copilotC17.data = data
+        xac_update.copilotC17.size = size
+        xac_update.copilotC17.status = status
+        xac_update.copilotC17.localsize = fsize(xac_update.copilotC17.filename)
     end
 
     if xac_update.approach.url == url and dataread == 1 then
