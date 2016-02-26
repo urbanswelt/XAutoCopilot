@@ -21,7 +21,7 @@ function XAutoCopilot_OnCreate()
     local top = 30
     local width = 50
 
-    -- right side1
+    -- right side
     XAutoCopilot.preparation = gui.newLabel(XAutoCopilot.gui_h, "ignored", "COCKPIT PREPARATION", left, top, width)
     XAutoCopilot.beforestart = gui.newLabel(XAutoCopilot.gui_h, "ignored", "BEFORE START", left, top, width)
     XAutoCopilot.start = gui.newLabel(XAutoCopilot.gui_h, "ignored", "START", left, top, width)
