@@ -7,7 +7,7 @@
 
 
 function OnFirstFrame()
-
+--[[
     xac_gear_handle_status = dref.getDataref("sim/cockpit/switches/gear_handle_status")
     xac_gpu_av = dref.getDataref("sim/custom/xap/elec/gpu_av")
     xac_gpu_run = dref.getDataref("sim/custom/xap/elec/gpu_run")
@@ -284,7 +284,7 @@ function OnFirstFrame()
     xac_ap_trans_alt = dref.getDataref("sim/custom/xap/ap/trans_alt")
     xac_ap_trans_alt_star = dref.getDataref("sim/custom/xap/ap/trans_alt_star")
 
-
+]]
     -- own dataref
     xac_state_chk_box = dref.newIntArray("my/custom/dataref/state/chk_box")
     xac_state_preparation = dref.newIntArray("my/custom/dataref/state/preparation")
