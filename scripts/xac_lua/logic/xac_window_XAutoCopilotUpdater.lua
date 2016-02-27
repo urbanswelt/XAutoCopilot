@@ -195,7 +195,7 @@ function XAutoCopilotUpdater_OnUpdate()
 	if xac_update.copilotC17.status == 1 and xac_update.copilotC17.size ~= fsize(xac_update.copilotC17.filename) then
         gui.showWidget(XAutoCopilotUpdater.updatetext)
         gui.showWidget(XAutoCopilotUpdater.updatebutton)
-        xac_update.copilot.status = 2
+        xac_update.copilotC17.status = 2
     end
 	
     if xac_update.approach.status == 1 and xac_update.approach.size ~= fsize(xac_update.approach.filename) then
