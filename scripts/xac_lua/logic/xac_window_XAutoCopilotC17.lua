@@ -117,6 +117,8 @@ function SAFETY_EXTERIOR_INSPECTIONS_START1()
     end
 
     dref.setInt(dref.getDataref("sim/cockpit/electrical/gpu_on"), 1) --call GPU
+	dref.setInt(dref.getDataref("sim/cockpit/electrical/battery_on"), 1) --Battery 1 AUTO
+    dref.setInt(dref.getDataref("sim/cockpit/electrical/avionics_on"), 1) --Battery 2 AUTO
     --dref.setInt(dref.getDataref("sim/custom/xap/doors/p_f_l_kn"), 1) --Left Front Passenger Door
     --dref.setInt(dref.getDataref("sim/cockpit2/controls/gear_handle_down"), 1) --Gear is down
     --dref.setInt(dref.getDataref("sim/custom/xap/doors/c_f_kn"), 1) --Cargo Front Door
@@ -425,10 +427,11 @@ end
 
 function OnUpdate_XAutoCopilot_btnPreparation()
     --- -SAFETY EXTERIOR INSPECTIONS STATUS
+	
     if dref.getIntV(xac_state_preparation, 1, 1) == 1 then
         local tmr_safety = timer.newOneShot("SAFETY_EXTERIOR_INSPECTIONS_START1", 1.0)
     end
-
+--[[
     if dref.getIntV(xac_state_preparation, 1, 1) == 1 and
             dref.getInt(dref.getDataref("sim/custom/xap/elec/gpu_run")) == 1 and --GPU is running
             dref.getInt(dref.getDataref("sim/custom/xap/elec/gpu_av")) == 1 and --GPU is available
@@ -606,8 +609,9 @@ function OnUpdate_XAutoCopilot_btnPreparation()
         gui.showWidget(XAutoCopilot.chkPushback)
         OnUpdate_XAutoCopilot_btnPreparation = nil
     end
+	]]
 end
-
+--[[
 --- -BEFORE START UP
 function XAutoCopilot_btnbeforeStart_OnClick()
     dref.setString(xac_route_state, "BEFORE START UP")
@@ -826,6 +830,8 @@ function OnUpdate_XAutoCopilot_btnTaxi()
 --        OnUpdate_XAutoCopilot_btnTaxi = nil
     end
 end
+
+]]
 --
 --
 --function XAutoCopilot_btnAtHoldingPoint_OnClick()
