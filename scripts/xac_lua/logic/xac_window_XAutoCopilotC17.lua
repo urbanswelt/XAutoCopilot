@@ -116,11 +116,11 @@ function SAFETY_EXTERIOR_INSPECTIONS_START1()
         dref.setInt(dref.getDataref("sim/custom/xap/groundserv/stair/str_on"), 1) --call Stair
     end
 
-    dref.setInt(dref.getDataref("sim/custom/xap/elec/gpu_here"), 1) --call GPU
-    dref.setInt(dref.getDataref("sim/custom/xap/doors/p_f_l_kn"), 1) --Left Front Passenger Door
-    dref.setInt(dref.getDataref("sim/cockpit2/controls/gear_handle_down"), 1) --Gear is down
-    dref.setInt(dref.getDataref("sim/custom/xap/doors/c_f_kn"), 1) --Cargo Front Door
-    dref.setInt(dref.getDataref("sim/custom/xap/doors/c_b_kn"), 1) --Cargo Back Door
+    dref.setInt(dref.getDataref("sim/cockpit/electrical/gpu_on"), 1) --call GPU
+    --dref.setInt(dref.getDataref("sim/custom/xap/doors/p_f_l_kn"), 1) --Left Front Passenger Door
+    --dref.setInt(dref.getDataref("sim/cockpit2/controls/gear_handle_down"), 1) --Gear is down
+    --dref.setInt(dref.getDataref("sim/custom/xap/doors/c_f_kn"), 1) --Cargo Front Door
+    --dref.setInt(dref.getDataref("sim/custom/xap/doors/c_b_kn"), 1) --Cargo Back Door
     dref.setIntV(xac_state_preparation, 1, 0)
     dref.setIntV(xac_state_preparation, 2, 1)
 end
@@ -128,29 +128,29 @@ end
 function PRELIMINARY_COCKPIT_PREPARATION_START1()
     logging.debug("PRELIMINARY_COCKPIT_PREPARATION_START1")
     dref.setString(xac_route_state, "PRELIMINARY COCKPIT PREPARATION")
-    dref.setInt(dref.getDataref("sim/custom/xap/elec/gpu_on"), 1) --Exterior Power on
-    dref.setInt(dref.getDataref("sim/custom/xap/extlight/cockp_main_br"), 1) --Int Dome Lights on
-    dref.setFloat(dref.getDataref("sim/custom/xap/intlight/ovhd_int_lt"), 0.6) --Integrated Lights
-    dref.setFloat(dref.getDataref("sim/custom/xap/intlight/int_pan_ped_lt"), 0.6) --Integrated Lights
-    dref.setInt(dref.getDataref("sim/custom/xap/bleed/eng1_bl_knob"), 0) --Engine Bleed 1 OFF
-    dref.setInt(dref.getDataref("sim/custom/xap/bleed/eng2_bl_knob"), 0) --Engine Bleed 2 OFF
-    dref.setInt(dref.getDataref("sim/custom/xap/bleed/apu_blvlv"), 0) --Apu Bleed OFF
-    dref.setInt(dref.getDataref("sim/custom/xap/cond/pack1"), 0) --Aircon Pack 1 OFF
-    dref.setInt(dref.getDataref("sim/custom/xap/cond/pack2"), 0) --Aircon Pack 2 OFF
-    dref.setInt(dref.getDataref("sim/custom/xap/press/alt_rot"), 0) --Landing Elevation AUTO
+    --dref.setInt(dref.getDataref("sim/custom/xap/elec/gpu_on"), 1) --Exterior Power on
+    --dref.setInt(dref.getDataref("sim/custom/xap/extlight/cockp_main_br"), 1) --Int Dome Lights on
+    --dref.setFloat(dref.getDataref("sim/custom/xap/intlight/ovhd_int_lt"), 0.6) --Integrated Lights
+    --dref.setFloat(dref.getDataref("sim/custom/xap/intlight/int_pan_ped_lt"), 0.6) --Integrated Lights
+    --dref.setInt(dref.getDataref("sim/custom/xap/bleed/eng1_bl_knob"), 0) --Engine Bleed 1 OFF
+    --dref.setInt(dref.getDataref("sim/custom/xap/bleed/eng2_bl_knob"), 0) --Engine Bleed 2 OFF
+    --dref.setInt(dref.getDataref("sim/custom/xap/bleed/apu_blvlv"), 0) --Apu Bleed OFF
+    --dref.setInt(dref.getDataref("sim/custom/xap/cond/pack1"), 0) --Aircon Pack 1 OFF
+    --dref.setInt(dref.getDataref("sim/custom/xap/cond/pack2"), 0) --Aircon Pack 2 OFF
+    --dref.setInt(dref.getDataref("sim/custom/xap/press/alt_rot"), 0) --Landing Elevation AUTO
     dref.setIntV(xac_state_preparation, 2, 0)
     dref.setIntV(xac_state_preparation, 3, 1)
 end
 
 function PRELIMINARY_COCKPIT_PREPARATION_START2()
     logging.debug("PRELIMINARY_COCKPIT_PREPARATION_START2")
-    dref.setInt(dref.getDataref("sim/custom/xap/bleed/eng1_bl_knob"), 1) --Engine Bleed 1 ON
-    dref.setInt(dref.getDataref("sim/custom/xap/bleed/eng2_bl_knob"), 1) --Engine Bleed 2 ON
-    dref.setInt(dref.getDataref("sim/custom/xap/elec/gpu_on"), 0) --Exterior Power off
-    dref.setInt(dref.getDataref("sim/custom/xap/elec/bat1_on"), 1) --Battery 1 AUTO
-    dref.setInt(dref.getDataref("sim/custom/xap/elec/bat2_on"), 1) --Battery 2 AUTO
+    --dref.setInt(dref.getDataref("sim/custom/xap/bleed/eng1_bl_knob"), 1) --Engine Bleed 1 ON
+    --dref.setInt(dref.getDataref("sim/custom/xap/bleed/eng2_bl_knob"), 1) --Engine Bleed 2 ON
+    --dref.setInt(dref.getDataref("sim/custom/xap/elec/gpu_on"), 0) --Exterior Power off
+    dref.setInt(dref.getDataref("sim/cockpit/electrical/battery_on"), 1) --Battery 1 AUTO
+    dref.setInt(dref.getDataref("sim/cockpit/electrical/avionics_on"), 1) --Battery 2 AUTO
     dref.setIntV(xac_state_preparation, 3, 0)
-    dref.setIntV(xac_state_preparation, 4, 1)
+    --dref.setIntV(xac_state_preparation, 4, 1)
     --dref.setInt(dref.getDataref("sim/custom/xap/elec/gpu_on"),1)--Exterior Power on we do not wait yet TODO
 end
 
