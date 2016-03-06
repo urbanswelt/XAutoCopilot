@@ -118,12 +118,40 @@ function SAFETY_EXTERIOR_INSPECTIONS_START1()
 
     dref.setInt(dref.getDataref("sim/cockpit/electrical/gpu_on"), 1) --call GPU
 	dref.setInt(dref.getDataref("sim/cockpit/electrical/battery_on"), 1) --Battery 1 AUTO
-    dref.setInt(dref.getDataref("sim/cockpit/electrical/avionics_on"), 1) --Battery 2 AUTO
-    --dref.setInt(dref.getDataref("sim/custom/xap/doors/p_f_l_kn"), 1) --Left Front Passenger Door
-    --dref.setInt(dref.getDataref("sim/cockpit2/controls/gear_handle_down"), 1) --Gear is down
-    --dref.setInt(dref.getDataref("sim/custom/xap/doors/c_f_kn"), 1) --Cargo Front Door
-    --dref.setInt(dref.getDataref("sim/custom/xap/doors/c_b_kn"), 1) --Cargo Back Door
-    dref.setIntV(xac_state_preparation, 1, 0)
+    dref.setInt(dref.getDataref("sim/cockpit2/switches/avionics_power_on"), 1) --Battery 2 AUTO
+    dref.setInt(dref.getDataref("sim/cockpit2/switches/navigation_lights_on"), 1) --Left Front Passenger Door
+    dref.setInt(dref.getDataref("sim/cockpit2/controls/gear_handle_down"), 1) --Gear is down
+    dref.setInt(dref.getDataref("sim/cockpit2/switches/strobe_lights_on"), 1) --Cargo Front Door
+    dref.setIntV(dref.getDataref("sim/cockpit/engine/igniters_on"), 1, 1)
+	dref.setIntV(dref.getDataref("sim/cockpit/engine/igniters_on"), 2, 1)
+    dref.setIntV(dref.getDataref("sim/cockpit/engine/igniters_on"), 3, 1)
+	dref.setIntV(dref.getDataref("sim/cockpit/engine/igniters_on"), 4, 1)
+	dref.setInt(dref.getDataref("sim/cockpit2/electrical/APU_starter_switch"), 2)
+    dref.setFloat(dref.getDataref("sim/cockpit2/engine/actuators/mixture_ratio_all"), 1.0)
+	dref.setIntV(dref.getDataref("sim/cockpit/engine/fuel_pump_on"), 1, 1)
+	dref.setIntV(dref.getDataref("sim/cockpit/engine/fuel_pump_on"), 2, 1)
+	dref.setIntV(dref.getDataref("sim/cockpit/engine/fuel_pump_on"), 3, 1)
+	dref.setIntV(dref.getDataref("sim/cockpit/engine/fuel_pump_on"), 4, 1)
+	
+
+	
+	dref.setIntV(dref.getDataref("sim/cockpit2/electrical/generator_on"), 1, 1)
+	dref.setIntV(dref.getDataref("sim/cockpit2/electrical/generator_on"), 2, 1)
+	dref.setIntV(dref.getDataref("sim/cockpit2/electrical/generator_on"), 3, 1)
+	dref.setIntV(dref.getDataref("sim/cockpit2/electrical/generator_on"), 4, 1)
+	dref.setInt(dref.getDataref("sim/cockpit2/pressurization/actuators/bleed_air_mode"), 2)
+	
+	
+	dref.setFloatV(dref.getDataref("sim/cockpit2/switches/generic_lights_switch"), 51, 1)
+	dref.setFloatV(dref.getDataref("sim/cockpit2/switches/generic_lights_switch"), 54, 0.5)
+	dref.setFloatV(dref.getDataref("sim/cockpit2/switches/generic_lights_switch"), 56, 1)
+	dref.setFloatV(dref.getDataref("sim/cockpit2/switches/generic_lights_switch"), 57, 1)
+	dref.setFloatV(dref.getDataref("sim/cockpit2/switches/generic_lights_switch"), 58, 1)
+	dref.setFloatV(dref.getDataref("sim/cockpit2/switches/generic_lights_switch"), 59, 1)
+	
+	
+	
+	dref.setIntV(xac_state_preparation, 1, 0)
     dref.setIntV(xac_state_preparation, 2, 1)
 end
 
@@ -149,16 +177,16 @@ function PRELIMINARY_COCKPIT_PREPARATION_START2()
     --dref.setInt(dref.getDataref("sim/custom/xap/bleed/eng1_bl_knob"), 1) --Engine Bleed 1 ON
     --dref.setInt(dref.getDataref("sim/custom/xap/bleed/eng2_bl_knob"), 1) --Engine Bleed 2 ON
     --dref.setInt(dref.getDataref("sim/custom/xap/elec/gpu_on"), 0) --Exterior Power off
-    dref.setInt(dref.getDataref("sim/cockpit/electrical/battery_on"), 1) --Battery 1 AUTO
-    dref.setInt(dref.getDataref("sim/cockpit/electrical/avionics_on"), 1) --Battery 2 AUTO
+    --dref.setInt(dref.getDataref("sim/cockpit/electrical/battery_on"), 1) --Battery 1 AUTO
+    --dref.setInt(dref.getDataref("sim/cockpit/electrical/avionics_on"), 1) --Battery 2 AUTO
     dref.setIntV(xac_state_preparation, 3, 0)
-    --dref.setIntV(xac_state_preparation, 4, 1)
+    dref.setIntV(xac_state_preparation, 4, 1)
     --dref.setInt(dref.getDataref("sim/custom/xap/elec/gpu_on"),1)--Exterior Power on we do not wait yet TODO
 end
 
 function PRELIMINARY_COCKPIT_PREPARATION_START3()
     logging.debug("PRELIMINARY_COCKPIT_PREPARATION_START3")
-    dref.setInt(dref.getDataref("sim/custom/xap/elec/gpu_on"), 1) --Exterior Power on
+    --dref.setInt(dref.getDataref("sim/custom/xap/elec/gpu_on"), 1) --Exterior Power on
     dref.setIntV(xac_state_preparation, 4, 0)
     dref.setIntV(xac_state_preparation, 5, 1)
 end
@@ -166,16 +194,16 @@ end
 function INITIAL_COCKPIT_PREPARATION_START1()
     logging.debug("INITIAL_COCKPIT_PREPARATION_START1")
     dref.setString(xac_route_state, "INITIAL COCKPIT PREPARATION")
-    dref.setInt(dref.getDataref("sim/custom/xap/extlight/navlogo_sw"), 1) --Nav & Logo Lights ON
-    dref.setFloat(dref.getDataref("sim/custom/xap/lght_nd"), 0.0) --Integrated Lights
-    dref.setFloat(dref.getDataref("sim/custom/xap/lght_pfd"), 0.0) --Integrated Lights
-    dref.setFloat(dref.getDataref("sim/custom/xap/lght_upd"), 0.0) --Integrated Lights
-    dref.setFloat(dref.getDataref("sim/custom/xap/lght_dnd"), 0.0) --Integrated Lights
-    dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 6) --ECAM ELEC BAT Status
-    dref.setInt(dref.getDataref("sim/custom/xap/engines/eng1msw"), 0) --Engine Master 1 OFF
-    dref.setInt(dref.getDataref("sim/custom/xap/engines/eng2msw"), 0) --Engine Master 2 OFF
-    dref.setInt(dref.getDataref("sim/custom/xap/engines/startsel"), 0) --Engine Mode Selector NORM
-    dref.setInt(dref.getDataref("sim/cockpit/switches/gear_handle_status"), 1) --Landing Gear Lever|DOWN
+    --dref.setInt(dref.getDataref("sim/custom/xap/extlight/navlogo_sw"), 1) --Nav & Logo Lights ON
+    --dref.setFloat(dref.getDataref("sim/custom/xap/lght_nd"), 0.0) --Integrated Lights
+    --dref.setFloat(dref.getDataref("sim/custom/xap/lght_pfd"), 0.0) --Integrated Lights
+    --dref.setFloat(dref.getDataref("sim/custom/xap/lght_upd"), 0.0) --Integrated Lights
+    --dref.setFloat(dref.getDataref("sim/custom/xap/lght_dnd"), 0.0) --Integrated Lights
+    --dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 6) --ECAM ELEC BAT Status
+    --dref.setInt(dref.getDataref("sim/custom/xap/engines/eng1msw"), 0) --Engine Master 1 OFF
+    --dref.setInt(dref.getDataref("sim/custom/xap/engines/eng2msw"), 0) --Engine Master 2 OFF
+    --dref.setInt(dref.getDataref("sim/custom/xap/engines/startsel"), 0) --Engine Mode Selector NORM
+    --dref.setInt(dref.getDataref("sim/cockpit/switches/gear_handle_status"), 1) --Landing Gear Lever|DOWN
     --sim/flightmodel2/gear/deploy_ratio TODO
     dref.setIntV(xac_state_preparation, 5, 0)
     dref.setIntV(xac_state_preparation, 6, 1)
@@ -183,110 +211,110 @@ end
 
 function INITIAL_COCKPIT_PREPARATION_START2()
     logging.debug("INITIAL_COCKPIT_PREPARATION_START2")
-    dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 5) --ECAM WHEEL Gear Indicators
-    dref.setInt(dref.getDataref("sim/custom/xap/icerain/wiper_r"), 0) --Wiper right off
-    dref.setInt(dref.getDataref("sim/custom/xap/icerain/wiper_l"), 0) --Wiper left off
-    dref.setFloat(dref.getDataref("sim/cockpit2/controls/flap_ratio"), 0.0) --Flaps Lever 0
-    dref.setFloat(dref.getDataref("sim/cockpit2/controls/speedbrake_ratio"), 0.0) --Spoilers Lever|RETRACT
+    --dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 5) --ECAM WHEEL Gear Indicators
+    --dref.setInt(dref.getDataref("sim/custom/xap/icerain/wiper_r"), 0) --Wiper right off
+    --dref.setInt(dref.getDataref("sim/custom/xap/icerain/wiper_l"), 0) --Wiper left off
+    --dref.setFloat(dref.getDataref("sim/cockpit2/controls/flap_ratio"), 0.0) --Flaps Lever 0
+    --dref.setFloat(dref.getDataref("sim/cockpit2/controls/speedbrake_ratio"), 0.0) --Spoilers Lever|RETRACT
     dref.setIntV(xac_state_preparation, 6, 0)
     dref.setIntV(xac_state_preparation, 7, 1)
 end
 
 function INITIAL_COCKPIT_PREPARATION_START3()
     logging.debug("INITIAL_COCKPIT_PREPARATION_START3")
-    dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 4) --ECAM F/CTL Spoilers Position
-    dref.setInt(dref.getDataref("sim/custom/xap/firetest/apu"), 1) --Apu Fire Extinguisher on
+    --dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 4) --ECAM F/CTL Spoilers Position
+    --dref.setInt(dref.getDataref("sim/custom/xap/firetest/apu"), 1) --Apu Fire Extinguisher on
     dref.setIntV(xac_state_preparation, 7, 0)
     dref.setIntV(xac_state_preparation, 8, 1)
 end
 
 function INITIAL_COCKPIT_PREPARATION_START4()
     logging.debug("INITIAL_COCKPIT_PREPARATION_START4")
-    dref.setInt(dref.getDataref("sim/custom/xap/firetest/apu"), 0) --Apu Fire Extinguisher off
-    dref.setInt(dref.getDataref("sim/cockpit/engine/APU_switch"), 1) --Apu Master|ON
-    dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 2) --ECAM APU Status
+    --dref.setInt(dref.getDataref("sim/custom/xap/firetest/apu"), 0) --Apu Fire Extinguisher off
+    --dref.setInt(dref.getDataref("sim/cockpit/engine/APU_switch"), 1) --Apu Master|ON
+    --dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 2) --ECAM APU Status
     dref.setIntV(xac_state_preparation, 8, 0)
     dref.setIntV(xac_state_preparation, 9, 1)
 end
 
 function INITIAL_COCKPIT_PREPARATION_START5()
     logging.debug("INITIAL_COCKPIT_PREPARATION_START5")
-    dref.setInt(dref.getDataref("sim/custom/xap/apu/start_pb"), 1) --APU Start
+    --dref.setInt(dref.getDataref("sim/custom/xap/apu/start_pb"), 1) --APU Start
     dref.setIntV(xac_state_preparation, 9, 0)
     dref.setIntV(xac_state_preparation, 10, 1)
 end
 
 function INITIAL_COCKPIT_PREPARATION_START6()
     logging.debug("INITIAL_COCKPIT_PREPARATION_START6")
-    dref.setInt(dref.getDataref("sim/custom/xap/elec/gpu_on"), 0) --Exterior Power off
-    dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 6) --ECAM ELEC External Power Status
-    dref.setInt(dref.getDataref("sim/custom/xap/elec/gpu_here"), 0) --call GPU
-    dref.setFloat(dref.getDataref("sim/flightmodel/controls/parkbrake"), 1.0) --Parking Brake ON
+    --dref.setInt(dref.getDataref("sim/custom/xap/elec/gpu_on"), 0) --Exterior Power off
+    --dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 6) --ECAM ELEC External Power Status
+    --dref.setInt(dref.getDataref("sim/custom/xap/elec/gpu_here"), 0) --call GPU
+    --dref.setFloat(dref.getDataref("sim/flightmodel/controls/parkbrake"), 1.0) --Parking Brake ON
     dref.setIntV(xac_state_preparation, 10, 0)
     dref.setIntV(xac_state_preparation2, 1, 1)
 end
 
 function INITIAL_COCKPIT_PREPARATION_START7()
     logging.debug("INITIAL_COCKPIT_PREPARATION_START7")
-    dref.setInt(dref.getDataref("sim/custom/xap/hydr/y/elpump/mode"), 0) --Yellow Electric Pump OFF
-    dref.setFloat(dref.getDataref("sim/flightmodel/controls/parkbrake"), 0.0) --Parking Brake OFF
+    --dref.setInt(dref.getDataref("sim/custom/xap/hydr/y/elpump/mode"), 0) --Yellow Electric Pump OFF
+    --dref.setFloat(dref.getDataref("sim/flightmodel/controls/parkbrake"), 0.0) --Parking Brake OFF
     dref.setIntV(xac_state_preparation2, 1, 0)
     dref.setIntV(xac_state_preparation2, 2, 1)
 end
 
 function INITIAL_COCKPIT_PREPARATION_START8()
     logging.debug("INITIAL_COCKPIT_PREPARATION_START8")
-    dref.setFloat(dref.getDataref("sim/cockpit2/controls/parking_brake_ratio"), 0.5) --Brake Pedals PRESS/HOLD
+    --dref.setFloat(dref.getDataref("sim/cockpit2/controls/parking_brake_ratio"), 0.5) --Brake Pedals PRESS/HOLD
     dref.setIntV(xac_state_preparation2, 2, 0)
     dref.setIntV(xac_state_preparation2, 3, 1)
 end
 
 function INITIAL_COCKPIT_PREPARATION_START9()
     logging.debug("INITIAL_COCKPIT_PREPARATION_START9")
-    dref.setFloat(dref.getDataref("sim/cockpit2/controls/parking_brake_ratio"), 0.0) --Brake Pedals RELEASE
+    --dref.setFloat(dref.getDataref("sim/cockpit2/controls/parking_brake_ratio"), 0.0) --Brake Pedals RELEASE
     dref.setIntV(xac_state_preparation2, 3, 0)
     dref.setIntV(xac_state_preparation2, 4, 1)
 end
 
 function INITIAL_COCKPIT_PREPARATION_START10()
     logging.debug("INITIAL_COCKPIT_PREPARATION_START10")
-    dref.setFloat(dref.getDataref("sim/flightmodel/controls/parkbrake"), 1.0) --Parking Brake ON
+    --dref.setFloat(dref.getDataref("sim/flightmodel/controls/parkbrake"), 1.0) --Parking Brake ON
     dref.setIntV(xac_state_preparation2, 4, 0)
     dref.setIntV(xac_state_preparation2, 5, 1)
 end
 
 function INITIAL_COCKPIT_PREPARATION_START11()
     logging.debug("INITIAL_COCKPIT_PREPARATION_START11")
-    dref.setInt(dref.getDataref("sim/custom/xap/hydr/y/elpump/mode"), 1) --Yellow Electric Pump ON
-    dref.setInt(dref.getDataref("sim/cockpit/switches/anti_ice_window_heat"), 1) --Probe/Window Heat ON
-    dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 3) --ECAM PRESS Cabin|OUTFLOW VALVE OPEN
-    dref.setInt(dref.getDataref("sim/custom/xap/bleed/apu_blvlv"), 1) --ECAM PRESS Cabin|OUTFLOW VALVE OPEN
-    dref.setInt(dref.getDataref("sim/custom/xap/cond/pack1"), 1) --Air Con Pack 1 ON
-    dref.setInt(dref.getDataref("sim/custom/xap/cond/pack2"), 1) --Air Con Pack 2 ON
-    dref.setFloat(dref.getDataref("sim/custom/xap/cond/ckpt_knob"), 24.0) --Parking Brake ON
-    dref.setFloat(dref.getDataref("sim/custom/xap/cond/fwd_knob"), 24.0) --Parking Brake ON
-    dref.setFloat(dref.getDataref("sim/custom/xap/cond/aft_knob"), 24.0) --Parking Brake ON
+    --dref.setInt(dref.getDataref("sim/custom/xap/hydr/y/elpump/mode"), 1) --Yellow Electric Pump ON
+    --dref.setInt(dref.getDataref("sim/cockpit/switches/anti_ice_window_heat"), 1) --Probe/Window Heat ON
+    --dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 3) --ECAM PRESS Cabin|OUTFLOW VALVE OPEN
+    --dref.setInt(dref.getDataref("sim/custom/xap/bleed/apu_blvlv"), 1) --ECAM PRESS Cabin|OUTFLOW VALVE OPEN
+    --dref.setInt(dref.getDataref("sim/custom/xap/cond/pack1"), 1) --Air Con Pack 1 ON
+    --dref.setInt(dref.getDataref("sim/custom/xap/cond/pack2"), 1) --Air Con Pack 2 ON
+    --dref.setFloat(dref.getDataref("sim/custom/xap/cond/ckpt_knob"), 24.0) --Parking Brake ON
+    --dref.setFloat(dref.getDataref("sim/custom/xap/cond/fwd_knob"), 24.0) --Parking Brake ON
+    --dref.setFloat(dref.getDataref("sim/custom/xap/cond/aft_knob"), 24.0) --Parking Brake ON
     dref.setIntV(xac_state_preparation2, 5, 0)
     dref.setIntV(xac_state_preparation2, 6, 1)
 end
 
 function INITIAL_COCKPIT_PREPARATION_START12()
     logging.debug("INITIAL_COCKPIT_PREPARATION_START12")
-    dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 9) --ECAM DOOR Oxy Pressure
+    --dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 9) --ECAM DOOR Oxy Pressure
     dref.setIntV(xac_state_preparation2, 6, 0)
     dref.setIntV(xac_state_preparation2, 7, 1)
 end
 
 function INITIAL_COCKPIT_PREPARATION_START13()
     logging.debug("INITIAL_COCKPIT_PREPARATION_START13")
-    dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 0) --ECAM HYD Quantity
+    --dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 0) --ECAM HYD Quantity
     dref.setIntV(xac_state_preparation2, 7, 0)
     dref.setIntV(xac_state_preparation2, 8, 1)
 end
 
 function INITIAL_COCKPIT_PREPARATION_START14()
     logging.debug("INITIAL_COCKPIT_PREPARATION_START14")
-    dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 11) --ECAM ENG Oil Quantity
+    --dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 11) --ECAM ENG Oil Quantity
     dref.setIntV(xac_state_preparation2, 8, 0)
     dref.setIntV(xac_state_preparation2, 9, 1)
 end
@@ -294,23 +322,23 @@ end
 function COCKPIT_PREPARATION_START1()
     logging.debug("COCKPIT_PREPARATION_START1")
     dref.setString(xac_route_state, "COCKPIT PREPARATION")
-    dref.setInt(dref.getDataref("sim/custom/xap/adirs/data_sel"), 3) --ADIRS Data Sel STS
-    dref.setInt(dref.getDataref("sim/custom/xap/adirs/sys_sel"), 1) --ADIRS Sys Sel STS
-    dref.setInt(dref.getDataref("sim/custom/xap/adirs/mode_sel_1"), 1) --ADIRS Mode Sel 1
+    --dref.setInt(dref.getDataref("sim/custom/xap/adirs/data_sel"), 3) --ADIRS Data Sel STS
+    --dref.setInt(dref.getDataref("sim/custom/xap/adirs/sys_sel"), 1) --ADIRS Sys Sel STS
+    --dref.setInt(dref.getDataref("sim/custom/xap/adirs/mode_sel_1"), 1) --ADIRS Mode Sel 1
     dref.setIntV(xac_state_preparation2, 9, 0)
     dref.setIntV(xac_state_preparation2, 10, 1)
 end
 
 function COCKPIT_PREPARATION_START2()
     logging.debug("COCKPIT_PREPARATION_START2")
-    dref.setInt(dref.getDataref("sim/custom/xap/adirs/mode_sel_3"), 1) --ADIRS Mode Sel 2
+    --dref.setInt(dref.getDataref("sim/custom/xap/adirs/mode_sel_3"), 1) --ADIRS Mode Sel 2
     dref.setIntV(xac_state_preparation2, 10, 0)
     dref.setIntV(xac_state_preparation3, 1, 1)
 end
 
 function COCKPIT_PREPARATION_START3()
     logging.debug("COCKPIT_PREPARATION_START3")
-    dref.setInt(dref.getDataref("sim/custom/xap/adirs/mode_sel_2"), 1) --ADIRS Mode Sel 3
+    --dref.setInt(dref.getDataref("sim/custom/xap/adirs/mode_sel_2"), 1) --ADIRS Mode Sel 3
     dref.setIntV(xac_state_preparation3, 1, 0)
     dref.setIntV(xac_state_preparation3, 2, 1)
 end
@@ -319,12 +347,12 @@ function COCKPIT_PREPARATION_START4()
     logging.debug("COCKPIT_PREPARATION_START4")
     dref.setInt(dref.getDataref("sim/custom/xap/adirs/knob_ent"), 1) --ADIRS Enter
     gui.showWindow(XAutoCopilotRoute.gui_h) -- PopUp Window
-    dref.setInt(dref.getDataref("sim/custom/xap/extlight/strobe_sw"), 1) --Strobe Lights AUTO
-    dref.setInt(dref.getDataref("sim/custom/xap/extlight/beacon_sw"), 0) --Beacon Light OFF
-    dref.setInt(dref.getDataref("sim/custom/xap/extlight/emer_ext_lt"), 1) --Emergency Exit Lights ARM
-    dref.setInt(dref.getDataref("sim/cockpit/switches/fasten_seat_belts"), 1) --Seatbelt Signs ON
-    dref.setInt(dref.getDataref("sim/cockpit2/switches/no_smoking"), 1) --No Smoking Signs ON
-    dref.setFloat(dref.getDataref("sim/custom/xap/cond/econ_flow"), 0.5) --Hi Flow
+    --dref.setInt(dref.getDataref("sim/custom/xap/extlight/strobe_sw"), 1) --Strobe Lights AUTO
+    --dref.setInt(dref.getDataref("sim/custom/xap/extlight/beacon_sw"), 0) --Beacon Light OFF
+    --dref.setInt(dref.getDataref("sim/custom/xap/extlight/emer_ext_lt"), 1) --Emergency Exit Lights ARM
+    --dref.setInt(dref.getDataref("sim/cockpit/switches/fasten_seat_belts"), 1) --Seatbelt Signs ON
+    --dref.setInt(dref.getDataref("sim/cockpit2/switches/no_smoking"), 1) --No Smoking Signs ON
+    --dref.setFloat(dref.getDataref("sim/custom/xap/cond/econ_flow"), 0.5) --Hi Flow
     dref.setString(xac_route_state, "BOARDING")
     dref.setIntV(xac_state_preparation3, 2, 0)
     dref.setIntV(xac_state_preparation3, 3, 1)
@@ -332,21 +360,21 @@ end
 
 function COCKPIT_PREPARATION_START5()
     logging.debug("COCKPIT_PREPARATION_START5")
-    dref.setInt(dref.getDataref("sim/custom/xap/firetest/e1"), 1) --Engine Fire Extinguisher 1
-    dref.setInt(dref.getDataref("sim/custom/xap/firetest/e2"), 1) --Engine Fire Extinguisher 2
-    dref.setInt(dref.getDataref("sim/custom/xap/firetest/apu"), 1) --Apu Fire Extinguisher on
+   -- dref.setInt(dref.getDataref("sim/custom/xap/firetest/e1"), 1) --Engine Fire Extinguisher 1
+   -- dref.setInt(dref.getDataref("sim/custom/xap/firetest/e2"), 1) --Engine Fire Extinguisher 2
+    --dref.setInt(dref.getDataref("sim/custom/xap/firetest/apu"), 1) --Apu Fire Extinguisher on
     dref.setIntV(xac_state_preparation3, 3, 0)
     dref.setIntV(xac_state_preparation3, 4, 1)
 end
 
 function COCKPIT_PREPARATION_START6()
     logging.debug("COCKPIT_PREPARATION_START6")
-    dref.setInt(dref.getDataref("sim/custom/xap/firetest/e1"), 0) --Engine Fire Extinguisher 1
-    dref.setInt(dref.getDataref("sim/custom/xap/firetest/e2"), 0) --Engine Fire Extinguisher 2
-    dref.setInt(dref.getDataref("sim/custom/xap/firetest/apu"), 0) --Apu Fire Extinguisher off
-    dref.setInt(dref.getDataref("sim/custom/xap/radio/on"), 1) --Radio Panel ON
-    dref.setInt(dref.getDataref("sim/custom/xap/radio/nav_but"), 0) --Radio Panel Nav OFF
-    dref.setInt(dref.getDataref("sim/cockpit2/radios/actuators/nav_com_adf_mode"), 2) --Panel VHF 1 SET
+   -- dref.setInt(dref.getDataref("sim/custom/xap/firetest/e1"), 0) --Engine Fire Extinguisher 1
+   -- dref.setInt(dref.getDataref("sim/custom/xap/firetest/e2"), 0) --Engine Fire Extinguisher 2
+   -- dref.setInt(dref.getDataref("sim/custom/xap/firetest/apu"), 0) --Apu Fire Extinguisher off
+   -- dref.setInt(dref.getDataref("sim/custom/xap/radio/on"), 1) --Radio Panel ON
+   -- dref.setInt(dref.getDataref("sim/custom/xap/radio/nav_but"), 0) --Radio Panel Nav OFF
+   -- dref.setInt(dref.getDataref("sim/cockpit2/radios/actuators/nav_com_adf_mode"), 2) --Panel VHF 1 SET
     gui.showWindow(XAutoCopilotBriefingDeparture.gui_h) -- PopUp Window
     dref.setIntV(xac_state_preparation3, 4, 0)
     dref.setIntV(xac_state_preparation3, 5, 1)
@@ -355,10 +383,10 @@ end
 function MCDU_INITIALISATION_START1()
     logging.debug("MCDU_INITIALISATION_START1")
     dref.setString(xac_route_state, "MCDU INITIALISATION")
-    dref.setInt(dref.getDataref("sim/cockpit/switches/EFIS_dme_1_selector"), 2) --ILS/ADF Selector SET TO ILS
-    dref.setInt(dref.getDataref("sim/cockpit/switches/EFIS_dme_2_selector"), 2) --VOR/ADF Selector SET TO VOR
-    dref.setInt(dref.getDataref("sim/custom/xap/groundserv/load_on"), 1) --Loadsheet SET
-    dref.setInt(dref.getDataref("sim/custom/xap/groundserv/tanker/tanker_on"), 1) --Fuel Truck
+   -- dref.setInt(dref.getDataref("sim/cockpit/switches/EFIS_dme_1_selector"), 2) --ILS/ADF Selector SET TO ILS
+    --dref.setInt(dref.getDataref("sim/cockpit/switches/EFIS_dme_2_selector"), 2) --VOR/ADF Selector SET TO VOR
+    --dref.setInt(dref.getDataref("sim/custom/xap/groundserv/load_on"), 1) --Loadsheet SET
+    --dref.setInt(dref.getDataref("sim/custom/xap/groundserv/tanker/tanker_on"), 1) --Fuel Truck
     dref.setIntV(xac_state_preparation3, 5, 0)
     dref.setIntV(xac_state_preparation3, 6, 1)
 end
@@ -366,61 +394,61 @@ end
 function FINAL_COCKPIT_PREPARATION_START1()
     logging.debug("FINAL_COCKPIT_PREPARATION_START1")
     dref.setString(xac_route_state, "FINAL COCKPIT PREPARATION")
-    dref.setInt(dref.getDataref("sim/custom/xap/fcu/fd"), 1) --Flight Director ON
-    dref.setInt(dref.getDataref("sim/custom/xap/fcu/ils"), 1) --ILS
-    dref.setInt(dref.getDataref("sim/custom/xap/fcu/nd_mode"), 3)
-    dref.setInt(dref.getDataref("sim/cockpit2/EFIS/map_range"), 2)
-    dref.setInt(dref.getDataref("sim/cockpit/switches/EFIS_dme_1_selector"), 1) --ILS/ADF Selector SET TO OFF
-    dref.setInt(dref.getDataref("sim/cockpit/switches/EFIS_dme_2_selector"), 1) --VOR/ADF Selector SET TO OFF
-    dref.setInt(dref.getDataref("sim/custom/xap/ap/spdmanaged"), 1) --FCU-Speed Window
-    dref.setInt(dref.getDataref("sim/custom/xap/oxy/crewsupp"), 0) --Oxygen Crew Supply ON
-    dref.setInt(dref.getDataref("sim/operation/sound/sound_on"), 1) --Loudspeakers ON
-    dref.setInt(dref.getDataref("sim/custom/xap/oxy/oxyhiss"), 1) --Oxygen Mask Test
-    dref.setInt(dref.getDataref("sim/cockpit2/clock_timer/timer_running"), 1) --Chrono OFF
-    dref.setFloat(dref.getDataref("sim/custom/xap/et_timer/all"), 0.0) --Clock Elapsed Time BLANK OR ZERO
-    dref.setInt(dref.getDataref("sim/custom/xap/wheels/ant_skeed"), 1) --Antiskid ON
+   -- dref.setInt(dref.getDataref("sim/custom/xap/fcu/fd"), 1) --Flight Director ON
+   -- dref.setInt(dref.getDataref("sim/custom/xap/fcu/ils"), 1) --ILS
+   -- dref.setInt(dref.getDataref("sim/custom/xap/fcu/nd_mode"), 3)
+   -- dref.setInt(dref.getDataref("sim/cockpit2/EFIS/map_range"), 2)
+    --dref.setInt(dref.getDataref("sim/cockpit/switches/EFIS_dme_1_selector"), 1) --ILS/ADF Selector SET TO OFF
+    --dref.setInt(dref.getDataref("sim/cockpit/switches/EFIS_dme_2_selector"), 1) --VOR/ADF Selector SET TO OFF
+    --dref.setInt(dref.getDataref("sim/custom/xap/ap/spdmanaged"), 1) --FCU-Speed Window
+    --dref.setInt(dref.getDataref("sim/custom/xap/oxy/crewsupp"), 0) --Oxygen Crew Supply ON
+   -- dref.setInt(dref.getDataref("sim/operation/sound/sound_on"), 1) --Loudspeakers ON
+    --dref.setInt(dref.getDataref("sim/custom/xap/oxy/oxyhiss"), 1) --Oxygen Mask Test
+    --dref.setInt(dref.getDataref("sim/cockpit2/clock_timer/timer_running"), 1) --Chrono OFF
+    --dref.setFloat(dref.getDataref("sim/custom/xap/et_timer/all"), 0.0) --Clock Elapsed Time BLANK OR ZERO
+    --dref.setInt(dref.getDataref("sim/custom/xap/wheels/ant_skeed"), 1) --Antiskid ON
     dref.setIntV(xac_state_preparation3, 6, 0)
     dref.setIntV(xac_state_preparation3, 7, 1)
 end
 
 function FINAL_COCKPIT_PREPARATION_START2()
     logging.debug("FINAL_COCKPIT_PREPARATION_START2")
-    dref.setInt(dref.getDataref("sim/cockpit/switches/EFIFS_shows_weather"), 0) --Weather Radar OFF
-    dref.setInt(dref.getDataref("sim/custom/xap/wx_radar/au_gn_mx"), 1) --Weather Radar Gain
-    dref.setInt(dref.getDataref("sim/custom/xap/wx_radar/wv_map"), 1) --WX/TURB
-    dref.setFloat(dref.getDataref("sim/cockpit/switches/EFIS_weather_alpha"), 0.7) --Weather Radar Tilt|4° UP
-    dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 3) --ECAM PRESS Cabin LDG ELEV AUTO
-    dref.setInt(dref.getDataref("sim/custom/xap/engines/eng1msw"), 0) --Engine Master 1 OFF
-    dref.setInt(dref.getDataref("sim/custom/xap/engines/eng2msw"), 0) --Engine Master 2 OFF
-    dref.setInt(dref.getDataref("sim/custom/xap/engines/startsel"), 0) --Engine Mode Selector NORM
-    dref.setFloat(dref.getDataref("sim/flightmodel/controls/parkbrake"), 1.0) --Parking Brake ON
+    --dref.setInt(dref.getDataref("sim/cockpit/switches/EFIFS_shows_weather"), 0) --Weather Radar OFF
+    --dref.setInt(dref.getDataref("sim/custom/xap/wx_radar/au_gn_mx"), 1) --Weather Radar Gain
+    --dref.setInt(dref.getDataref("sim/custom/xap/wx_radar/wv_map"), 1) --WX/TURB
+    --dref.setFloat(dref.getDataref("sim/cockpit/switches/EFIS_weather_alpha"), 0.7) --Weather Radar Tilt|4° UP
+    --dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 3) --ECAM PRESS Cabin LDG ELEV AUTO
+    --dref.setInt(dref.getDataref("sim/custom/xap/engines/eng1msw"), 0) --Engine Master 1 OFF
+    --dref.setInt(dref.getDataref("sim/custom/xap/engines/eng2msw"), 0) --Engine Master 2 OFF
+    --dref.setInt(dref.getDataref("sim/custom/xap/engines/startsel"), 0) --Engine Mode Selector NORM
+    --dref.setFloat(dref.getDataref("sim/flightmodel/controls/parkbrake"), 1.0) --Parking Brake ON
     dref.setIntV(xac_state_preparation3, 7, 0)
     dref.setIntV(xac_state_preparation3, 8, 1)
 end
 
 function FINAL_COCKPIT_PREPARATION_START3()
     logging.debug("FINAL_COCKPIT_PREPARATION_START3")
-    dref.setFloat(dref.getDataref("sim/flightmodel/controls/parkbrake"), 0.0) --Parking Brake OFF
+    --dref.setFloat(dref.getDataref("sim/flightmodel/controls/parkbrake"), 0.0) --Parking Brake OFF
     dref.setIntV(xac_state_preparation3, 8, 0)
     dref.setIntV(xac_state_preparation3, 9, 1)
 end
 
 function FINAL_COCKPIT_PREPARATION_START4()
     logging.debug("FINAL_COCKPIT_PREPARATION_START4")
-    dref.setFloat(dref.getDataref("sim/cockpit2/controls/parking_brake_ratio"), 0.5) --Brake Pedals PRESS/HOLD
+    --dref.setFloat(dref.getDataref("sim/cockpit2/controls/parking_brake_ratio"), 0.5) --Brake Pedals PRESS/HOLD
     dref.setIntV(xac_state_preparation3, 9, 0)
     dref.setIntV(xac_state_preparation3, 10, 1)
 end
 
 function FINAL_COCKPIT_PREPARATION_START5()
     logging.debug("FINAL_COCKPIT_PREPARATION_START5")
-    dref.setFloat(dref.getDataref("sim/cockpit2/controls/parking_brake_ratio"), 0.0) --Brake Pedals RELEASE
+    --dref.setFloat(dref.getDataref("sim/cockpit2/controls/parking_brake_ratio"), 0.0) --Brake Pedals RELEASE
 
-    dref.setInt(dref.getDataref("sim/custom/xap/atc/mode_sel"), 0) --ATC Mode|STBY
-    dref.setInt(dref.getDataref("sim/custom/xap/atc/sel_12"), 0) --ATC System|1
-    dref.setInt(dref.getDataref("sim/custom/xap/atc/alt_rptg"), 1) --Alt Rptg|ON
-    dref.setInt(dref.getDataref("sim/custom/xap/atc/ta_tara"), 0) --TCAS|STBY
-    dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 1) --ECAM FUEL|CHECK
+    --dref.setInt(dref.getDataref("sim/custom/xap/atc/mode_sel"), 0) --ATC Mode|STBY
+    --dref.setInt(dref.getDataref("sim/custom/xap/atc/sel_12"), 0) --ATC System|1
+    --dref.setInt(dref.getDataref("sim/custom/xap/atc/alt_rptg"), 1) --Alt Rptg|ON
+    --dref.setInt(dref.getDataref("sim/custom/xap/atc/ta_tara"), 0) --TCAS|STBY
+    --dref.setInt(dref.getDataref("sim/custom/xap/disp/sys/mode"), 1) --ECAM FUEL|CHECK
     dref.setIntV(xac_state_preparation3, 10, 0)
     dref.setIntV(xac_state_preparation4, 1, 1)
 end
@@ -428,35 +456,86 @@ end
 function OnUpdate_XAutoCopilot_btnPreparation()
     --- -SAFETY EXTERIOR INSPECTIONS STATUS
 	
+--sim/time/timer_is_running_sec
+--sim/time/timer_elapsed_time_sec
+	
+--sim/cockpit2/clock_timer/elapsed_time_hours
+--sim/cockpit2/clock_timer/elapsed_time_minutes
+--sim/cockpit2/clock_timer/elapsed_time_seconds
+	
+	
     if dref.getIntV(xac_state_preparation, 1, 1) == 1 then
         local tmr_safety = timer.newOneShot("SAFETY_EXTERIOR_INSPECTIONS_START1", 1.0)
     end
---[[
+
     if dref.getIntV(xac_state_preparation, 1, 1) == 1 and
-            dref.getInt(dref.getDataref("sim/custom/xap/elec/gpu_run")) == 1 and --GPU is running
-            dref.getInt(dref.getDataref("sim/custom/xap/elec/gpu_av")) == 1 and --GPU is available
-            dref.getFloat(dref.getDataref("sim/custom/xap/doors/p_f_l_now")) == 1.0 and --Left Front Passenger Door|OPEN
-            dref.getInt(dref.getDataref("sim/cockpit/switches/gear_handle_status")) == 1 and --Gear is down
-            dref.getInt(dref.getDataref("sim/custom/xap/groundserv/pins_covers")) == 1 and --Pins and Covers there
-            dref.getFloat(dref.getDataref("sim/custom/xap/doors/c_f_now")) == 1.0 and --Cargo Front Door is open
-            dref.getFloat(dref.getDataref("sim/custom/xap/doors/c_b_now")) == 1.0 --Cargo Back Door is open
+
+            dref.getInt(dref.getDataref("sim/cockpit/switches/gear_handle_status")) == 1 --and --Gear is down
+
     then
         dref.setIntV(xac_state_preparation, 2, 1)
         dref.setIntV(xac_state_preparation, 1, 0)
     end
 
     --- -PRELIMINARY COCKPIT PREPARATION STATUS
-    if dref.getIntV(xac_state_preparation, 2, 1) == 1 and
-            dref.getIntV(xac_state_chk_box, 1, 1) == 1 and
-            dref.getFloat(dref.getDataref("sim/custom/xap/groundserv/stair/conect_stair")) > 1.0 --STAIR is available
+    if dref.getIntV(xac_state_preparation, 2, 1) == 1 --and
+            --dref.getIntV(xac_state_chk_box, 1, 1) == 1 and
+            --dref.getFloat(dref.getDataref("sim/custom/xap/groundserv/stair/conect_stair")) > 1.0 --STAIR is available
     then
-        local tmr_precock1 = timer.newOneShot("PRELIMINARY_COCKPIT_PREPARATION_START1", 10.0)
-    end
 
+	dref.setInt(dref.getDataref("sim/time/timer_is_running_sec"), 1)
+	dref.setIntV(xac_state_preparation, 2, 0)
+	--sim/cockpit2/engine/actuators/ignition_key --4 Starter hold 12-15 secs|PULL
+
+    end
+	
+
+	if dref.getInt(dref.getDataref("sim/cockpit2/clock_timer/elapsed_time_seconds")) > 5 and
+		dref.getInt(dref.getDataref("sim/cockpit2/clock_timer/elapsed_time_seconds")) < 15 then
+	
+	        dref.setIntV(dref.getDataref("sim/cockpit2/engine/actuators/ignition_key"), 1, 4)
+
+
+
+	end
+	
+		if dref.getInt(dref.getDataref("sim/cockpit2/clock_timer/elapsed_time_seconds")) > 15 and
+		dref.getInt(dref.getDataref("sim/cockpit2/clock_timer/elapsed_time_seconds")) < 25 then
+	
+
+			dref.setIntV(dref.getDataref("sim/cockpit2/engine/actuators/ignition_key"), 2, 4)
+
+
+	end
+	
+		if dref.getInt(dref.getDataref("sim/cockpit2/clock_timer/elapsed_time_seconds")) > 25 and
+		dref.getInt(dref.getDataref("sim/cockpit2/clock_timer/elapsed_time_seconds")) < 35 then
+	
+
+			dref.setIntV(dref.getDataref("sim/cockpit2/engine/actuators/ignition_key"), 3, 4)
+
+
+	end
+	
+		if dref.getInt(dref.getDataref("sim/cockpit2/clock_timer/elapsed_time_seconds")) > 35 and
+		dref.getInt(dref.getDataref("sim/cockpit2/clock_timer/elapsed_time_seconds")) < 45 then
+
+			dref.setIntV(dref.getDataref("sim/cockpit2/engine/actuators/ignition_key"), 4, 4)
+
+	end
+
+		if dref.getInt(dref.getDataref("sim/cockpit2/clock_timer/elapsed_time_seconds")) > 45 then
+
+			dref.setInt(dref.getDataref("sim/time/timer_is_running_sec"), 0)
+			dref.setFloat(dref.getDataref("sim/time/timer_elapsed_time_sec"), 0.0)
+
+	end	
+	
+--[[
     if dref.getIntV(xac_state_preparation, 2, 1) == 1 and
             dref.getIntV(xac_state_chk_box, 1, 1) == 0
     then
-        local tmr_precock1 = timer.newOneShot("PRELIMINARY_COCKPIT_PREPARATION_START1", 10.0)
+        local tmr_precock1 = timer.newOneShot("PRELIMINARY_COCKPIT_PREPARATION_START123test", 10.0)
     end
 
 
