@@ -401,7 +401,7 @@ function http_updater_check(data, url, size)
     local data = tonumber(data)
     if (data) then
         if data ~= xac_updater_version then
-            --infocube.newInfo("NEW UPDATER SCRIPT", "Version: " .. data .. "\nCurrent: " .. xac_updater_version .. "")
+            toast.newInfo("NEW UPDATER SCRIPT", "Version: " .. data .. "\nCurrent: " .. xac_updater_version .. "")
         end
     else
         Network_Error("Version Updater Check")
@@ -425,7 +425,7 @@ function http_update_check(data, url, size)
     local data = tonumber(data)
     if (data) then
         if data ~= xac_version then
-            --infocube.newInfo("NEW UPDATES FOR XAC", "Version: " .. data .. "\nCurrent: " .. xac_version .. "")
+            toast.newInfo("NEW UPDATES FOR XAC", "Version: " .. data .. "\nCurrent: " .. xac_version .. "")
         end
     else
         Network_Error("XAC Version Update Check")
@@ -451,7 +451,7 @@ end --http_update_save()
 
 function Network_Error(modul)
     local modul = modul
-    --infocube.newError("Network Error", modul)
+    toast.newError("Network Error", modul)
 end
 
 function xac_trigger_update()

@@ -437,7 +437,8 @@ function OnUpdate_XAutoCopilot_btnPreparation()
 			dref.setInt(dref.getDataref("sim/time/timer_is_running_sec"), 0)
 			dref.setFloat(dref.getDataref("sim/time/timer_elapsed_time_sec"), 0.0)
 	end	
-		
+--sim/joystick/yolk_roll_ratio
+
 end
 --[[
 --- -BEFORE START UP
